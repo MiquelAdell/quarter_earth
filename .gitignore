@@ -16,3 +16,6 @@ assets/content/images/*
 assets/src/images
 assets/src/audio
 assets/fonts/Synt
+
+.claude/settings.local.json
+private-references
