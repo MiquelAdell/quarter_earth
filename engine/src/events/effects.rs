@@ -113,6 +113,7 @@ pub enum Effect {
     CO2ForFeature(ProcessFeature, f32),
     BiodiversityPressureForFeature(ProcessFeature, f32),
     ProcessLimit(Id, f32),
+    ChangeMixShare(Id, isize),
     Feedstock(Feedstock, f32),
 
     AddEvent(Id),
@@ -195,6 +196,7 @@ impl Effect {
                 Effect::BiodiversityPressureForFeature(ProcessFeature::IsCCS, 0.)
             }
             EffectKind::ProcessLimit => Effect::ProcessLimit(default_process, 0.),
+            EffectKind::ChangeMixShare => Effect::ChangeMixShare(default_process, 0),
             EffectKind::Feedstock => Effect::Feedstock(Feedstock::Coal, 0.),
             EffectKind::AddEvent => Effect::AddEvent(default_event),
             EffectKind::TriggerEvent => Effect::TriggerEvent(default_event, 5),
@@ -237,6 +239,7 @@ impl Effect {
         match self {
             Effect::OutputForProcess(id, _)
             | Effect::ProcessLimit(id, _)
+            | Effect::ChangeMixShare(id, _)
             | Effect::UnlocksProcess(id)
             | Effect::ProcessRequest(id, ..)
             | Effect::ModifyProcessByproducts(id, ..) => Some(*id),
@@ -420,6 +423,11 @@ impl Effect {
                 if let Some(limit) = process.limit {
                     process.limit = Some(limit + change);
                 }
+            }
+            Effect::ChangeMixShare(id, change) => {
+                // Engine-pure share shift: no NPC relationship
+                // changes and no rebalancing of other processes.
+                state.world.processes[id].shift_mix_share(*change);
             }
             Effect::Feedstock(feedstock, pct_change) => {
                 state.feedstocks.available[*feedstock] *= 1. + pct_change;
@@ -663,6 +671,11 @@ impl Effect {
                     process.limit = Some(limit - change);
                 }
             }
+            Effect::ChangeMixShare(id, change) => {
+                // Note: if applying the effect clamped the share at
+                // zero, unapplying restores less than the original.
+                state.world.processes[id].shift_mix_share(-change);
+            }
             Effect::Feedstock(feedstock, pct_change) => {
                 state.feedstocks.available[*feedstock] /= 1. + pct_change;
             }
@@ -856,6 +869,74 @@ mod tests {
         effect.unapply(&mut state, None);
         state.world.update_climate(temp_prev);
         assert_eq!(state.world.temperature, temp_next);
+    }
+
+    #[test]
+    fn test_change_mix_share() {
+        let mut state = State::default();
+        let target_id = state
+            .world
+            .processes
+            .iter()
+            .find(|p| p.mix_share > 0 && !(p.supporters.is_empty() && p.opposers.is_empty()))
+            .unwrap()
+            .id;
+        let shares_before: Vec<(crate::Id, usize)> = state
+            .world
+            .processes
+            .iter()
+            .map(|p| (p.id, p.mix_share))
+            .collect();
+        let relationships_before: Vec<(crate::Id, f32)> = state
+            .npcs
+            .iter()
+            .map(|npc| (npc.id, npc.relationship))
+            .collect();
+        let target_share = state.world.processes[&target_id].mix_share;
+
+        // Policies apply their effects via `apply_effects`.
+        let effect = Effect::ChangeMixShare(target_id, 3);
+        state.apply_effects(&[effect.clone()], None);
+        assert_eq!(state.world.processes[&target_id].mix_share, target_share + 3);
+
+        // Only the target process's share changes;
+        // no rebalancing of other processes.
+        for (id, share_before) in &shares_before {
+            if *id != target_id {
+                assert_eq!(state.world.processes[id].mix_share, *share_before);
+            }
+        }
+
+        // No NPC relationship changes, unlike player-driven mix changes.
+        for (id, relationship_before) in &relationships_before {
+            assert_eq!(state.npcs[id].relationship, *relationship_before);
+        }
+
+        // Unapplying (e.g. on policy repeal) restores the original mix exactly.
+        effect.unapply(&mut state, None);
+        for (id, share_before) in &shares_before {
+            assert_eq!(state.world.processes[id].mix_share, *share_before);
+        }
+        for (id, relationship_before) in &relationships_before {
+            assert_eq!(state.npcs[id].relationship, *relationship_before);
+        }
+    }
+
+    #[test]
+    fn test_change_mix_share_clamps_at_zero() {
+        let mut state = State::default();
+        let target_id = state
+            .world
+            .processes
+            .iter()
+            .find(|p| p.mix_share > 0)
+            .unwrap()
+            .id;
+        let target_share = state.world.processes[&target_id].mix_share;
+
+        let effect = Effect::ChangeMixShare(target_id, -(target_share as isize) - 5);
+        state.apply_effects(&[effect], None);
+        assert_eq!(state.world.processes[&target_id].mix_share, 0);
     }
 
     #[test]

@@ -13,7 +13,6 @@ use crate::{
 };
 use serde::{Deserialize, Serialize};
 
-const LIFESPAN: usize = 60;
 const PRODUCTION_SHORTAGE_PENALTY: f32 = 60.;
 
 /// Have to all be below these values to win
@@ -93,7 +92,7 @@ impl State {
         }
 
         let events = world.events.clone();
-        let death_year = world.year + LIFESPAN;
+        let death_year = world.year + world.lifespan;
 
         let resources = Reserve::from(world.starting_resources);
         let feedstocks = Reserve::from(world.feedstock_reserves);
@@ -137,6 +136,11 @@ impl State {
         self.step_production();
         self.update_project_costs();
         self.world.update_climate(self.world.temperature);
+    }
+
+    /// The length of a run in years, as configured by the world.
+    pub fn lifespan(&self) -> usize {
+        self.world.lifespan
     }
 
     /// If we won the game.

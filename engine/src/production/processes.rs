@@ -155,15 +155,23 @@ impl Process {
         ((max_share * 100.) / 5.).floor() as usize
     }
 
-    /// Changes this process's mix share by the specified amount.
-    pub fn change_mix_share(&mut self, change: isize) -> ProcessChanges {
-        let was_banned = self.is_banned();
-        let was_promoted = self.is_promoted();
+    /// Shifts this process's mix share by the specified amount
+    /// (in 5% units), clamping at zero. This only changes the share
+    /// itself, with no other side effects (e.g. no NPC relationship
+    /// changes); other processes' shares are left untouched.
+    pub fn shift_mix_share(&mut self, change: isize) {
         if change < 0 {
             self.mix_share = self.mix_share.saturating_sub(change.unsigned_abs());
         } else {
             self.mix_share += change as usize;
         }
+    }
+
+    /// Changes this process's mix share by the specified amount.
+    pub fn change_mix_share(&mut self, change: isize) -> ProcessChanges {
+        let was_banned = self.is_banned();
+        let was_promoted = self.is_promoted();
+        self.shift_mix_share(change);
 
         let (support_change, oppose_change) = if !was_banned && self.is_banned() {
             // Ban

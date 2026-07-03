@@ -170,6 +170,12 @@ impl Editable for &mut usize {
     }
 }
 
+impl Editable for &mut isize {
+    fn edit(self, ui: &mut egui::Ui) {
+        ui.add(egui::DragValue::new(self));
+    }
+}
+
 impl Editable for &mut bool {
     fn edit(self, ui: &mut egui::Ui) {
         ui.add(egui::Checkbox::new(self, ""));
@@ -1790,6 +1796,30 @@ impl Editable
                             edit(value)
                                 .label("Amount")
                                 .help("The amount to modify this process's limit by.")
+                                .inline(),
+                        );
+                    },
+                );
+            }
+            Effect::ChangeMixShare(id, value) => {
+                ui.add(parts::help(
+"Shift the specified process's mix share by an amount in 5% units (e.g. 2 = +10%). The share is clamped at zero and other processes' shares are not rebalanced. Unlike player mix changes, this has no NPC relationship side effects."
+                ));
+                parts::two_columns(
+                    ui,
+                    |ui| {
+                        ui.add(
+                            edit((id, processes))
+                                .label("Process")
+                                .help("Which process is affected.")
+                                .inline(),
+                        );
+                    },
+                    |ui| {
+                        ui.add(
+                            edit(value)
+                                .label("Amount")
+                                .help("The number of 5%-units to shift this process's mix share by.")
                                 .inline(),
                         );
                     },

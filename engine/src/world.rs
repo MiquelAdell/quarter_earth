@@ -25,6 +25,12 @@ pub static CLIMATES: LazyLock<BTreeMap<String, Vec<[f32; 4]>>> = LazyLock::new(|
 pub struct World {
     pub year: usize,
 
+    /// The length of a run in years; the game ends
+    /// (the player "dies") this many years after the
+    /// starting year.
+    #[serde(default = "default_lifespan")]
+    pub lifespan: usize,
+
     pub base_outlook: f32,
     pub temp_outlook: f32,
 
@@ -50,6 +56,14 @@ pub struct World {
 
     pub feedstock_reserves: FeedstockMap,
     pub starting_resources: ResourceMap,
+}
+
+/// Default game length in years, used for worlds
+/// (and saves) that predate the configurable lifespan.
+pub const DEFAULT_LIFESPAN: usize = 60;
+
+fn default_lifespan() -> usize {
+    DEFAULT_LIFESPAN
 }
 
 impl Default for World {
@@ -150,6 +164,47 @@ impl World {
             .collect::<Vec<_>>()
             .try_into()
             .expect("Mapping from same size arrays")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::state::State;
+
+    #[test]
+    fn test_lifespan_defaults_to_60() {
+        // DEFAULT.world predates the `lifespan` field,
+        // so this also checks backwards-compatible deserialization.
+        let world = World::default();
+        assert_eq!(world.lifespan, 60);
+
+        let start_year = world.year;
+        let state = State::new(world);
+        assert_eq!(state.lifespan(), 60);
+        assert_eq!(state.death_year, start_year + 60);
+    }
+
+    #[test]
+    fn test_lifespan_configurable() {
+        let mut value: serde_json::Value =
+            serde_json::from_str(include_str!("../assets/DEFAULT.world")).unwrap();
+        value["lifespan"] = 30.into();
+        let world: World = serde_json::from_value(value).unwrap();
+        assert_eq!(world.lifespan, 30);
+
+        let start_year = world.year;
+        let mut state = State::new(world);
+        assert_eq!(state.lifespan(), 30);
+        assert_eq!(state.death_year, start_year + 30);
+
+        // The run ends once the 30-year horizon is reached.
+        state.world.year = start_year + 29;
+        state.step_year(state.world.temperature);
+        assert!(!state.game_over);
+        assert_eq!(state.world.year, start_year + 30);
+        state.step_year(state.world.temperature);
+        assert!(state.game_over);
     }
 }
 

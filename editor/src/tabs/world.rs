@@ -56,6 +56,17 @@ pub fn world(ui: &mut egui::Ui, world: &mut World) {
                     )
                     .inline(),
                 );
+
+                parts::space(ui);
+
+                ui.add(
+                    inputs::edit(&mut world.lifespan)
+                    .label("Game Length (Years)")
+                    .help(
+                        "How many years a run lasts before it ends.",
+                    )
+                    .inline(),
+                );
             },
         );
 
