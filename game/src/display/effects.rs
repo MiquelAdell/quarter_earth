@@ -676,6 +676,31 @@ impl DisplayEffect {
                         icon = process.output.icon(),
                     )))
             }
+            Effect::ChangeMixShare(id, amount) => {
+                let process = &state.world.processes[id];
+                // Each mix share point is 5% of the output's production mix.
+                let percent = amount.unsigned_abs() * 5;
+                (
+                    tip(
+                        process.output.icon(),
+                        t!(
+                            "Changes this process's share of %{output} production by %{percent}%.",
+                            output = t!(process.output.lower()),
+                            percent = format!("{:+}", amount * 5),
+                        ),
+                    )
+                    .card(process.clone()),
+                    icon_text(
+                        process.output.as_key(),
+                        &t!(
+                            "%{changeDir} %{tag} production share by [b]%{percent}%.[/b]",
+                            percent = percent,
+                            tag = icon_card_tag(&t!(&process.name), process.output.icon()),
+                            changeDir = self.change_dir(*amount as f32),
+                        ),
+                    ),
+                )
+            }
             Effect::OutputForFeature(feat, amount) => {
                 let processes: Vec<_> = state
                     .world

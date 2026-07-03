@@ -6,11 +6,12 @@ use hes_engine::{EventPhase, State};
 use rust_i18n::t;
 
 use crate::{
-    audio,
+    audio, consts,
     display::intensity,
     parts::{button, center_center, set_full_bg_image},
     state::StateExt,
     views::events::Events,
+    workshop::WORKSHOP,
 };
 
 pub struct Interstitial {
@@ -63,7 +64,15 @@ impl Interstitial {
         let biodiversity = describe_extinction(extinction);
         let contentedness = describe_outlook(outlook);
         let years_left = {
-            let years_left = death_year.saturating_sub(year);
+            // In workshop mode the session ends at the fixed horizon,
+            // not at the engine's death year.
+            // TODO(workshop): adopt world.lifespan once available.
+            let end_year = if WORKSHOP.active {
+                start_year + consts::WORKSHOP_YEARS
+            } else {
+                death_year
+            };
+            let years_left = end_year.saturating_sub(year);
             t!(
                 "You have %{yearsLeft} years left in your tenure.",
                 yearsLeft = years_left

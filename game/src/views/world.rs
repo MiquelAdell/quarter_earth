@@ -24,6 +24,7 @@ use crate::{
         events::{Events, Updates},
         globe::GlobeView,
     },
+    workshop::WORKSHOP,
 };
 
 pub struct WorldEvents {
@@ -56,10 +57,15 @@ impl WorldEvents {
             climate.set_emissions_data(state.ui.emissions.clone());
         }
 
+        // Workshop mode reduces the world phase to a fast simulation
+        // tick: no events, and years advance at skip speed.
+        let mut year_timer = Timer::new();
+        year_timer.skipping = WORKSHOP.active;
+
         Self {
             phase: Subphase::Events,
-            year_timer: Timer::new(),
-            skipping: DEBUG.always_skip_world,
+            year_timer,
+            skipping: DEBUG.always_skip_world || WORKSHOP.active,
             events: Events::new(events, state),
             globe: GlobeView::new(360, 250., context),
             toasts: VecDeque::default(),

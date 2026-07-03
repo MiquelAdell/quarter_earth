@@ -3,6 +3,7 @@ use crate::{
     DEBUG, consts,
     display::{self, DisplayEvent},
     state::update_factors,
+    workshop::WORKSHOP,
 };
 use enum_map::EnumMap;
 use extend::ext;
@@ -214,7 +215,8 @@ pub impl State {
     }
 
     fn roll_events(&mut self, phase: EventPhase) -> Vec<DisplayEvent> {
-        if DEBUG.skip_events {
+        // Workshop mode removes all story/world/icon events.
+        if DEBUG.skip_events || WORKSHOP.active {
             vec![]
         } else {
             let events = self

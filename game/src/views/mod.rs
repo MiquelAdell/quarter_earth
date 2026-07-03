@@ -15,10 +15,12 @@ mod world;
 use std::sync::Arc;
 
 use crate::{
+    consts,
     debug::{DEBUG, DebugView},
     state::{GameState, Settings},
     tips::render_tip,
     views::{ending::End, report::Report, world::WorldEvents},
+    workshop::WORKSHOP,
 };
 use hes_engine::State;
 use hud::{HudAction, render_hud};
@@ -68,6 +70,10 @@ impl GameView {
                 DebugView::GameWin => Phase::Ending(End::new(false, state)),
             };
             GameView::with_phase(phase, context.clone())
+        } else if WORKSHOP.active {
+            // Workshop mode has no intro/tutorial: go straight to planning.
+            let session = Session::new(state);
+            GameView::with_phase(Phase::Planning(session), context.clone())
         } else {
             Self::intro(&mut state.core, context.clone())
         }
@@ -115,7 +121,21 @@ impl GameView {
             Phase::Interstitial(view) => {
                 let next = view.render(ui, &mut state.core, state.ui.start_year);
                 if next {
-                    if state.won() {
+                    if WORKSHOP.active {
+                        // Workshop sessions have no mid-game loss and no early
+                        // win: they always run to the fixed horizon, where the
+                        // ending doubles as the evaluation/debrief.
+                        // TODO(workshop): adopt world.lifespan once available.
+                        let horizon = state.ui.start_year + consts::WORKSHOP_YEARS;
+                        if state.world.year >= horizon {
+                            prefs.runs_played += 1;
+                            self.phase = Phase::Ending(End::new(!state.won(), state));
+                        } else {
+                            let session = Session::new(state);
+                            self.phase = Phase::Planning(session);
+                            ret_action = Some(GameAction::Save);
+                        }
+                    } else if state.won() {
                         prefs.runs_played += 1;
                         self.phase = Phase::Ending(End::new(false, state));
                     } else if state.game_over {

@@ -16,6 +16,7 @@ use crate::{
     debug::DEBUG,
     display::factors::{self, Factor},
     vars::Var,
+    workshop::WORKSHOP,
 };
 
 #[derive(Serialize, Deserialize)]
@@ -52,9 +53,14 @@ impl std::ops::DerefMut for GameState {
 
 pub fn prepare_game(state: &mut GameState, prefs: &Settings) {
     DEBUG.apply(state);
+    WORKSHOP.apply(&mut state.core);
     init_vars(&state.core);
     state.core.runs = prefs.runs_played;
     state.ui.tutorial = prefs.tutorial;
+    if WORKSHOP.active {
+        // Workshop sessions never show the tutorial.
+        state.ui.tutorial.finish();
+    }
 
     state.ui.viewed = state
         .core

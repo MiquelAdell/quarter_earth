@@ -1,35 +1,40 @@
-use std::{borrow::Cow, collections::BTreeMap};
+use std::{
+    borrow::Cow,
+    collections::{BTreeMap, BTreeSet},
+};
 
 use egui::{Align2, Color32, CornerRadius, Margin, Order, Rect, Sense, Shadow, Stroke};
 use egui_taffy::TuiBuilderLogic;
 use enum_map::EnumMap;
 use hes_engine::{
-    EventPhase, Feedstock, Id, KindMap, Output, Process, Project, ProjectType, Resource, State,
-    Status,
+    Effect, EventPhase, Feedstock, Group, Id, KindMap, Output, Process, Project, ProjectType,
+    Resource, State, Status,
 };
 use hes_images::flavor_image;
 use rust_i18n::t;
 use strum::IntoEnumIterator;
 
 use crate::{
+    consts,
     debug::DEBUG,
     display::{
         self, AsText, FloatExt, HasIcon, Icon, factors::factors_card, group_color, icons, resource,
         to_energy_units,
     },
     parts::{
-        RaisedFrame, bg_cover_image, button, center_text, fill_bar, get_sizing, h_center, new_icon,
-        raised_frame, set_full_bg_image,
+        RaisedFrame, bg_cover_image, button, center_text, fill_bar, get_sizing, glow_fill,
+        h_center, new_icon, raised_frame, set_full_bg_image,
     },
     state::{GameState, PlanChange, Points, StateExt, Tutorial},
     text::bbcode,
     tips::{Tip, add_editable_project_card, add_tip, tip},
     vars::Var,
     views::{
-        cards::draw_mix_cell,
+        cards::{Card, draw_mix_cell},
         scanner::Cards,
         session::{TabItem, render_tabs},
     },
+    workshop::{WORKSHOP, toggle_policy},
 };
 
 pub enum PlanAction {
@@ -40,11 +45,17 @@ pub enum PlanAction {
 
 pub struct Plan {
     page: Page,
+
+    /// Workshop mode: the single themed policy-card list,
+    /// grouped by the projects' `group` field. Persisted across
+    /// frames to keep per-card state (e.g. flipped cards).
+    workshop_groups: Option<Vec<(Group, Vec<Card<Project>>)>>,
 }
 impl Plan {
     pub fn new() -> Self {
         Self {
             page: Page::Overview,
+            workshop_groups: None,
         }
     }
 
@@ -61,6 +72,12 @@ impl Plan {
             hes_images::background_image("plan.png"),
             egui::vec2(1600., 1192.),
         );
+
+        // Workshop mode: the plan tab is a single policy-card list.
+        // No overview, no Processes page, no project-kind sub-tabs.
+        if WORKSHOP.active {
+            return self.render_workshop(ui, state);
+        }
 
         match &mut self.page {
             Page::Overview => {
@@ -408,6 +425,72 @@ impl Plan {
         } else {
             None
         }
+    }
+
+    /// Workshop mode: a single list of policy cards grouped by theme,
+    /// with a prominent expiring-budget display. Tap/click a card to
+    /// pass it; tap a passed card to repeal it. Prereq-locked cards
+    /// are shown grayed out so groups can see unlockable branches.
+    fn render_workshop(&mut self, ui: &mut egui::Ui, state: &mut GameState) -> Option<PlanAction> {
+        let mut ret_action = None;
+
+        let groups = self
+            .workshop_groups
+            .get_or_insert_with(|| workshop_card_groups(&state.core));
+
+        ui.add_space(56.);
+
+        render_workshop_budget(ui, &state.core);
+
+        let mut clicked: Option<Id> = None;
+        egui::ScrollArea::vertical().show(ui, |ui| {
+            for (group, cards) in groups.iter_mut() {
+                ui.add_space(24.);
+                render_workshop_group_header(ui, group);
+                ui.add_space(12.);
+
+                egui::Frame::NONE
+                    .inner_margin(Margin::symmetric(24, 0))
+                    .show(ui, |ui| {
+                        ui.horizontal_wrapped(|ui| {
+                            ui.style_mut().spacing.item_spacing = egui::vec2(18., 18.);
+                            for card in cards {
+                                if let Some(id) = render_workshop_card(ui, state, card) {
+                                    clicked = Some(id);
+                                }
+                            }
+                        });
+                    });
+            }
+
+            ui.add_space(48.);
+
+            let resp = ui
+                .vertical_centered(|ui| {
+                    ui.set_width(320.);
+                    let b = button(t!("Ready")).full_width().colors(
+                        Color32::from_rgb(0xf7, 0x5c, 0x52),
+                        Color32::from_rgb(0x82, 0x14, 0x0c),
+                        Color32::from_rgb(0xfa, 0x23, 0x14),
+                        Color32::from_rgb(0xeb, 0x40, 0x34),
+                    );
+                    ui.add(b)
+                })
+                .inner;
+            if resp.clicked() {
+                ret_action = Some(PlanAction::EnterWorld);
+            }
+
+            ui.add_space(48.);
+        });
+
+        if let Some(id) = clicked
+            && toggle_policy(&mut state.core, &mut state.ui.plan_changes, &id)
+        {
+            ret_action = Some(PlanAction::PlanChanged);
+        }
+
+        ret_action
     }
 
     fn render_full_plan(
@@ -1063,6 +1146,187 @@ fn get_projects(
                 .collect::<Vec<_>>();
     projects.sort_by_key(|a| a.name.to_lowercase());
     projects
+}
+
+/// The workshop deck: every unlocked policy, plus locked policies
+/// reachable through `Effect::UnlocksProject` chains from unlocked
+/// policies (prereq-locked cards, shown as visible-but-locked).
+/// Grouped by the projects' existing `group` field.
+fn workshop_card_groups(state: &State) -> Vec<(Group, Vec<Card<Project>>)> {
+    let projects = &state.world.projects;
+
+    let mut visible: BTreeSet<Id> = projects
+        .iter()
+        .filter(|p| p.kind == ProjectType::Policy && !p.locked)
+        .map(|p| p.id)
+        .collect();
+    let mut frontier: Vec<Id> = visible.iter().copied().collect();
+    while let Some(id) = frontier.pop() {
+        let unlocks: Vec<Id> = projects[&id]
+            .effects
+            .iter()
+            .filter_map(|effect| match effect {
+                Effect::UnlocksProject(target) => Some(*target),
+                _ => None,
+            })
+            .collect();
+        for target in unlocks {
+            if projects[&target].kind == ProjectType::Policy && visible.insert(target) {
+                frontier.push(target);
+            }
+        }
+    }
+
+    Group::iter()
+        .filter_map(|group| {
+            let mut cards: Vec<Project> = visible
+                .iter()
+                .map(|id| &projects[id])
+                .filter(|p| p.group == group)
+                .cloned()
+                .collect();
+            if cards.is_empty() {
+                None
+            } else {
+                cards.sort_by_key(|p| p.name.to_lowercase());
+                Some((group, cards.into_iter().map(Card::new).collect()))
+            }
+        })
+        .collect()
+}
+
+/// The expiring per-cycle budget, displayed prominently at the
+/// top of the workshop plan screen.
+fn render_workshop_budget(ui: &mut egui::Ui, state: &State) {
+    ui.vertical_centered(|ui| {
+        egui::Frame::NONE
+            .fill(Color32::from_black_alpha(208))
+            .corner_radius(6)
+            .inner_margin(Margin::symmetric(14, 8))
+            .show(ui, |ui| {
+                ui.horizontal(|ui| {
+                    ui.style_mut().spacing.item_spacing.x = 6.;
+                    ui.add(icons::POLITICAL_CAPITAL.size(26.));
+                    ui.label(
+                        egui::RichText::new(t!(
+                            "%{pc}/%{budget} PC this cycle",
+                            pc = state.political_capital,
+                            budget = consts::WORKSHOP_PC_BUDGET
+                        ))
+                        .heading()
+                        .size(22.)
+                        .color(Color32::WHITE),
+                    );
+                });
+            });
+    });
+}
+
+fn render_workshop_group_header(ui: &mut egui::Ui, group: &Group) {
+    let (bg, fg) = group_color(group);
+    ui.vertical_centered(|ui| {
+        egui::Frame::NONE
+            .fill(bg)
+            .corner_radius(4)
+            .inner_margin(Margin::symmetric(12, 4))
+            .show(ui, |ui| {
+                ui.label(
+                    egui::RichText::new(t!(group.to_string()).to_uppercase())
+                        .heading()
+                        .size(18.)
+                        .color(fg),
+                );
+            });
+    });
+}
+
+/// Render one workshop policy card. Returns the project's id if the
+/// card was clicked and is interactive (not locked, not over budget).
+fn render_workshop_card(
+    ui: &mut egui::Ui,
+    state: &GameState,
+    card: &mut Card<Project>,
+) -> Option<Id> {
+    let id = card.id;
+    let project = &state.world.projects[&id];
+    let locked = project.locked;
+    let passed = project.is_building() || project.is_online();
+    let free_repass = state
+        .ui
+        .plan_changes
+        .get(&id)
+        .is_some_and(|changes| changes.withdrawn);
+    let over_budget =
+        !locked && !passed && !free_repass && (project.cost as isize) > state.political_capital;
+
+    let resp = ui
+        .scope(|ui| {
+            if locked {
+                ui.set_opacity(0.4);
+            } else if over_budget {
+                ui.set_opacity(0.65);
+            }
+            card.render(ui, state, false)
+        })
+        .inner;
+    let rect = resp.rect;
+
+    if locked {
+        // Visible-but-locked: gray overlay with a lock icon,
+        // no interaction.
+        ui.painter()
+            .rect_filled(rect, 4., Color32::from_black_alpha(112));
+        let icon_rect = Rect::from_center_size(
+            rect.center() - egui::vec2(0., 16.),
+            egui::Vec2::splat(48.),
+        );
+        ui.place(icon_rect, icons::LOCKS.size(48.));
+        let label_rect = Rect::from_center_size(
+            rect.center() + egui::vec2(0., 28.),
+            egui::vec2(rect.width(), 20.),
+        );
+        ui.place(label_rect, |ui: &mut egui::Ui| {
+            ui.vertical_centered(|ui| {
+                ui.label(
+                    egui::RichText::new(t!("Locked"))
+                        .heading()
+                        .size(14.)
+                        .color(Color32::WHITE),
+                )
+            })
+            .response
+        });
+        None
+    } else if over_budget {
+        // Clear visual for cards blocked by the remaining budget.
+        let banner_rect = Rect::from_center_size(
+            rect.center_top() + egui::vec2(0., 38.),
+            egui::vec2(rect.width() - 12., 20.),
+        );
+        ui.place(banner_rect, |ui: &mut egui::Ui| {
+            egui::Frame::NONE
+                .fill(Color32::from_rgb(0xEF, 0x38, 0x38))
+                .corner_radius(3)
+                .inner_margin(Margin::symmetric(6, 2))
+                .show(ui, |ui| {
+                    ui.vertical_centered(|ui| {
+                        ui.label(
+                            egui::RichText::new(t!("Not enough political capital"))
+                                .size(12.)
+                                .color(Color32::WHITE),
+                        );
+                    });
+                })
+                .response
+        });
+        None
+    } else {
+        if resp.contains_pointer() {
+            let painter = resp.ctx.layer_painter(resp.layer_id);
+            glow_fill(&painter, rect, Color32::WHITE);
+        }
+        resp.interact(Sense::click()).clicked().then_some(id)
+    }
 }
 
 const SLOT_HEIGHT: f32 = 155.;

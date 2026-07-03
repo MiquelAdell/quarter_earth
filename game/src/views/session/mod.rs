@@ -17,6 +17,7 @@ use crate::{
     parts::{RaisedFrame, get_sizing, raised_frame},
     state::{GameState, StateExt, Tutorial, update_factors},
     views::events::{EventResult, Events},
+    workshop::WORKSHOP,
 };
 
 use govt::Parliament;
@@ -32,6 +33,10 @@ pub struct Session {
 }
 impl Session {
     pub fn new(state: &mut GameState) -> Self {
+        // Workshop mode: each planning session starts with a fresh,
+        // expiring PC budget (no-op in normal mode).
+        WORKSHOP.begin_planning(&mut state.core);
+
         let mut events: Vec<_> = StateExt::roll_events(&mut state.core, EventPhase::PlanningStart)
             .into_iter()
             .chain(StateExt::roll_events(
@@ -105,41 +110,25 @@ impl Session {
         ctx: &Arc<three_d::context::Context>,
     ) -> bool {
         if self.view.show_tabs() {
-            let tabs = &[
-                TabItem {
-                    tab: Tab::Plan,
-                    selected: self.view.as_tab() == Tab::Plan,
-                    tutorial: Some(Tutorial::Plan),
+            let tabs: Vec<_> = [Tab::Plan, Tab::Govt, Tab::Stats, Tab::World]
+                .into_iter()
+                // Workshop mode removes parliament entirely.
+                .filter(|tab| !(WORKSHOP.active && *tab == Tab::Govt))
+                .map(|tab| TabItem {
+                    selected: self.view.as_tab() == tab,
+                    tutorial: Some(match tab {
+                        Tab::Plan => Tutorial::Plan,
+                        Tab::Govt => Tutorial::Parliament,
+                        Tab::Stats => Tutorial::Dashboard,
+                        Tab::World => Tutorial::Regions,
+                    }),
                     icon: None,
-                    label: Tab::Plan.to_string(),
+                    label: tab.to_string(),
                     disabled: false,
-                },
-                TabItem {
-                    tab: Tab::Govt,
-                    selected: self.view.as_tab() == Tab::Govt,
-                    tutorial: Some(Tutorial::Parliament),
-                    icon: None,
-                    label: Tab::Govt.to_string(),
-                    disabled: false,
-                },
-                TabItem {
-                    tab: Tab::Stats,
-                    selected: self.view.as_tab() == Tab::Stats,
-                    tutorial: Some(Tutorial::Dashboard),
-                    icon: None,
-                    label: Tab::Stats.to_string(),
-                    disabled: false,
-                },
-                TabItem {
-                    tab: Tab::World,
-                    selected: self.view.as_tab() == Tab::World,
-                    tutorial: Some(Tutorial::Regions),
-                    icon: None,
-                    label: Tab::World.to_string(),
-                    disabled: false,
-                },
-            ];
-            if let Some(tab) = render_tabs(ui, &state.ui.tutorial, tabs) {
+                    tab,
+                })
+                .collect();
+            if let Some(tab) = render_tabs(ui, &state.ui.tutorial, &tabs) {
                 self.set_tab(tab, &mut state.core, ctx);
             }
         }

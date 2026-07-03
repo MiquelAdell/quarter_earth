@@ -51,3 +51,12 @@ pub const PROCESS_CARD_WITHDRAW_TIME: f32 = 0.4 * 1000.;
 pub const MS_PER_YEAR: f32 = 2500.;
 
 pub const PARLIAMENT_SEATS: &[usize] = &[9, 9, 7, 5, 3];
+
+/// Length of a workshop-mode session in in-game years
+/// (6 planning cycles of 5 years: 2022 -> 2052).
+// TODO(workshop): adopt world.lifespan once available in the engine.
+pub const WORKSHOP_YEARS: usize = 30;
+
+/// Workshop mode: flat, expiring political capital budget granted
+/// at the start of each planning cycle. Unspent PC is discarded.
+pub const WORKSHOP_PC_BUDGET: isize = 30;

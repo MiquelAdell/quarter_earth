@@ -17,6 +17,7 @@ use crate::{
     tips::{Tip, add_tip, tip},
     vars::Var,
     views::events::Events,
+    workshop::WORKSHOP,
 };
 
 const ROW_HEIGHT: f32 = 18.;
@@ -47,12 +48,19 @@ impl Report {
         ];
 
         let requests = requests_rows(state);
-        let honeymoon_pc = honeymoon_pc(state);
-        let pc_change = changes.iter().map(|row| row.pc_change).sum::<isize>()
-            + requests.iter().map(|(_, bounty)| bounty).sum::<isize>()
-            + (state.ui.cycle_start_state.completed_projects.len()
-                * consts::PC_PER_COMPLETED_PROJECT) as isize
-            + honeymoon_pc;
+
+        // Workshop mode: PC is a flat expiring budget, not earned
+        // from outcomes, so no PC is awarded (or displayed) here.
+        let honeymoon_pc = if WORKSHOP.active { 0 } else { honeymoon_pc(state) };
+        let pc_change = if WORKSHOP.active {
+            0
+        } else {
+            changes.iter().map(|row| row.pc_change).sum::<isize>()
+                + requests.iter().map(|(_, bounty)| bounty).sum::<isize>()
+                + (state.ui.cycle_start_state.completed_projects.len()
+                    * consts::PC_PER_COMPLETED_PROJECT) as isize
+                + honeymoon_pc
+        };
 
         Self {
             events: Events::new(events, state),
@@ -129,13 +137,19 @@ impl Report {
         let year = state.world.year;
         let start_year = state.ui.cycle_start_state.year;
 
-        TableBuilder::new(ui)
+        // Workshop mode hides the PC-award column entirely.
+        let show_pc = !WORKSHOP.active;
+
+        let mut table = TableBuilder::new(ui)
             .id_salt("changes")
             .column(Column::remainder())
             .column(Column::auto())
             .column(Column::auto())
-            .column(Column::auto())
-            .column(Column::auto())
+            .column(Column::auto());
+        if show_pc {
+            table = table.column(Column::auto());
+        }
+        table
             .header(ROW_HEIGHT, |mut header| {
                 header.col(|ui| {
                     ui.label(egui::RichText::new(t!("Changes")).size(12.).underline());
@@ -149,9 +163,11 @@ impl Report {
                 header.col(|ui| {
                     ui.label(egui::RichText::new(year.to_string()).size(12.));
                 });
-                header.col(|ui| {
-                    ui.add(icons::POLITICAL_CAPITAL.size(12.));
-                });
+                if show_pc {
+                    header.col(|ui| {
+                        ui.add(icons::POLITICAL_CAPITAL.size(12.));
+                    });
+                }
             })
             .body(|mut body| {
                 for change in &self.changes {
@@ -189,10 +205,12 @@ impl Report {
                                 }
                             };
                         });
-                        row.col(|ui| {
-                            let pc_change = format!("{:+}", change.pc_change);
-                            ui.label(pc_change);
-                        });
+                        if show_pc {
+                            row.col(|ui| {
+                                let pc_change = format!("{:+}", change.pc_change);
+                                ui.label(pc_change);
+                            });
+                        }
                     });
                 }
             });
@@ -224,10 +242,13 @@ impl Report {
                                     .card(p.clone());
                                 add_tip(tip, ui.label(t!(&p.name)));
                             });
-                            row.col(|ui| {
-                                let pc_change = format!("{:+}", consts::PC_PER_COMPLETED_PROJECT);
-                                ui.label(pc_change);
-                            });
+                            if !WORKSHOP.active {
+                                row.col(|ui| {
+                                    let pc_change =
+                                        format!("{:+}", consts::PC_PER_COMPLETED_PROJECT);
+                                    ui.label(pc_change);
+                                });
+                            }
                         });
                     }
                 });
@@ -267,6 +288,10 @@ impl Report {
     }
 
     fn render_total_pc_change(&self, ui: &mut egui::Ui) {
+        // Workshop mode: no PC awards, so no total to show.
+        if WORKSHOP.active {
+            return;
+        }
         ui.add_space(12.);
         TableBuilder::new(ui)
             .id_salt("pc-total")

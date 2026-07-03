@@ -12,6 +12,7 @@ mod text;
 mod tips;
 mod vars;
 mod views;
+mod workshop;
 
 use std::sync::Arc;
 
@@ -20,6 +21,7 @@ use egui::Key;
 use debug::DEBUG;
 use splash::{Start, StartAction};
 use state::Settings;
+use workshop::WORKSHOP;
 
 use crate::{
     audio::AudioSystem,
@@ -123,7 +125,11 @@ impl App {
     }
 
     fn save_prefs(&mut self, storage: &mut dyn eframe::Storage) {
-        self.prefs.tutorial = self.state.ui.tutorial;
+        // In workshop mode the tutorial is force-finished for the session;
+        // don't let that leak into the persisted prefs for normal mode.
+        if !WORKSHOP.active {
+            self.prefs.tutorial = self.state.ui.tutorial;
+        }
         if self.prefs.tutorial == Tutorial::Ready && self.prefs.runs_played == 0 {
             self.prefs.runs_played = 1;
         }
