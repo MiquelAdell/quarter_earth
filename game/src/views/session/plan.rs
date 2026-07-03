@@ -34,7 +34,7 @@ use crate::{
         scanner::Cards,
         session::{TabItem, render_tabs},
     },
-    workshop::{WORKSHOP, toggle_policy},
+    workshop::{WORKSHOP, land_gauge_segments, toggle_policy},
 };
 
 pub enum PlanAction {
@@ -442,6 +442,10 @@ impl Plan {
 
         render_workshop_budget(ui, &state.core);
 
+        ui.add_space(12.);
+        render_workshop_land_gauge(ui, &state.core);
+        render_workshop_water_warning(ui, &state.core);
+
         let mut clicked: Option<Id> = None;
         egui::ScrollArea::vertical().show(ui, |ui| {
             for (group, cards) in groups.iter_mut() {
@@ -498,7 +502,7 @@ impl Plan {
         ui: &mut egui::Ui,
         state: &State,
         tutorial: &mut Tutorial,
-        plan_changes: &BTreeMap<Id, PlanChange>,
+        _plan_changes: &BTreeMap<Id, PlanChange>,
     ) {
         let projects = &state.world.projects;
         let active_projects: Vec<_> = projects
@@ -1216,6 +1220,104 @@ fn render_workshop_budget(ui: &mut egui::Ui, state: &State) {
                         .heading()
                         .size(22.)
                         .color(Color32::WHITE),
+                    );
+                });
+            });
+    });
+}
+
+/// The persistent land gauge (used/protected/free) on the workshop
+/// plan screen — the constraint that drives the Half-Earth tension.
+/// Reads live engine state, so it reacts immediately to policies
+/// that protect land or change land demand.
+fn render_workshop_land_gauge(ui: &mut egui::Ui, state: &State) {
+    let used = resource(
+        state.resource_demand.of(Resource::Land),
+        Resource::Land,
+        state.world.starting_resources,
+    );
+    let protected = state.protected_land * 100.;
+    let (used, protected, free) = land_gauge_segments(used, protected);
+
+    const USED_COLOR: Color32 = Color32::from_rgb(0xC4, 0x6A, 0x3B);
+    const PROTECTED_COLOR: Color32 = Color32::from_rgb(0x43, 0x8A, 0x5A);
+    const FREE_COLOR: Color32 = Color32::from_rgb(0xE4, 0xC9, 0xC2);
+
+    ui.vertical_centered(|ui| {
+        egui::Frame::NONE
+            .fill(Color32::from_black_alpha(208))
+            .corner_radius(6)
+            .inner_margin(Margin::symmetric(14, 8))
+            .show(ui, |ui| {
+                ui.set_width(320.);
+
+                ui.horizontal(|ui| {
+                    ui.style_mut().spacing.item_spacing.x = 6.;
+                    ui.add(icons::LAND.size(18.));
+                    ui.label(
+                        egui::RichText::new(t!("Land"))
+                            .heading()
+                            .size(14.)
+                            .color(Color32::WHITE),
+                    );
+                });
+
+                let (rect, _) =
+                    ui.allocate_exact_size(egui::vec2(ui.available_width(), 12.), Sense::hover());
+                let mut x = rect.left();
+                for (percent, color) in [
+                    (used, USED_COLOR),
+                    (protected, PROTECTED_COLOR),
+                    (free, FREE_COLOR),
+                ] {
+                    let width = rect.width() * percent / 100.;
+                    let segment = egui::Rect::from_min_size(
+                        egui::pos2(x, rect.top()),
+                        egui::vec2(width, rect.height()),
+                    );
+                    ui.painter().rect_filled(segment, 2., color);
+                    x += width;
+                }
+
+                ui.label(
+                    egui::RichText::new(t!(
+                        "Used %{used}% · Protected %{protected}% · Free %{free}%",
+                        used = format!("{used:.0}"),
+                        protected = format!("{protected:.0}"),
+                        free = format!("{free:.0}")
+                    ))
+                    .size(12.)
+                    .color(Color32::WHITE),
+                );
+            });
+    });
+}
+
+/// Workshop mode: water is warning-only — an alert banner shown on
+/// the plan screen only when demand exceeds the available supply.
+fn render_workshop_water_warning(ui: &mut egui::Ui, state: &State) {
+    let demand = state.resource_demand.of(Resource::Water);
+    let available = state.resources.available.water;
+    if demand <= available {
+        return;
+    }
+
+    ui.add_space(8.);
+    ui.vertical_centered(|ui| {
+        egui::Frame::NONE
+            .fill(Color32::from_rgb(0xEF, 0x38, 0x38))
+            .corner_radius(4)
+            .inner_margin(Margin::symmetric(10, 4))
+            .show(ui, |ui| {
+                ui.horizontal(|ui| {
+                    ui.style_mut().spacing.item_spacing.x = 6.;
+                    ui.add(icons::ALERT.size(16.));
+                    ui.colored_label(
+                        Color32::WHITE,
+                        egui::RichText::new(t!(
+                            "Water shortage: demand exceeds the available supply."
+                        ))
+                        .size(13.),
                     );
                 });
             });

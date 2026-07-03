@@ -304,9 +304,26 @@ Conventional-Commits branch off `main`.
   each planning start (`begin_planning`), over-budget pass blocked, Govt tab
   hidden, report PC awards zeroed/hidden. 49 game tests green. (Agent's
   session died mid-report; work inspected and verified directly.)
-- **Next:** W7 (metric report + land gauge) → W8 (world v2: 5 ChangeMixShare
-  cards, Spanish strings, year alignment, playtest rebalance — needs
-  `playtest-notes.md` from W3) → W9 (review + wasm verification).
+- **2026-07-03 — W7 done, verified.** Workshop report re-centered on the 4
+  headline metrics: emissions, temperature, extinction, plus new Energy
+  Supplied / Calories Supplied rows shown as %-of-demand-met with
+  cycle-start → cycle-end deltas (`CycleStart` gained
+  `produced`/`output_demand` snapshots, serde-defaulted; game-layer only).
+  Contentedness demoted to a secondary "Also Tracked" table; water is a
+  red warning line only on shortage. Persistent 3-segment land gauge
+  (used/protected/free, `workshop::land_gauge_segments` clamps to 100 with
+  used winning over protected) under the PC budget on the plan screen,
+  reads live state each frame so Nature Preserves moves it immediately.
+  All new strings via `t!` for W8. 53 game tests green (4 new, exact
+  assertions). **Gotchas:** (a) plan brief said Leptos — codebase is egui;
+  (b) `cycle_start_state` did NOT have output data as the plan claimed —
+  added to `CycleStart`; (c) the "cycle start" snapshot fires at end of
+  planning, so deltas measure the 5 simulated years (desired). (Agent hit
+  a session limit mid-polish; resumed via SendMessage and finished.)
+- **Next:** W8 (world v2: 5 ChangeMixShare cards, Spanish strings, year
+  alignment, playtest rebalance — needs `playtest-notes.md` from the W3
+  human playtest, which hasn't happened yet) → W9 (review + wasm
+  verification).
 
 ## Global verification
 

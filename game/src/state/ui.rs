@@ -1,7 +1,7 @@
 use crate::{climate::EmissionsData, consts, display::DisplayEvent};
 use enum_iterator::Sequence;
 use enum_map::EnumMap;
-use hes_engine::{Change, IconEvent, Id, Income, Output, State};
+use hes_engine::{Change, IconEvent, Id, Income, Output, OutputMap, State};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use strum::IntoEnumIterator;
@@ -16,6 +16,13 @@ pub struct CycleStart {
     pub contentedness: f32,
     pub temperature: f32,
     pub region_incomes: Vec<Income>,
+
+    /// Output produced/demanded at the start of the cycle, for the
+    /// workshop report's "produced vs demand" before/after deltas.
+    #[serde(default)]
+    pub produced: OutputMap,
+    #[serde(default)]
+    pub output_demand: OutputMap,
 
     // Seats in parliament for each NPC faction
     pub parliament: Vec<f32>,
@@ -195,6 +202,8 @@ impl UIState {
         self.cycle_start_state.contentedness = state.outlook();
         self.cycle_start_state.temperature = state.world.temperature;
         self.cycle_start_state.emissions = state.emissions.as_gtco2eq();
+        self.cycle_start_state.produced = state.produced.total();
+        self.cycle_start_state.output_demand = state.output_demand.total();
         self.cycle_start_state.region_incomes =
             state.world.regions.iter().map(|r| r.income).collect();
         self.cycle_start_state.parliament = state.npcs.iter().map(|npc| npc.seats).collect();

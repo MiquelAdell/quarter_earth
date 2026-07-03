@@ -96,6 +96,17 @@ pub fn toggle_policy(
     }
 }
 
+/// The land gauge segments (used, protected, free) as percentages of
+/// habitable land, clamped so the three always sum to 100. Used wins
+/// over protected when their raw sum would exceed 100 (a shortage:
+/// demand is already eating into what should be protected).
+pub fn land_gauge_segments(used_percent: f32, protected_percent: f32) -> (f32, f32, f32) {
+    let used = used_percent.clamp(0., 100.);
+    let protected = protected_percent.clamp(0., 100. - used);
+    let free = 100. - used - protected;
+    (used, protected, free)
+}
+
 #[cfg(not(target_arch = "wasm32"))]
 fn get_workshop_flag() -> String {
     std::env::var("WORKSHOP").unwrap_or_default()
@@ -175,6 +186,19 @@ mod tests {
 
         WorkshopOpts { active: false }.begin_planning(&mut state);
         assert_eq!(state.political_capital, 3);
+    }
+
+    #[test]
+    fn test_land_gauge_segments() {
+        assert_eq!(land_gauge_segments(60., 10.), (60., 10., 30.));
+        assert_eq!(land_gauge_segments(0., 0.), (0., 0., 100.));
+        // More protection eats into free land, not used land.
+        assert_eq!(land_gauge_segments(60., 40.), (60., 40., 0.));
+        // Shortage: used land wins over protected; nothing goes negative.
+        assert_eq!(land_gauge_segments(95., 10.), (95., 5., 0.));
+        assert_eq!(land_gauge_segments(120., 10.), (100., 0., 0.));
+        // Out-of-range inputs are clamped.
+        assert_eq!(land_gauge_segments(-5., -5.), (0., 0., 100.));
     }
 
     /// An affordable, unlocked, inactive policy from the default world.

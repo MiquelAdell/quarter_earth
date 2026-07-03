@@ -1,7 +1,7 @@
 use egui::Color32;
 use egui_extras::{Column, TableBuilder};
 use egui_taffy::TuiBuilderLogic;
-use hes_engine::{EventPhase, IconEvent, Income, NPCRequest, Project};
+use hes_engine::{EventPhase, IconEvent, Income, NPCRequest, OutputMap, Project, Resource};
 use rust_i18n::t;
 
 use crate::{
@@ -25,6 +25,12 @@ const ROW_HEIGHT: f32 = 18.;
 pub struct Report {
     events: Events,
     changes: Vec<ChangeRow>,
+    /// Workshop mode: metrics tracked but demoted below the four
+    /// headline metrics (currently just contentedness).
+    secondary_changes: Vec<ChangeRow>,
+    /// Workshop mode: water is warning-only — set when demand
+    /// exceeds the available supply at the end of the cycle.
+    water_warning: Option<String>,
     projects_finished: Vec<Project>,
     requests_fulfilled: Vec<(String, isize)>,
     seat_changes: Vec<(String, f32, f32)>,
@@ -40,12 +46,36 @@ impl Report {
 
         state.ui.session_start_state = state.core.clone();
 
-        let changes = vec![
-            temp_row(state),
-            cont_row(state),
-            ext_row(state),
-            ghg_row(state),
-        ];
+        // Workshop mode re-centers the report on the four headline
+        // metrics (spec §6): CO2/temperature, biodiversity, energy
+        // vs demand, calories vs demand. Contentedness is demoted to
+        // a secondary line and water is warning-only.
+        let changes = if WORKSHOP.active {
+            vec![
+                ghg_row(state),
+                temp_row(state),
+                ext_row(state),
+                energy_row(state),
+                calories_row(state),
+            ]
+        } else {
+            vec![
+                temp_row(state),
+                cont_row(state),
+                ext_row(state),
+                ghg_row(state),
+            ]
+        };
+        let secondary_changes = if WORKSHOP.active {
+            vec![cont_row(state)]
+        } else {
+            vec![]
+        };
+        let water_warning = if WORKSHOP.active {
+            water_warning(state)
+        } else {
+            None
+        };
 
         let requests = requests_rows(state);
 
@@ -65,6 +95,8 @@ impl Report {
         Self {
             events: Events::new(events, state),
             changes,
+            secondary_changes,
+            water_warning,
             projects_finished: projects_rows(state),
             requests_fulfilled: requests,
             seat_changes: parliament_rows(state),
@@ -106,6 +138,8 @@ impl Report {
                         ui.set_width(360.);
 
                         self.render_changes(ui, state);
+                        self.render_secondary_changes(ui);
+                        self.render_water_warning(ui);
                         self.render_projects(ui);
                         self.render_requests(ui);
                         self.render_total_pc_change(ui);
@@ -214,6 +248,80 @@ impl Report {
                     });
                 }
             });
+    }
+
+    /// Workshop mode: metrics demoted below the headline four,
+    /// shown as a plain before/after list without the year header.
+    fn render_secondary_changes(&self, ui: &mut egui::Ui) {
+        if self.secondary_changes.is_empty() {
+            return;
+        }
+        ui.add_space(12.);
+        TableBuilder::new(ui)
+            .id_salt("secondary-changes")
+            .column(Column::remainder())
+            .column(Column::auto())
+            .column(Column::auto())
+            .column(Column::auto())
+            .header(ROW_HEIGHT, |mut header| {
+                header.col(|ui| {
+                    ui.label(
+                        egui::RichText::new(t!("Also Tracked"))
+                            .size(12.)
+                            .underline(),
+                    );
+                });
+            })
+            .body(|mut body| {
+                for change in &self.secondary_changes {
+                    body.row(ROW_HEIGHT, |mut row| {
+                        row.col(|ui| {
+                            add_tip(
+                                change.tip.clone(),
+                                ui.horizontal(|ui| {
+                                    ui.add(change.icon.size(16.));
+                                    ui.label(&change.label);
+                                })
+                                .response,
+                            );
+                        });
+                        row.col(|ui| match &change.from {
+                            Value::Bar(intensity_bar) => {
+                                ui.add(intensity_bar);
+                            }
+                            Value::Val(val) => {
+                                ui.label(val);
+                            }
+                        });
+                        row.col(|ui| {
+                            ui.add(icons::ARROW_RIGHT.size(16.));
+                        });
+                        row.col(|ui| match &change.to {
+                            Value::Bar(intensity_bar) => {
+                                ui.add(intensity_bar);
+                            }
+                            Value::Val(val) => {
+                                ui.label(val);
+                            }
+                        });
+                    });
+                }
+            });
+    }
+
+    /// Workshop mode: water is warning-only — a single alert line
+    /// shown only when there is a shortage.
+    fn render_water_warning(&self, ui: &mut egui::Ui) {
+        if let Some(warning) = &self.water_warning {
+            ui.add_space(12.);
+            ui.horizontal(|ui| {
+                ui.add(icons::ALERT.size(16.));
+                ui.colored_label(
+                    Color32::from_rgb(0xB0, 0x14, 0x0C),
+                    egui::RichText::new(warning).size(12.),
+                );
+            });
+        }
     }
 
     fn render_projects(&self, ui: &mut egui::Ui) {
@@ -592,6 +700,86 @@ fn ghg_row(state: &GameState) -> ChangeRow {
     }
 }
 
+/// Percent of demand met, rounded to the nearest whole percent.
+/// No demand counts as fully met.
+fn percent_demand_met(produced: f32, demand: f32) -> f32 {
+    if demand <= 0. {
+        100.
+    } else {
+        (produced / demand * 100.).round()
+    }
+}
+
+/// Percent of energy demand (fuel + electricity) met.
+fn energy_percent_met(produced: OutputMap, demand: OutputMap) -> f32 {
+    percent_demand_met(
+        produced.fuel + produced.electricity,
+        demand.fuel + demand.electricity,
+    )
+}
+
+/// Percent of calorie demand (plant + animal) met.
+fn calories_percent_met(produced: OutputMap, demand: OutputMap) -> f32 {
+    percent_demand_met(
+        produced.plant_calories + produced.animal_calories,
+        demand.plant_calories + demand.animal_calories,
+    )
+}
+
+/// Workshop headline metric: energy produced vs demand,
+/// cycle start → cycle end.
+fn energy_row(state: &GameState) -> ChangeRow {
+    let start = &state.ui.cycle_start_state;
+    let from = energy_percent_met(start.produced, start.output_demand);
+    let to = energy_percent_met(state.produced.total(), state.output_demand.total());
+
+    let tip_text = t!(
+        r#"How much of the demand for energy (fuel and electricity) is being met. [g]Your goal is to keep this at 100%.[/g]"#
+    );
+    let energy_tip = tip(icons::ENERGY, tip_text).card(factors_card(None, Var::Electricity, state));
+
+    ChangeRow {
+        tip: energy_tip,
+        icon: icons::ENERGY,
+        label: t!("Energy Supplied").to_string(),
+        from: Value::Val(format!("{:.0}%", from)),
+        to: Value::Val(format!("{:.0}%", to)),
+        pc_change: 0,
+    }
+}
+
+/// Workshop headline metric: calories produced vs demand,
+/// cycle start → cycle end.
+fn calories_row(state: &GameState) -> ChangeRow {
+    let start = &state.ui.cycle_start_state;
+    let from = calories_percent_met(start.produced, start.output_demand);
+    let to = calories_percent_met(state.produced.total(), state.output_demand.total());
+
+    let tip_text = t!(
+        r#"How much of the demand for food is being met. [g]Your goal is to keep this at 100%.[/g]"#
+    );
+    let calories_tip =
+        tip(icons::PLANT_CALORIES, tip_text).card(factors_card(None, Var::PlantCalories, state));
+
+    ChangeRow {
+        tip: calories_tip,
+        icon: icons::PLANT_CALORIES,
+        label: t!("Calories Supplied").to_string(),
+        from: Value::Val(format!("{:.0}%", from)),
+        to: Value::Val(format!("{:.0}%", to)),
+        pc_change: 0,
+    }
+}
+
+/// Workshop mode: water is warning-only. Returns a warning message
+/// when water demand exceeds the available supply.
+fn water_warning(state: &GameState) -> Option<String> {
+    let demand = state.resource_demand.of(Resource::Water);
+    let available = state.resources.available.water;
+    (demand > available)
+        .then(|| t!("Water shortage: demand exceeds the available supply.").to_string())
+}
+
 fn honeymoon_pc(state: &GameState) -> isize {
     let year = state.world.year;
     let start_year = state.ui.cycle_start_state.year;
@@ -700,4 +888,58 @@ fn region_rows(state: &GameState) -> Vec<(String, Income)> {
         .filter(|(reg, inc)| reg.income != **inc)
         .map(|(reg, _)| (reg.name.clone(), reg.income))
         .collect::<Vec<_>>()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_percent_demand_met() {
+        assert_eq!(percent_demand_met(50., 100.), 50.);
+        assert_eq!(percent_demand_met(100., 100.), 100.);
+        // Oversupply reads as more than 100%.
+        assert_eq!(percent_demand_met(150., 100.), 150.);
+        // Rounded to the nearest whole percent.
+        assert_eq!(percent_demand_met(1., 3.), 33.);
+        // No demand counts as fully met (avoids division by zero).
+        assert_eq!(percent_demand_met(10., 0.), 100.);
+        assert_eq!(percent_demand_met(0., 0.), 100.);
+    }
+
+    #[test]
+    fn test_energy_percent_met_sums_fuel_and_electricity() {
+        let produced = OutputMap {
+            fuel: 30.,
+            electricity: 30.,
+            plant_calories: 999.,
+            animal_calories: 999.,
+        };
+        let demand = OutputMap {
+            fuel: 40.,
+            electricity: 40.,
+            plant_calories: 1.,
+            animal_calories: 1.,
+        };
+        // (30 + 30) / (40 + 40) = 75%; calories are ignored.
+        assert_eq!(energy_percent_met(produced, demand), 75.);
+    }
+
+    #[test]
+    fn test_calories_percent_met_sums_plant_and_animal() {
+        let produced = OutputMap {
+            fuel: 999.,
+            electricity: 999.,
+            plant_calories: 45.,
+            animal_calories: 15.,
+        };
+        let demand = OutputMap {
+            fuel: 1.,
+            electricity: 1.,
+            plant_calories: 50.,
+            animal_calories: 50.,
+        };
+        // (45 + 15) / (50 + 50) = 60%; energy is ignored.
+        assert_eq!(calories_percent_met(produced, demand), 60.);
+    }
 }
