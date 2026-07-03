@@ -30,9 +30,15 @@ struct WorldPicker {
 }
 impl WorldPicker {
     fn new() -> Self {
-        Self {
+        #[allow(unused_mut)]
+        let mut picker = Self {
             world: Rc::new(RefCell::new(WorldStatus::Default)),
+        };
+        #[cfg(not(target_arch = "wasm32"))]
+        if let Ok(path) = std::env::var("DEBUG_WORLD") {
+            picker.load_world(PathBuf::from(path));
         }
+        picker
     }
 
     fn render(&mut self, ui: &mut egui::Ui) {
