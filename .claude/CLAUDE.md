@@ -13,7 +13,10 @@ Two build targets (web vs native) that should stay in sync except where noted in
 
 See `references/project-brief.md` for the acTe assembly-workshop use case
 (model-only mode + encyclopedia, target Oct 2026) currently motivating work
-on this repo.
+on this repo. The workshop-mode work itself is spec-driven in
+`references/simplification/` — `README.md` there is the entry point, and
+`implementation-plan.md` carries the work breakdown plus an execution log
+with current status.
 
 ## Commands
 
