@@ -72,7 +72,7 @@ impl App {
         cc.egui_ctx.set_theme(egui::Theme::Dark);
 
         let mut prefs = load_prefs(cc.storage).unwrap_or_default();
-        let state = load_game(cc.storage);
+        let state = load_game(cc.storage, WORKSHOP.active);
         let has_save = state.is_some();
         let mut state = state.unwrap_or_default();
 
@@ -121,7 +121,7 @@ impl App {
         // loading always returns `None`. There might be something wrong
         // with the RON de/serializer. It works fine using JSON though.
         let s = serde_json::to_string(&self.state).unwrap();
-        eframe::set_value(storage, "state", &s);
+        eframe::set_value(storage, game_save_key(WORKSHOP.active), &s);
     }
 
     fn save_prefs(&mut self, storage: &mut dyn eframe::Storage) {
@@ -137,9 +137,17 @@ impl App {
     }
 }
 
-fn load_game(storage: Option<&dyn eframe::Storage>) -> Option<GameState> {
+fn game_save_key(workshop_active: bool) -> &'static str {
+    if workshop_active {
+        "workshop_state"
+    } else {
+        "state"
+    }
+}
+
+fn load_game(storage: Option<&dyn eframe::Storage>, workshop_active: bool) -> Option<GameState> {
     storage
-        .and_then(|storage| eframe::get_value::<String>(storage, "state"))
+        .and_then(|storage| eframe::get_value::<String>(storage, game_save_key(workshop_active)))
         // See note in `save_game`.
         .map(|s| serde_json::from_str(&s).unwrap())
 }
@@ -178,7 +186,8 @@ impl eframe::App for App {
                             if let Some(action) = start.render(ui, &mut self.prefs, self.has_save) {
                                 match action {
                                     StartAction::Continue => {
-                                        self.state = load_game(frame.storage()).unwrap_or_default();
+                                        self.state = load_game(frame.storage(), WORKSHOP.active)
+                                            .unwrap_or_default();
                                         prepare_game(&mut self.state, &self.prefs);
                                         self.view = View::Game(GameView::from_save(
                                             &mut self.state,
@@ -238,5 +247,17 @@ impl eframe::App for App {
                     }
                 });
             });
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::game_save_key;
+
+    #[test]
+    fn test_workshop_and_normal_saves_use_distinct_keys() {
+        assert_eq!(game_save_key(false), "state");
+        assert_eq!(game_save_key(true), "workshop_state");
+        assert_ne!(game_save_key(false), game_save_key(true));
     }
 }

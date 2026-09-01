@@ -10,7 +10,10 @@ pub use game::StateExt;
 use hes_engine::{Output, OutputMap, State, World};
 pub use prefs::Settings;
 use serde::{Deserialize, Serialize};
-pub use ui::{PlanChange, Points, Tutorial, UIState};
+pub use ui::{
+    PlanChange, Points, Tutorial, UIState, WorkshopCycleRecord, WorkshopPolicyAction,
+    WorkshopPolicyChoice,
+};
 
 use crate::{
     debug::DEBUG,
@@ -26,7 +29,11 @@ pub struct GameState {
 }
 impl Default for GameState {
     fn default() -> Self {
-        let state = State::default();
+        let state = if WORKSHOP.active {
+            State::new(World::workshop())
+        } else {
+            State::default()
+        };
         let ui = UIState::new(state.world.year);
         Self { core: state, ui }
     }

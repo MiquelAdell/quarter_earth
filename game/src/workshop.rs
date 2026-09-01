@@ -4,15 +4,15 @@
 //! When active:
 //! - No intro, no tutorial, no story/world events, no parliament majorities.
 //! - The world phase between cycles is a fast simulation tick.
-//! - The game always runs to the fixed horizon (`consts::WORKSHOP_YEARS`),
-//!   where the usual ending/evaluation is shown; mid-game loss is disabled.
+//! - The game runs to the loaded world's configured end year, where the usual
+//!   ending/evaluation is shown; mid-game loss is disabled.
 //!
 //! Activated via the `WORKSHOP=1` env var (native) or the `?workshop=1`
 //! query param (web), mirroring the debug flag mechanism in `debug.rs`.
 
 use std::{collections::BTreeMap, sync::LazyLock};
 
-use hes_engine::{Flag, Id, ProjectType, State};
+use hes_engine::{Effect, Flag, Id, Project, ProjectType, State};
 
 use crate::{
     consts,
@@ -24,6 +24,116 @@ pub static WORKSHOP: LazyLock<WorkshopOpts> = LazyLock::new(WorkshopOpts::defaul
 pub struct WorkshopOpts {
     /// Whether workshop mode is active.
     pub active: bool,
+}
+
+/// Presentation-only themes for the accepted workshop deck. These deliberately
+/// do not reuse the legacy `Project.group` values, which split the 21 cards into
+/// categories that are too narrow for a moderated discussion.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum WorkshopTheme {
+    Energy,
+    FoodAndAgriculture,
+    LandAndBiodiversity,
+    IndustryTransportAndGeoengineering,
+    SocietyAndEconomy,
+}
+
+impl WorkshopTheme {
+    pub const ALL: [Self; 5] = [
+        Self::Energy,
+        Self::FoodAndAgriculture,
+        Self::LandAndBiodiversity,
+        Self::IndustryTransportAndGeoengineering,
+        Self::SocietyAndEconomy,
+    ];
+
+    pub const fn title(self) -> &'static str {
+        match self {
+            Self::Energy => "Energy",
+            Self::FoodAndAgriculture => "Food & Agriculture",
+            Self::LandAndBiodiversity => "Land & Biodiversity",
+            Self::IndustryTransportAndGeoengineering => "Industry, Transport & Geoengineering",
+            Self::SocietyAndEconomy => "Society & Economy",
+        }
+    }
+}
+
+/// Map every accepted workshop card to exactly one moderator-facing theme.
+/// Returning `None` keeps this mapping safely workshop-only if called with a
+/// normal-world project.
+pub fn workshop_theme(project: &Project) -> Option<WorkshopTheme> {
+    match project.name.as_str() {
+        "Solar Push"
+        | "Wind Push"
+        | "Nuclear Expansion"
+        | "Phase Out Coal"
+        | "Mass Electrification"
+        | "Energy Quotas"
+        | "Crack Down on Crypto-Mining" => Some(WorkshopTheme::Energy),
+        "Vegetarian Mandate"
+        | "Meatless Mondays"
+        | "Cellular Meat"
+        | "Organic Transition"
+        | "Regenerative Agriculture" => Some(WorkshopTheme::FoodAndAgriculture),
+        "Expand Nature Preserves" | "Remediate and Protect Ecosystems" | "Ban Outdoor Cats" => {
+            Some(WorkshopTheme::LandAndBiodiversity)
+        }
+        "Solar Radiation Management (SRM)"
+        | "Expand Public Transit"
+        | "Ban Cars"
+        | "Restrict Air Travel" => Some(WorkshopTheme::IndustryTransportAndGeoengineering),
+        "Degrowth in Developed Regions" | "Luxury for All" => {
+            Some(WorkshopTheme::SocietyAndEconomy)
+        }
+        _ => None,
+    }
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct WorkshopLockReason {
+    /// One prerequisite is sufficient. A list with more than one item is an
+    /// OR rule, matching the engine's independent `UnlocksProject` effects.
+    pub prerequisites: Vec<String>,
+    /// The card remains locked during the planning round in which an enabler
+    /// is selected. It becomes available after that round is simulated.
+    pub available_next_cycle: bool,
+}
+
+/// Reverse the world's `UnlocksProject` graph to explain why a visible card is
+/// locked. This uses the actual embedded-world data rather than duplicating a
+/// second prerequisite table in the UI.
+pub fn workshop_lock_reason(state: &State, target: &Id) -> Option<WorkshopLockReason> {
+    let mut prerequisite_projects = state
+        .world
+        .projects
+        .iter()
+        .filter(|project| {
+            project.effects.iter().any(
+                |effect| matches!(effect, Effect::UnlocksProject(unlocked) if unlocked == target),
+            )
+        })
+        .collect::<Vec<_>>();
+
+    if prerequisite_projects.is_empty() {
+        return None;
+    }
+
+    prerequisite_projects.sort_by(|left, right| left.name.cmp(&right.name));
+    Some(WorkshopLockReason {
+        available_next_cycle: prerequisite_projects
+            .iter()
+            .any(|project| project.is_building() || project.is_online()),
+        prerequisites: prerequisite_projects
+            .into_iter()
+            .map(|project| project.name.clone())
+            .collect(),
+    })
+}
+
+/// Cycle number and year range shown on the workshop planning header.
+pub fn workshop_cycle(year: usize, start_year: usize, end_year: usize) -> (usize, usize, usize) {
+    let cycle = year.saturating_sub(start_year) / 5 + 1;
+    (cycle, year, year.saturating_add(5).min(end_year))
 }
 
 impl WorkshopOpts {
@@ -49,6 +159,12 @@ impl WorkshopOpts {
             state.political_capital = consts::WORKSHOP_PC_BUDGET;
         }
     }
+}
+
+/// Workshop sessions always evaluate at the end year configured by the
+/// embedded world, rather than at a separately-maintained UI constant.
+pub fn has_reached_end(state: &State) -> bool {
+    state.world.year >= state.death_year
 }
 
 /// Workshop-mode click/tap interaction on a policy card:
@@ -136,6 +252,7 @@ impl Default for WorkshopOpts {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::collections::BTreeSet;
 
     #[test]
     fn test_apply_when_active_suspends_parliament() {
@@ -189,6 +306,17 @@ mod tests {
     }
 
     #[test]
+    fn test_workshop_end_uses_the_embedded_world_lifespan() {
+        let mut state = State::new(hes_engine::World::workshop());
+
+        assert_eq!(state.death_year, 2052);
+        state.world.year = 2051;
+        assert!(!has_reached_end(&state));
+        state.world.year = 2052;
+        assert!(has_reached_end(&state));
+    }
+
+    #[test]
     fn test_land_gauge_segments() {
         assert_eq!(land_gauge_segments(60., 10.), (60., 10., 30.));
         assert_eq!(land_gauge_segments(0., 0.), (0., 0., 100.));
@@ -199,6 +327,112 @@ mod tests {
         assert_eq!(land_gauge_segments(120., 10.), (100., 0., 0.));
         // Out-of-range inputs are clamped.
         assert_eq!(land_gauge_segments(-5., -5.), (0., 0., 100.));
+    }
+
+    #[test]
+    fn test_workshop_theme_mapping_is_complete_and_unique() {
+        let state = State::new(hes_engine::World::workshop());
+        let themed = state
+            .world
+            .projects
+            .iter()
+            .filter_map(|project| workshop_theme(project).map(|theme| (project.id, theme)))
+            .collect::<Vec<_>>();
+        let unique_ids = themed.iter().map(|(id, _)| *id).collect::<BTreeSet<_>>();
+
+        assert_eq!(themed.len(), 21);
+        assert_eq!(unique_ids.len(), 21);
+        assert_eq!(
+            WorkshopTheme::ALL
+                .into_iter()
+                .map(|theme| {
+                    themed
+                        .iter()
+                        .filter(|(_, mapped_theme)| *mapped_theme == theme)
+                        .count()
+                })
+                .collect::<Vec<_>>(),
+            vec![7, 5, 3, 4, 2]
+        );
+    }
+
+    #[test]
+    fn test_workshop_theme_mapping_excludes_normal_world_cards() {
+        let normal = State::default();
+        let universal_family_planning = normal
+            .world
+            .projects
+            .iter()
+            .find(|project| project.name == "Universal Family Planning")
+            .expect("normal world contains Universal Family Planning");
+
+        assert_eq!(workshop_theme(universal_family_planning), None);
+    }
+
+    #[test]
+    fn test_lock_reason_derives_single_prerequisite_and_next_cycle_timing() {
+        let mut state = State::new(hes_engine::World::workshop());
+        let cellular_meat = state
+            .world
+            .projects
+            .iter()
+            .find(|project| project.name == "Cellular Meat")
+            .expect("workshop contains Cellular Meat")
+            .id;
+        let regenerative_agriculture = state
+            .world
+            .projects
+            .iter()
+            .find(|project| project.name == "Regenerative Agriculture")
+            .expect("workshop contains Regenerative Agriculture")
+            .id;
+
+        assert_eq!(
+            workshop_lock_reason(&state, &cellular_meat),
+            Some(WorkshopLockReason {
+                prerequisites: vec!["Regenerative Agriculture".to_string()],
+                available_next_cycle: false,
+            })
+        );
+
+        state.start_project(&regenerative_agriculture);
+        assert_eq!(
+            workshop_lock_reason(&state, &cellular_meat),
+            Some(WorkshopLockReason {
+                prerequisites: vec!["Regenerative Agriculture".to_string()],
+                available_next_cycle: true,
+            })
+        );
+    }
+
+    #[test]
+    fn test_lock_reason_derives_mass_electrification_or_rule() {
+        let state = State::new(hes_engine::World::workshop());
+        let mass_electrification = state
+            .world
+            .projects
+            .iter()
+            .find(|project| project.name == "Mass Electrification")
+            .expect("workshop contains Mass Electrification")
+            .id;
+
+        assert_eq!(
+            workshop_lock_reason(&state, &mass_electrification),
+            Some(WorkshopLockReason {
+                prerequisites: vec![
+                    "Nuclear Expansion".to_string(),
+                    "Solar Push".to_string(),
+                    "Wind Push".to_string(),
+                ],
+                available_next_cycle: false,
+            })
+        );
+    }
+
+    #[test]
+    fn test_workshop_cycle_context_uses_six_five_year_cycles() {
+        assert_eq!(workshop_cycle(2022, 2022, 2052), (1, 2022, 2027));
+        assert_eq!(workshop_cycle(2047, 2022, 2052), (6, 2047, 2052));
     }
 
     /// An affordable, unlocked, inactive policy from the default world.
@@ -227,10 +461,7 @@ mod tests {
         let cost = state.world.projects[&id].cost as isize;
 
         assert!(toggle_policy(&mut state, &mut plan_changes, &id));
-        assert_eq!(
-            state.political_capital,
-            consts::WORKSHOP_PC_BUDGET - cost
-        );
+        assert_eq!(state.political_capital, consts::WORKSHOP_PC_BUDGET - cost);
         let project = &state.world.projects[&id];
         assert!(project.is_building() || project.is_online());
         assert!(plan_changes[&id].passed);

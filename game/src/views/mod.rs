@@ -15,7 +15,6 @@ mod world;
 use std::sync::Arc;
 
 use crate::{
-    consts,
     debug::{DEBUG, DebugView},
     state::{GameState, Settings},
     tips::render_tip,
@@ -43,6 +42,20 @@ enum Phase {
     Events(WorldEvents),
     Report(Report),
     Ending(End),
+}
+
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+enum ReportNextPhase {
+    Interstitial,
+    Ending,
+}
+
+fn report_next_phase(workshop_active: bool, state: &GameState) -> ReportNextPhase {
+    if workshop_active && crate::workshop::has_reached_end(&state.core) {
+        ReportNextPhase::Ending
+    } else {
+        ReportNextPhase::Interstitial
+    }
 }
 
 pub enum GameAction {
@@ -123,11 +136,9 @@ impl GameView {
                 if next {
                     if WORKSHOP.active {
                         // Workshop sessions have no mid-game loss and no early
-                        // win: they always run to the fixed horizon, where the
-                        // ending doubles as the evaluation/debrief.
-                        // TODO(workshop): adopt world.lifespan once available.
-                        let horizon = state.ui.start_year + consts::WORKSHOP_YEARS;
-                        if state.world.year >= horizon {
+                        // win: they always run to the loaded world's end year,
+                        // where the ending doubles as the evaluation/debrief.
+                        if crate::workshop::has_reached_end(&state.core) {
                             prefs.runs_played += 1;
                             self.phase = Phase::Ending(End::new(!state.won(), state));
                         } else {
@@ -175,6 +186,7 @@ impl GameView {
                     let go_to_world = session.render(ui, state, &self.ctx);
                     if go_to_world {
                         self.phase = Phase::Events(WorldEvents::new(state, &self.ctx));
+                        ui.ctx().request_repaint();
                         ret_action = Some(GameAction::Save);
                     }
                 }
@@ -188,8 +200,19 @@ impl GameView {
             Phase::Report(report) => {
                 let done = report.render(ui, state);
                 if done {
-                    let view = Interstitial::new(state);
-                    self.phase = Phase::Interstitial(view);
+                    match report_next_phase(WORKSHOP.active, state) {
+                        // The final workshop report is itself the debrief
+                        // boundary. Going through Interstitial here would
+                        // create a seventh planning session at 2052.
+                        ReportNextPhase::Ending => {
+                            prefs.runs_played += 1;
+                            self.phase = Phase::Ending(End::new(!state.won(), state));
+                        }
+                        ReportNextPhase::Interstitial => {
+                            let view = Interstitial::new(state);
+                            self.phase = Phase::Interstitial(view);
+                        }
+                    }
                 }
             }
             Phase::Ending(end) => {
@@ -203,5 +226,35 @@ impl GameView {
         render_tip(ui.ctx(), state);
 
         ret_action
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn workshop_final_report_goes_to_ending_not_a_seventh_plan() {
+        let mut state = GameState::from_world(hes_engine::World::workshop());
+
+        state.core.world.year = 2047;
+        assert_eq!(
+            report_next_phase(true, &state),
+            ReportNextPhase::Interstitial
+        );
+
+        state.core.world.year = 2052;
+        assert_eq!(report_next_phase(true, &state), ReportNextPhase::Ending);
+    }
+
+    #[test]
+    fn normal_final_report_keeps_the_existing_interstitial_route() {
+        let mut state = GameState::default();
+        state.core.world.year = state.core.death_year;
+
+        assert_eq!(
+            report_next_phase(false, &state),
+            ReportNextPhase::Interstitial
+        );
     }
 }

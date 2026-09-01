@@ -39,6 +39,28 @@ pub struct PlanChange {
     pub passed: bool,
 }
 
+/// A workshop policy decision recorded for the projected cycle debrief.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct WorkshopPolicyChoice {
+    pub name: String,
+    pub action: WorkshopPolicyAction,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub enum WorkshopPolicyAction {
+    Passed,
+    Repealed,
+}
+
+/// Durable workshop history used by the cycle report and final debrief.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub struct WorkshopCycleRecord {
+    pub cycle: usize,
+    pub start_year: usize,
+    pub end_year: usize,
+    pub choices: Vec<WorkshopPolicyChoice>,
+}
+
 /// Available/unused points.
 #[derive(Default, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Points {
@@ -161,6 +183,11 @@ pub struct UIState {
     #[serde(default)]
     pub process_mix_history: Vec<(usize, EnumMap<Output, BTreeMap<String, usize>>)>,
 
+    /// The six workshop planning decisions, kept separately from the generic
+    /// engine diff so the debrief can name passed and repealed policies.
+    #[serde(default)]
+    pub workshop_policy_history: Vec<WorkshopCycleRecord>,
+
     #[serde(default)]
     pub session_start_state: State,
 
@@ -210,6 +237,30 @@ impl UIState {
         self.cycle_start_state.completed_projects.clear();
     }
 
+    pub fn record_workshop_cycle(
+        &mut self,
+        start_year: usize,
+        end_year: usize,
+        choices: Vec<WorkshopPolicyChoice>,
+    ) -> WorkshopCycleRecord {
+        if let Some(existing) = self
+            .workshop_policy_history
+            .iter()
+            .find(|record| record.end_year == end_year)
+        {
+            return existing.clone();
+        }
+
+        let record = WorkshopCycleRecord {
+            cycle: self.workshop_policy_history.len() + 1,
+            start_year,
+            end_year,
+            choices,
+        };
+        self.workshop_policy_history.push(record.clone());
+        record
+    }
+
     pub fn has_process_mix_changes(&self, output: Output) -> bool {
         self.process_mix_changes[output]
             .iter()
@@ -234,5 +285,43 @@ impl UIState {
             .map(|output| self.process_mix_change_time(output))
             .reduce(f32::max)
             .unwrap_or_default()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn workshop_cycle_history_is_ordered_and_idempotent_by_end_year() {
+        let mut ui = UIState::new(2022);
+        let first_choices = vec![WorkshopPolicyChoice {
+            name: "Solar Push".into(),
+            action: WorkshopPolicyAction::Passed,
+        }];
+
+        let first = ui.record_workshop_cycle(2022, 2027, first_choices.clone());
+        let duplicate = ui.record_workshop_cycle(2022, 2027, vec![]);
+        let second = ui.record_workshop_cycle(
+            2027,
+            2032,
+            vec![WorkshopPolicyChoice {
+                name: "Solar Push".into(),
+                action: WorkshopPolicyAction::Repealed,
+            }],
+        );
+
+        assert_eq!(
+            first,
+            WorkshopCycleRecord {
+                cycle: 1,
+                start_year: 2022,
+                end_year: 2027,
+                choices: first_choices,
+            }
+        );
+        assert_eq!(duplicate, first);
+        assert_eq!(second.cycle, 2);
+        assert_eq!(ui.workshop_policy_history, vec![first, second]);
     }
 }

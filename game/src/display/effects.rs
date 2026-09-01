@@ -701,6 +701,33 @@ impl DisplayEffect {
                     ),
                 )
             }
+            Effect::TransferMixShare(source, target, amount) => {
+                let source = &state.world.processes[source];
+                let target = &state.world.processes[target];
+                let percent = amount * 5;
+                (
+                    tip(
+                        target.output.icon(),
+                        t!(
+                            "Moves %{percent}% of %{output} production from %{source} to %{target}.",
+                            percent = percent,
+                            output = t!(target.output.lower()),
+                            source = source.name,
+                            target = target.name,
+                        ),
+                    )
+                    .card(target.clone()),
+                    icon_text(
+                        target.output.as_key(),
+                        &t!(
+                            "Move [b]%{percent}%[/b] from %{source} to %{target}.",
+                            percent = percent,
+                            source = icon_card_tag(&source.name, source.output.icon()),
+                            target = icon_card_tag(&target.name, target.output.icon()),
+                        ),
+                    ),
+                )
+            }
             Effect::OutputForFeature(feat, amount) => {
                 let processes: Vec<_> = state
                     .world

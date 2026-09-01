@@ -204,11 +204,11 @@ impl State {
     }
 
     pub fn is_planning_year(&self) -> bool {
-        self.world.year.is_multiple_of(5)
+        self.world.is_planning_year(self.world.year)
     }
 
     pub fn is_pre_planning_year(&self) -> bool {
-        (self.world.year + 1).is_multiple_of(5)
+        self.world.is_pre_planning_year(self.world.year)
     }
 
     pub fn apply_effects(&mut self, effects: &[Effect], region_id: Option<Id>) {
@@ -793,6 +793,67 @@ impl Update {
 
     pub fn is_policy(&self) -> bool {
         matches!(self, Update::Policy { .. })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn workshop_state() -> State {
+        let world: World = serde_json::from_str(include_str!("../assets/WORKSHOP.world"))
+            .expect("WORKSHOP.world must deserialize");
+        State::new(world)
+    }
+
+    #[test]
+    fn test_workshop_planning_boundaries_and_pre_boundaries() {
+        let mut state = workshop_state();
+
+        let planning_years = (2022..=2052)
+            .filter(|year| {
+                state.world.year = *year;
+                state.is_planning_year()
+            })
+            .collect::<Vec<_>>();
+        let pre_planning_years = (2022..=2051)
+            .filter(|year| {
+                state.world.year = *year;
+                state.is_pre_planning_year()
+            })
+            .collect::<Vec<_>>();
+
+        assert_eq!(
+            planning_years,
+            vec![2022, 2027, 2032, 2037, 2042, 2047, 2052]
+        );
+        assert_eq!(pre_planning_years, vec![2026, 2031, 2036, 2041, 2046, 2051]);
+    }
+
+    #[test]
+    fn test_workshop_policy_effects_apply_in_the_2026_pre_boundary() {
+        let mut state = workshop_state();
+        let policy_id = state
+            .world
+            .projects
+            .iter()
+            .find(|project| project.name == "Solar Push")
+            .expect("Solar Push must exist in the workshop world")
+            .id;
+        state.start_project(&policy_id);
+
+        let policy_update_years = (0..5)
+            .filter_map(|_| {
+                let updates = state.step_year(state.world.temperature);
+                updates
+                    .iter()
+                    .any(|update| update == &Update::Policy { id: policy_id })
+                    .then_some(state.world.year)
+            })
+            .collect::<Vec<_>>();
+
+        assert_eq!(policy_update_years, vec![2026]);
+        assert_eq!(state.world.projects[&policy_id].status, Status::Active);
     }
 }
 

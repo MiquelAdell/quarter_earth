@@ -1,7 +1,7 @@
 use std::{cell::RefCell, path::PathBuf, rc::Rc};
 
 use super::super::parts::set_full_bg_image;
-use crate::{image, parts::glow, state::Settings, text::scale_text_ui};
+use crate::{image, parts::glow, state::Settings, text::scale_text_ui, workshop::WORKSHOP};
 use egui::{
     Align2, Color32, CursorIcon, FontFamily, FontId, Layout, Margin, OpenUrl, RichText, Sense,
     Stroke, TextFormat, text::LayoutJob,
@@ -150,6 +150,10 @@ impl Menu {
     }
 
     fn world(&self) -> Box<World> {
+        if WORKSHOP.active {
+            return Box::new(World::workshop());
+        }
+
         let world = self.picker.world.borrow();
         match &*world {
             WorldStatus::Default
@@ -205,7 +209,15 @@ impl Menu {
 
                 ui.add_space(18.);
 
-                ui.label(t!("A Planetary Crisis Planning Game"));
+                if WORKSHOP.active {
+                    ui.label(RichText::new("Workshop mode").heading().size(20.));
+                    ui.add_space(8.);
+                    ui.label("A six-cycle group exercise for shaping a livable planet.");
+                    ui.label("Each cycle gives 30 Political Capital. Unspent PC expires.");
+                    ui.label("Reach 2052, then assess emissions, temperature, and biodiversity.");
+                } else {
+                    ui.label(t!("A Planetary Crisis Planning Game"));
+                }
 
                 ui.add_space(18.);
 
@@ -222,7 +234,9 @@ impl Menu {
                 if button(ui, &t!("New Game"), WIDTH) {
                     action = Some(MenuAction::NewGame(self.world()));
                 }
-                self.picker.render(ui);
+                if !WORKSHOP.active {
+                    self.picker.render(ui);
+                }
 
                 ui.separator();
 
@@ -247,6 +261,21 @@ impl Menu {
         });
 
         action
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_workshop_world_is_embedded_and_not_the_default_world() {
+        let workshop = World::workshop();
+        let default = World::default();
+
+        assert_eq!(workshop.year, 2022);
+        assert_eq!(workshop.lifespan, 30);
+        assert_ne!(workshop.projects.len(), default.projects.len());
     }
 }
 

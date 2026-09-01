@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build the M1 workshop world from engine/assets/DEFAULT.world.
+"""Build the release workshop world from engine/assets/DEFAULT.world.
 
-Produces references/simplification/worlds/workshop-m1.world with exactly
-16 playable policy cards (13 unlocked at start, 3 prerequisite-gated),
-everything else locked, all events removed, fixed rebalanced costs.
+Produces engine/assets/WORKSHOP.world with exactly 21 playable policy cards
+(18 unlocked at start, 3 prerequisite-gated), five atomic mix-transfer cards,
+everything else locked, no events, and fixed workshop costs.
 
 Reproducible: python3 util/workshop_world.py
 Stdlib only.
@@ -11,14 +11,19 @@ Stdlib only.
 
 import json
 import sys
+import uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "engine" / "assets" / "DEFAULT.world"
-OUT = ROOT / "references" / "simplification" / "worlds" / "workshop-m1.world"
+OUT = ROOT / "engine" / "assets" / "WORKSHOP.world"
 
 # Card name (as it appears in DEFAULT.world) -> target fixed cost in PC.
 CARDS = {
+    "Solar Push": 15,
+    "Wind Push": 15,
+    "Nuclear Expansion": 15,
+    "Phase Out Coal": 10,
     "Mass Electrification": 15,
     "Energy Quotas": 10,
     "Crack Down on Crypto-Mining": 5,
@@ -26,6 +31,7 @@ CARDS = {
     "Meatless Mondays": 5,
     "Cellular Meat": 10,
     "Regenerative Agriculture": 10,
+    "Organic Transition": 10,
     "Expand Nature Preserves": 15,
     "Remediate and Protect Ecosystems": 10,
     "Ban Outdoor Cats": 5,
@@ -37,13 +43,33 @@ CARDS = {
     "Luxury for All": 15,
 }
 
+CARD_DESCRIPTIONS = {
+    "Solar Push": "Move 20% of electricity generation from coal to solar photovoltaics.",
+    "Wind Push": "Move 20% of electricity generation from gas to terrestrial wind power.",
+    "Nuclear Expansion": "Move 15% of electricity generation from coal to nuclear power.",
+    "Phase Out Coal": "Retire 25% of coal generation. Retired capacity no longer supplies electricity.",
+    "Organic Transition": "Move 20% of crop agriculture from industrial to organic production.",
+}
+
+# Each tuple is card name, source process name, target process name, and
+# amount in five-percent units. Retired coal is a zero-capacity sink, keeping
+# phase-out reversible while intentionally reducing available electricity.
+MIX_TRANSFERS = (
+    ("Solar Push", "Coal Power Generation", "Solar PV", 4),
+    ("Wind Push", "Natural Gas Power Gen", "Terrestrial Wind Power", 4),
+    ("Nuclear Expansion", "Coal Power Generation", "Nuclear Power", 3),
+    ("Phase Out Coal", "Coal Power Generation", "Retired Coal Capacity", 5),
+    ("Organic Transition", "Industrial Crop Ag", "Organic Crop Ag", 4),
+)
+
+RETIRED_COAL_CAPACITY = "Retired Coal Capacity"
+
 # Prerequisite-gated cards: card -> the card whose passing unlocks it.
 # These start locked; the prerequisite gets an UnlocksProject effect.
 PREREQS = {
     "Cellular Meat": "Regenerative Agriculture",
     "Solar Radiation Management (SRM)": "Remediate and Protect Ecosystems",
-    # M1 placeholder: the real gate is a clean-electricity card (M2).
-    "Mass Electrification": "Energy Quotas",
+    "Mass Electrification": ("Solar Push", "Wind Push", "Nuclear Expansion"),
 }
 
 # Effect variants that reference event ids (see Effect::event_id() in
@@ -118,6 +144,7 @@ EFFECT_REFS = {
     "OutputForProcess": "processes",
     "ProcessLimit": "processes",
     "UnlocksProcess": "processes",
+    "TransferMixShare": "processes",
     "ProcessRequest": "processes",
     "ModifyProcessByproducts": "processes",
     "ModifyIndustryByproducts": "industries",
@@ -142,6 +169,14 @@ def referenced_id(effect):
     return (kind, eid)
 
 
+def workshop_id(name):
+    return str(uuid.uuid5(uuid.NAMESPACE_URL, f"quarter-earth/workshop-v2/{name}"))
+
+
+def transfer_effect(source_id, target_id, amount):
+    return {"TransferMixShare": [source_id, target_id, amount]}
+
+
 def validate(world):
     """Replicate editor/src/validate.rs referential-integrity checks."""
     ids = {
@@ -160,6 +195,12 @@ def validate(world):
             if ref and ref[1] not in ids[ref[0]]:
                 errors.append(f"{item['name']}: effect {effect_key(effect)} "
                               f"refers to missing {ref[0][:-1]} {ref[1]}")
+            if effect_key(effect) == "TransferMixShare":
+                source, target, _ = effect["TransferMixShare"]
+                for process_id in (source, target):
+                    if process_id not in ids["processes"]:
+                        errors.append(f"{item['name']}: transfer refers to missing "
+                                      f"process {process_id}")
         for cond in conditions:
             key = effect_key(cond)
             if key in CONDITION_PROJECT or key in CONDITION_PROCESS:
@@ -172,15 +213,113 @@ def validate(world):
     return errors
 
 
+def validate_workshop(world):
+    by_name = {project["name"]: project for project in world["projects"]}
+    assert world["year"] == 2022
+    assert world["lifespan"] == 30
+    assert world["planning_anchor"] == 2022
+    assert world["events"] == []
+    assert world["project_lockers"] == {}
+    assert sum(CARDS.values()) == 235
+    assert set(CARDS) <= set(by_name)
+
+    cards = [project for project in world["projects"] if project["name"] in CARDS]
+    other_projects = [project for project in world["projects"] if project["name"] not in CARDS]
+    assert len(cards) == 21
+    assert all(project["kind"] == "Policy" for project in cards)
+    assert all(project["base_cost"] == {"Fixed": CARDS[project["name"]]} for project in cards)
+    assert all(project["cost"] == CARDS[project["name"]] for project in cards)
+    assert all(project["locked"] for project in other_projects)
+
+    unlocked = {project["name"] for project in cards if not project["locked"]}
+    assert unlocked == set(CARDS) - set(PREREQS)
+    unlocks = {
+        project["name"]: [effect["UnlocksProject"] for effect in project["effects"] if effect_key(effect) == "UnlocksProject"]
+        for project in cards
+    }
+    prerequisite_targets = {by_name[card]["id"] for card in PREREQS}
+    for card, prereqs in PREREQS.items():
+        expected = {by_name[card]["id"]}
+        for prereq in (prereqs,) if isinstance(prereqs, str) else prereqs:
+            assert set(unlocks[prereq]) == expected
+    assert {
+        target
+        for targets in unlocks.values()
+        for target in targets
+    } == prerequisite_targets
+
+    processes = {process["name"]: process for process in world["processes"]}
+    for card, source, target, amount in MIX_TRANSFERS:
+        assert transfer_effect(processes[source]["id"], processes[target]["id"], amount) in by_name[card]["effects"]
+    assert processes[RETIRED_COAL_CAPACITY]["mix_share"] == 0
+    assert processes[RETIRED_COAL_CAPACITY]["limit"] == 0
+    assert all(effect_key(effect) not in EVENT_EFFECTS for effect in _effects(world))
+
+
+def _effects(node):
+    effects = []
+    collect_effects(node, effects)
+    return effects
+
+
 def main():
     world = json.loads(SRC.read_text())
 
     by_name = {p["name"]: p for p in world["projects"]}
-    missing = [name for name in CARDS if name not in by_name]
+    generated_cards = {name for name, _, _, _ in MIX_TRANSFERS}
+    missing = [name for name in CARDS if name not in generated_cards and name not in by_name]
     if missing:
         sys.exit(f"FATAL: cards not found in DEFAULT.world: {missing}")
 
-    kept_ids = {by_name[name]["id"]: name for name in CARDS}
+    mix_template = by_name["Mass Electrification"]
+    for name, _, _, _ in MIX_TRANSFERS:
+        project = json.loads(json.dumps(mix_template))
+        project.update({
+            "id": workshop_id(name),
+            "name": name,
+            "kind": "Policy",
+            "group": "Energy" if name != "Organic Transition" else "Food",
+            "ongoing": False,
+            "gradual": False,
+            "locked": False,
+            "cost": CARDS[name],
+            "base_cost": {"Fixed": CARDS[name]},
+            "cost_modifier": 1.0,
+            "progress": 0.0,
+            "points": 0,
+            "estimate": 0,
+            "status": "Inactive",
+            "level": 0,
+            "completed_at": 0,
+            "required_majority": 0.0,
+            "effects": [],
+            "outcomes": [{"effects": [], "probability": {"likelihood": "Guaranteed", "conditions": []}}],
+            "upgrades": [],
+            "active_outcome": None,
+            "supporters": [],
+            "opposers": [],
+            "notes": "Workshop v2 policy card.",
+        })
+        project["flavor"]["description"] = CARD_DESCRIPTIONS[name]
+        project["flavor"]["outcomes"] = []
+        world["projects"].append(project)
+
+    by_name = {p["name"]: p for p in world["projects"]}
+    coal_sink = json.loads(json.dumps(next(process for process in world["processes"] if process["name"] == "Coal Power Generation")))
+    coal_sink.update({
+        "id": workshop_id(RETIRED_COAL_CAPACITY),
+        "name": RETIRED_COAL_CAPACITY,
+        "mix_share": 0,
+        "limit": 0,
+        "locked": False,
+        "supporters": [],
+        "opposers": [],
+        "notes": "Workshop-only zero-capacity sink for retired coal generation.",
+    })
+    coal_sink["flavor"]["description"] = "Retired coal capacity does not produce electricity."
+    world["processes"].append(coal_sink)
+    world["lifespan"] = 30
+    world["planning_anchor"] = 2022
 
     # 5. Delete all events (M1 also runs with SKIP_EVENTS; belt-and-braces).
     world["events"] = []
@@ -190,6 +329,7 @@ def main():
         # Event-referencing effects would dangle/panic with events gone;
         # strip from every project (locked ones are still validated/applied).
         strip_effects(project, EVENT_EFFECTS)
+        strip_effects(project, PROJECT_LOCK_EFFECTS)
         if name in CARDS:
             # 1. Re-kind everything to Policy (spec lever B2).
             project["kind"] = "Policy"
@@ -199,43 +339,41 @@ def main():
             project["cost_modifier"] = 1.0
             # 4. Prereq-gated cards start locked; the rest start unlocked.
             project["locked"] = name in PREREQS
-            # Playing a card must never unlock/lock non-workshop projects.
-            strip_effects(project, PROJECT_LOCK_EFFECTS)
         else:
             # 3. Lock everything else (kept, not deleted, so ids referenced
             # by project_lockers/effects stay valid).
             project["locked"] = True
 
-    # 4. Wire prerequisites via the existing UnlocksProject effect.
-    for card, prereq in PREREQS.items():
-        by_name[prereq]["effects"].append({"UnlocksProject": by_name[card]["id"]})
+    processes = {process["name"]: process for process in world["processes"]}
+    for card, source, target, amount in MIX_TRANSFERS:
+        by_name[card]["effects"] = [
+            transfer_effect(processes[source]["id"], processes[target]["id"], amount)
+        ]
+
+    # 4. Wire prerequisites via the existing UnlocksProject effect after
+    # installing transfer effects, so clean-electricity cards retain both.
+    for card, prereqs in PREREQS.items():
+        for prereq in (prereqs,) if isinstance(prereqs, str) else prereqs:
+            by_name[prereq]["effects"].append({"UnlocksProject": by_name[card]["id"]})
+
+    world["project_lockers"] = {}
 
     # --- Acceptance checks -------------------------------------------------
     errors = validate(world)
     assert not errors, "\n".join(errors)
 
-    kept = [p for p in world["projects"] if p["name"] in CARDS]
-    others = [p for p in world["projects"] if p["name"] not in CARDS]
-    assert len(kept) == 16
-    assert all(p["kind"] == "Policy" for p in kept)
-    assert all(p["base_cost"] == {"Fixed": CARDS[p["name"]]} for p in kept)
-    unlocked = sorted(p["name"] for p in kept if not p["locked"])
-    gated = sorted(p["name"] for p in kept if p["locked"])
-    assert len(unlocked) == 13 and gated == sorted(PREREQS), (unlocked, gated)
-    assert all(p["locked"] for p in others)
-    assert world["events"] == []
-    # No event-referencing effects remain anywhere in the world.
-    leftovers = []
-    collect_effects(world, leftovers)
-    assert not any(effect_key(e) in EVENT_EFFECTS for e in leftovers)
+    validate_workshop(world)
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(world, indent=2, ensure_ascii=False) + "\n")
 
     print(f"Wrote {OUT.relative_to(ROOT)}")
+    kept = [project for project in world["projects"] if project["name"] in CARDS]
+    others = [project for project in world["projects"] if project["name"] not in CARDS]
+    unlocked = sorted(project["name"] for project in kept if not project["locked"])
     print(f"  projects: {len(world['projects'])} "
-          f"(16 workshop cards, {len(others)} locked)")
-    print(f"  unlocked at start (13): {', '.join(unlocked)}")
+          f"(21 workshop cards, {len(others)} locked)")
+    print(f"  unlocked at start (18): {', '.join(unlocked)}")
     print(f"  prerequisite-gated (3): "
           + "; ".join(f"{c} <- {p}" for c, p in sorted(PREREQS.items())))
     print(f"  events: {len(world['events'])}")

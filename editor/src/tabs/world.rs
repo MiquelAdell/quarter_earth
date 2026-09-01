@@ -19,9 +19,7 @@ pub fn world(ui: &mut egui::Ui, world: &mut World) {
                 ui.add(
                     inputs::edit(&mut world.base_outlook)
                         .label("Contentedness")
-                        .help(
-                            "The starting world contentedness.",
-                        )
+                        .help("The starting world contentedness.")
                         .inline(),
                 );
 
@@ -30,43 +28,52 @@ pub fn world(ui: &mut egui::Ui, world: &mut World) {
                 ui.add(
                     inputs::edit(&mut world.extinction_rate)
                         .label("Extinction Pressure")
-                        .help(
-                            "The starting extinction pressure.",
-                        )
+                        .help("The starting extinction pressure.")
                         .inline(),
                 );
             },
             |ui| {
                 ui.add(
                     inputs::edit(&mut world.temperature)
-                    .label("Warming")
-                    .help(
-                        "The starting temperature anomaly (C).",
-                    )
-                    .inline(),
+                        .label("Warming")
+                        .help("The starting temperature anomaly (C).")
+                        .inline(),
                 );
 
                 parts::space(ui);
 
                 ui.add(
                     inputs::edit(&mut world.sea_level_rise)
-                    .label("Sea Level Rise")
-                    .help(
-                        "The starting sea level rise (meters).",
-                    )
-                    .inline(),
+                        .label("Sea Level Rise")
+                        .help("The starting sea level rise (meters).")
+                        .inline(),
                 );
 
                 parts::space(ui);
 
                 ui.add(
                     inputs::edit(&mut world.lifespan)
-                    .label("Game Length (Years)")
-                    .help(
-                        "How many years a run lasts before it ends.",
-                    )
-                    .inline(),
+                        .label("Game Length (Years)")
+                        .help("How many years a run lasts before it ends.")
+                        .inline(),
                 );
+
+                parts::space(ui);
+
+                let mut use_planning_anchor = world.planning_anchor.is_some();
+                if ui
+                    .checkbox(&mut use_planning_anchor, "Custom Planning Anchor")
+                    .on_hover_text("Start five-year planning cycles from a specific year.")
+                    .changed()
+                {
+                    world.planning_anchor = use_planning_anchor.then_some(world.year);
+                }
+                if let Some(anchor) = &mut world.planning_anchor {
+                    ui.horizontal(|ui| {
+                        ui.label("Anchor Year");
+                        ui.add(egui::DragValue::new(anchor));
+                    });
+                }
             },
         );
 
@@ -78,19 +85,15 @@ pub fn world(ui: &mut egui::Ui, world: &mut World) {
             |ui| {
                 ui.add(
                     inputs::edit(&mut world.starting_resources)
-                    .label("Starting Resources")
-                    .help(
-                        "The starting resource availability.",
-                    ),
+                        .label("Starting Resources")
+                        .help("The starting resource availability."),
                 );
             },
             |ui| {
                 ui.add(
                     inputs::edit(&mut world.feedstock_reserves)
                         .label("Feedstock Reserves")
-                        .help(
-                            "The starting feedstock reserves.",
-                        ),
+                        .help("The starting feedstock reserves."),
                 );
             },
         );
@@ -227,33 +230,36 @@ pub fn world(ui: &mut egui::Ui, world: &mut World) {
             .header(parts::ROW_HEIGHT, |mut header| {
                 header.col(|_| {});
                 header.col(|ui| {
-                    ui.label("Population").on_hover_text("The region's starting population.");
+                    ui.label("Population")
+                        .on_hover_text("The region's starting population.");
                 });
                 header.col(|ui| {
-                    ui.label("Development").on_hover_text("The region's starting progress to the next income level, from 0.0 to 1.0.");
+                    ui.label("Development").on_hover_text(
+                        "The region's starting progress to the next income level, from 0.0 to 1.0.",
+                    );
                 });
                 header.col(|ui| {
-                    ui.label("Income Level").on_hover_text("The region's starting income level.");
+                    ui.label("Income Level")
+                        .on_hover_text("The region's starting income level.");
                 });
             })
-        .body(|mut body| {
-            for region in world.regions.iter_mut()
-            {
-                body.row(parts::ROW_HEIGHT, |mut row| {
-                    row.col(|ui| {
-                        ui.label(&region.name);
+            .body(|mut body| {
+                for region in world.regions.iter_mut() {
+                    body.row(parts::ROW_HEIGHT, |mut row| {
+                        row.col(|ui| {
+                            ui.label(&region.name);
+                        });
+                        row.col(|ui| {
+                            ui.add(inputs::edit(&mut region.population));
+                        });
+                        row.col(|ui| {
+                            ui.add(inputs::share(&mut region.development));
+                        });
+                        row.col(|ui| {
+                            ui.add(inputs::edit(&mut region.income));
+                        });
                     });
-                    row.col(|ui| {
-                        ui.add(inputs::edit(&mut region.population));
-                    });
-                    row.col(|ui| {
-                        ui.add(inputs::share(&mut region.development));
-                    });
-                    row.col(|ui| {
-                        ui.add(inputs::edit(&mut region.income));
-                    });
-                });
-            }
-        });
+                }
+            });
     });
 }

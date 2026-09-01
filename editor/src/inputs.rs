@@ -1819,9 +1819,26 @@ impl Editable
                         ui.add(
                             edit(value)
                                 .label("Amount")
-                                .help("The number of 5%-units to shift this process's mix share by.")
+                                .help(
+                                    "The number of 5%-units to shift this process's mix share by.",
+                                )
                                 .inline(),
                         );
+                    },
+                );
+            }
+            Effect::TransferMixShare(source, target, amount) => {
+                ui.add(parts::help(
+                    "Atomically move complete 5%-units from one process to another. If the source cannot supply the whole amount, nothing changes; repeal reverses a completed transfer.",
+                ));
+                parts::two_columns(
+                    ui,
+                    |ui| {
+                        ui.add(edit((source, processes)).label("Source process").inline());
+                        ui.add(edit((target, processes)).label("Target process").inline());
+                    },
+                    |ui| {
+                        ui.add(edit(amount).label("5%-units").inline());
                     },
                 );
             }

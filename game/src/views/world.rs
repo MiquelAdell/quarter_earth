@@ -214,6 +214,16 @@ impl WorldEvents {
         };
 
         if next == Subphase::ComputeTgav {
+            // The browser climate model loads its scenario data asynchronously.
+            // Workshop's fast tick can arrive here before that initialization;
+            // hold this transition until the same complete inputs normal mode
+            // would have before appending the year's emissions. Leave the
+            // current disaster phase in place so it retries this transition,
+            // rather than entering ComputeTgav without emissions.
+            if !self.climate.is_ready() {
+                return;
+            }
+
             // Update emissions to compute the temp anomaly.
             let emissions = get_emissions(&state.core);
             self.climate.add_emissions(emissions);
@@ -259,7 +269,7 @@ impl WorldEvents {
             self.year_timer.reset();
             let cur_year = state.world.year;
             let cycle_start_year = state.ui.cycle_start_state.year;
-            if cur_year > cycle_start_year && cur_year.is_multiple_of(5) {
+            if cur_year > cycle_start_year && state.core.is_planning_year() {
                 state.finish_cycle();
 
                 // This has to happen before we enter the report

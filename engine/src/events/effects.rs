@@ -114,6 +114,10 @@ pub enum Effect {
     BiodiversityPressureForFeature(ProcessFeature, f32),
     ProcessLimit(Id, f32),
     ChangeMixShare(Id, isize),
+    /// Atomically moves complete five-percent mix-share units between two
+    /// processes. If the source cannot supply the whole amount, it is a
+    /// no-op. This makes policy repeal exactly reversible.
+    TransferMixShare(Id, Id, usize),
     Feedstock(Feedstock, f32),
 
     AddEvent(Id),
@@ -197,6 +201,9 @@ impl Effect {
             }
             EffectKind::ProcessLimit => Effect::ProcessLimit(default_process, 0.),
             EffectKind::ChangeMixShare => Effect::ChangeMixShare(default_process, 0),
+            EffectKind::TransferMixShare => {
+                Effect::TransferMixShare(default_process, default_process, 0)
+            }
             EffectKind::Feedstock => Effect::Feedstock(Feedstock::Coal, 0.),
             EffectKind::AddEvent => Effect::AddEvent(default_event),
             EffectKind::TriggerEvent => Effect::TriggerEvent(default_event, 5),
@@ -244,6 +251,13 @@ impl Effect {
             | Effect::ProcessRequest(id, ..)
             | Effect::ModifyProcessByproducts(id, ..) => Some(*id),
             _ => None,
+        }
+    }
+
+    pub fn process_ids(&self) -> Vec<Id> {
+        match self {
+            Effect::TransferMixShare(source, target, _) => vec![*source, *target],
+            _ => self.process_id().into_iter().collect(),
         }
     }
 
@@ -428,6 +442,12 @@ impl Effect {
                 // Engine-pure share shift: no NPC relationship
                 // changes and no rebalancing of other processes.
                 state.world.processes[id].shift_mix_share(*change);
+            }
+            Effect::TransferMixShare(source, target, amount) => {
+                if state.world.processes[source].mix_share >= *amount {
+                    state.world.processes[source].mix_share -= amount;
+                    state.world.processes[target].mix_share += amount;
+                }
             }
             Effect::Feedstock(feedstock, pct_change) => {
                 state.feedstocks.available[*feedstock] *= 1. + pct_change;
@@ -676,6 +696,16 @@ impl Effect {
                 // zero, unapplying restores less than the original.
                 state.world.processes[id].shift_mix_share(-change);
             }
+            Effect::TransferMixShare(source, target, amount) => {
+                // A transfer that could not apply leaves its unique target
+                // unchanged, so this is also a no-op for it. Content must
+                // use a distinct target for each independently repealable
+                // transfer.
+                if state.world.processes[target].mix_share >= *amount {
+                    state.world.processes[target].mix_share -= amount;
+                    state.world.processes[source].mix_share += amount;
+                }
+            }
             Effect::Feedstock(feedstock, pct_change) => {
                 state.feedstocks.available[*feedstock] /= 1. + pct_change;
             }
@@ -897,7 +927,10 @@ mod tests {
         // Policies apply their effects via `apply_effects`.
         let effect = Effect::ChangeMixShare(target_id, 3);
         state.apply_effects(&[effect.clone()], None);
-        assert_eq!(state.world.processes[&target_id].mix_share, target_share + 3);
+        assert_eq!(
+            state.world.processes[&target_id].mix_share,
+            target_share + 3
+        );
 
         // Only the target process's share changes;
         // no rebalancing of other processes.
@@ -937,6 +970,77 @@ mod tests {
         let effect = Effect::ChangeMixShare(target_id, -(target_share as isize) - 5);
         state.apply_effects(&[effect], None);
         assert_eq!(state.world.processes[&target_id].mix_share, 0);
+    }
+
+    #[test]
+    fn test_transfer_mix_share_is_atomic_and_exactly_reversible() {
+        let mut state = State::default();
+        let process_id = |name: &str| {
+            state
+                .world
+                .processes
+                .iter()
+                .find(|process| process.name == name)
+                .expect("workshop mix process")
+                .id
+        };
+        let coal_id = process_id("Coal Power Generation");
+        let solar_id = process_id("Solar PV");
+        let nuclear_id = process_id("Nuclear Power");
+        let wind_id = process_id("Terrestrial Wind Power");
+        let baseline = [
+            (coal_id, state.world.processes[&coal_id].mix_share),
+            (solar_id, state.world.processes[&solar_id].mix_share),
+            (nuclear_id, state.world.processes[&nuclear_id].mix_share),
+            (wind_id, state.world.processes[&wind_id].mix_share),
+        ];
+        let solar_push = Effect::TransferMixShare(coal_id, solar_id, 4);
+        let nuclear_expansion = Effect::TransferMixShare(coal_id, nuclear_id, 3);
+        let phase_out = Effect::TransferMixShare(coal_id, wind_id, 5);
+
+        state.apply_effects(
+            &[
+                solar_push.clone(),
+                nuclear_expansion.clone(),
+                phase_out.clone(),
+            ],
+            None,
+        );
+        assert_eq!(state.world.processes[&coal_id].mix_share, 0);
+        assert_eq!(
+            state.world.processes[&solar_id].mix_share,
+            baseline[1].1 + 4
+        );
+        assert_eq!(
+            state.world.processes[&nuclear_id].mix_share,
+            baseline[2].1 + 3
+        );
+
+        phase_out.unapply(&mut state, None);
+        nuclear_expansion.unapply(&mut state, None);
+        solar_push.unapply(&mut state, None);
+        for (id, share) in baseline {
+            assert_eq!(state.world.processes[&id].mix_share, share);
+        }
+
+        // The same guarantee holds when the phase-out transfer is the one
+        // that applies and later transfers cannot find enough coal.
+        let mut state = State::default();
+        state.apply_effects(
+            &[
+                phase_out.clone(),
+                solar_push.clone(),
+                nuclear_expansion.clone(),
+            ],
+            None,
+        );
+        nuclear_expansion.unapply(&mut state, None);
+        solar_push.unapply(&mut state, None);
+        phase_out.unapply(&mut state, None);
+        assert_eq!(state.world.processes[&coal_id].mix_share, 7);
+        assert_eq!(state.world.processes[&solar_id].mix_share, 1);
+        assert_eq!(state.world.processes[&nuclear_id].mix_share, 2);
+        assert_eq!(state.world.processes[&wind_id].mix_share, 1);
     }
 
     #[test]

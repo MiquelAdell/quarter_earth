@@ -1,6 +1,6 @@
-//! Headless smoke test for the M1 workshop world.
+//! Headless smoke test for the release workshop world.
 //!
-//! Deserializes references/simplification/worlds/workshop-m1.world,
+//! Deserializes engine/assets/WORKSHOP.world,
 //! builds a `State`, and steps 30 years without panicking.
 //!
 //! Run: cargo run -p hes-engine --example workshop_smoke
@@ -8,11 +8,8 @@
 use hes_engine::{State, World};
 
 fn main() {
-    let path = concat!(
-        env!("CARGO_MANIFEST_DIR"),
-        "/../references/simplification/worlds/workshop-m1.world"
-    );
-    let json = std::fs::read_to_string(path).expect("read workshop-m1.world");
+    let path = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/WORKSHOP.world");
+    let json = std::fs::read_to_string(path).expect("read WORKSHOP.world");
     let world: World = serde_json::from_str(&json).expect("deserialize World");
 
     let unlocked: Vec<_> = world
@@ -21,8 +18,42 @@ fn main() {
         .filter(|p| !p.locked)
         .map(|p| p.name.clone())
         .collect();
-    assert_eq!(unlocked.len(), 13, "expected 13 unlocked cards");
+    let workshop_cards = [
+        "Solar Push",
+        "Wind Push",
+        "Nuclear Expansion",
+        "Phase Out Coal",
+        "Mass Electrification",
+        "Energy Quotas",
+        "Crack Down on Crypto-Mining",
+        "Vegetarian Mandate",
+        "Meatless Mondays",
+        "Cellular Meat",
+        "Organic Transition",
+        "Regenerative Agriculture",
+        "Expand Nature Preserves",
+        "Remediate and Protect Ecosystems",
+        "Ban Outdoor Cats",
+        "Solar Radiation Management (SRM)",
+        "Expand Public Transit",
+        "Ban Cars",
+        "Restrict Air Travel",
+        "Degrowth in Developed Regions",
+        "Luxury for All",
+    ];
+    assert_eq!(
+        world
+            .projects
+            .iter()
+            .filter(|project| workshop_cards.contains(&project.name.as_str()))
+            .count(),
+        21,
+        "expected exactly the 21 accepted workshop cards"
+    );
+    assert_eq!(unlocked.len(), 18, "expected 18 unlocked cards");
     assert_eq!(world.events.len(), 0, "expected zero events");
+    assert_eq!(world.year, 2022, "expected workshop anchor year");
+    assert_eq!(world.lifespan, 30, "expected workshop lifespan");
 
     let mut state = State::new(world);
     let tgav = 1.2678074;

@@ -25,8 +25,11 @@ impl IdTracker {
     fn check_effect(&self, effect: &Effect) -> bool {
         if let Some(id) = effect.project_id() {
             self.projects.contains(&id)
-        } else if let Some(id) = effect.process_id() {
-            self.processes.contains(&id)
+        } else if !effect.process_ids().is_empty() {
+            effect
+                .process_ids()
+                .iter()
+                .all(|id| self.processes.contains(id))
         } else if let Some(id) = effect.industry_id() {
             self.industries.contains(&id)
         } else if let Some(id) = effect.event_id() {
@@ -55,7 +58,7 @@ pub fn find_references(id: Id, world: &World) -> Vec<String> {
     let check_effect = move |effect: &Effect| {
         [
             effect.project_id(),
-            effect.process_id(),
+            effect.process_ids().into_iter().find(|id_| *id_ == id),
             effect.industry_id(),
             effect.event_id(),
         ]

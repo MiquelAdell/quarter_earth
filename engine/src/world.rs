@@ -31,6 +31,11 @@ pub struct World {
     #[serde(default = "default_lifespan")]
     pub lifespan: usize,
 
+    /// Optional first year of a five-year planning cadence. Worlds without an
+    /// anchor retain the original calendar-year cadence.
+    #[serde(default)]
+    pub planning_anchor: Option<usize>,
+
     pub base_outlook: f32,
     pub temp_outlook: f32,
 
@@ -73,6 +78,31 @@ impl Default for World {
 }
 
 impl World {
+    /// The embedded configuration used by the facilitated workshop mode.
+    /// Keeping it in the engine makes the web build self-contained and avoids
+    /// relying on a moderator-selected local file.
+    pub fn workshop() -> Self {
+        serde_json::from_str(include_str!("../assets/WORKSHOP.world"))
+            .expect("embedded workshop world must be valid")
+    }
+
+    /// Whether `year` is a planning boundary for this world's cadence.
+    pub fn is_planning_year(&self, year: usize) -> bool {
+        match self.planning_anchor {
+            Some(anchor) => year
+                .checked_sub(anchor)
+                .is_some_and(|elapsed| elapsed.is_multiple_of(5)),
+            None => year.is_multiple_of(5),
+        }
+    }
+
+    /// Whether policy effects must be applied at the end of `year` so they
+    /// participate in production for the next planning boundary.
+    pub fn is_pre_planning_year(&self, year: usize) -> bool {
+        year.checked_add(1)
+            .is_some_and(|next_year| self.is_planning_year(next_year))
+    }
+
     pub fn update_climate(&mut self, tgav: f32) -> f32 {
         let prev_temp = self.temperature;
         self.temperature = tgav + self.temperature_modifier;
@@ -205,6 +235,34 @@ mod tests {
         assert_eq!(state.world.year, start_year + 30);
         state.step_year(state.world.temperature);
         assert!(state.game_over);
+    }
+
+    #[test]
+    fn test_planning_anchor_defaults_to_calendar_cadence() {
+        let world = World::default();
+
+        assert_eq!(world.planning_anchor, None);
+        assert_eq!(
+            (2022..=2030)
+                .filter(|year| world.is_planning_year(*year))
+                .collect::<Vec<_>>(),
+            vec![2025, 2030]
+        );
+        assert_eq!(
+            (2022..=2030)
+                .filter(|year| world.is_pre_planning_year(*year))
+                .collect::<Vec<_>>(),
+            vec![2024, 2029]
+        );
+    }
+
+    #[test]
+    fn test_embedded_workshop_world_has_its_30_year_horizon() {
+        let world = World::workshop();
+
+        assert_eq!(world.year, 2022);
+        assert_eq!(world.lifespan, 30);
+        assert_eq!(world.planning_anchor, Some(2022));
     }
 }
 

@@ -62,6 +62,10 @@ mod tgav {
             }
         }
 
+        pub fn is_ready(&self) -> bool {
+            true
+        }
+
         pub fn tgav(&self, year: usize) -> Option<f32> {
             let tgav = unsafe { run_hector(year, &self.emissions) };
             Some(tgav as f32)
@@ -96,6 +100,9 @@ mod tgav {
         #[wasm_bindgen(method, js_name = getEmissions)]
         fn get_emissions(this: &Temperature) -> JsValue;
 
+        #[wasm_bindgen(method, js_name = isReady)]
+        fn is_ready(this: &Temperature) -> bool;
+
         #[wasm_bindgen(method, js_name = updateTemperature)]
         fn calc_tgav(this: &Temperature) -> wasm_bindgen_futures::js_sys::Promise;
     }
@@ -128,6 +135,10 @@ mod tgav {
             let serializer = Serializer::new().serialize_maps_as_objects(true);
             let emissions = emissions.serialize(&serializer).unwrap();
             self.inner.borrow().add_emissions(emissions);
+        }
+
+        pub fn is_ready(&self) -> bool {
+            self.inner.borrow().is_ready()
         }
 
         pub fn tgav(&mut self, year: usize) -> Option<f32> {

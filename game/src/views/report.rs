@@ -13,7 +13,7 @@ use crate::{
         intensity::{self, IntensityBar, intensity_bar},
     },
     parts::{button, center_center, center_text, raised_frame, set_full_bg_image},
-    state::{GameState, StateExt},
+    state::{GameState, StateExt, WorkshopCycleRecord, WorkshopPolicyAction, WorkshopPolicyChoice},
     tips::{Tip, add_tip, tip},
     vars::Var,
     views::events::Events,
@@ -21,6 +21,7 @@ use crate::{
 };
 
 const ROW_HEIGHT: f32 = 18.;
+const WORKSHOP_ROW_HEIGHT: f32 = 36.;
 
 pub struct Report {
     events: Events,
@@ -39,10 +40,13 @@ pub struct Report {
     region_incomes: Vec<(String, Income)>,
     honeymoon_pc: isize,
     pc_change: isize,
+    workshop: Option<WorkshopReportData>,
 }
 impl Report {
     pub fn new(state: &mut GameState) -> Self {
         let events = StateExt::roll_events(&mut state.core, EventPhase::ReportStart);
+
+        let workshop = WORKSHOP.active.then(|| build_workshop_report_data(state));
 
         state.ui.session_start_state = state.core.clone();
 
@@ -81,7 +85,11 @@ impl Report {
 
         // Workshop mode: PC is a flat expiring budget, not earned
         // from outcomes, so no PC is awarded (or displayed) here.
-        let honeymoon_pc = if WORKSHOP.active { 0 } else { honeymoon_pc(state) };
+        let honeymoon_pc = if WORKSHOP.active {
+            0
+        } else {
+            honeymoon_pc(state)
+        };
         let pc_change = if WORKSHOP.active {
             0
         } else {
@@ -105,6 +113,7 @@ impl Report {
             region_incomes: region_rows(state),
             honeymoon_pc,
             pc_change,
+            workshop,
         }
     }
 
@@ -117,6 +126,15 @@ impl Report {
         );
 
         self.events.render(ui, &mut state.core);
+
+        if let Some(workshop) = &self.workshop {
+            let done = render_workshop_report(ui, workshop, self.water_warning.as_deref());
+            if done {
+                state.ui.plan_changes.clear();
+                state.ui.points.refundable_research.clear();
+            }
+            return done;
+        }
 
         center_center(ui, "report", |tui| {
             tui.ui(|ui| {
@@ -564,6 +582,294 @@ impl Report {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum MetricDirection {
+    Improved,
+    Worsened,
+    Unchanged,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+struct WorkshopMetricRow {
+    label: &'static str,
+    from: String,
+    to: String,
+    target: &'static str,
+    direction: MetricDirection,
+    shortage: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+struct WorkshopReportData {
+    cycle: WorkshopCycleRecord,
+    metrics: Vec<WorkshopMetricRow>,
+    contentedness: String,
+}
+
+fn build_workshop_report_data(state: &mut GameState) -> WorkshopReportData {
+    let choices = state
+        .ui
+        .plan_changes
+        .iter()
+        .filter_map(|(id, change)| {
+            let action = if change.passed {
+                Some(WorkshopPolicyAction::Passed)
+            } else if change.withdrawn {
+                Some(WorkshopPolicyAction::Repealed)
+            } else {
+                None
+            }?;
+            Some(WorkshopPolicyChoice {
+                name: state.world.projects[id].name.clone(),
+                action,
+            })
+        })
+        .collect::<Vec<_>>();
+    let start_year = state.ui.cycle_start_state.year;
+    let end_year = state.world.year;
+    let cycle = state
+        .ui
+        .record_workshop_cycle(start_year, end_year, choices);
+
+    workshop_report_data(state, cycle)
+}
+
+fn workshop_report_data(state: &GameState, cycle: WorkshopCycleRecord) -> WorkshopReportData {
+    let start = &state.ui.cycle_start_state;
+    let end_produced = state.produced.total();
+    let end_demand = state.output_demand.total();
+    let start_energy = energy_percent_met(start.produced, start.output_demand);
+    let end_energy = energy_percent_met(end_produced, end_demand);
+    let start_calories = calories_percent_met(start.produced, start.output_demand);
+    let end_calories = calories_percent_met(end_produced, end_demand);
+    let emissions = state.emissions.as_gtco2eq();
+
+    WorkshopReportData {
+        cycle,
+        metrics: vec![
+            lower_is_better_row(
+                "CO2 emissions",
+                start.emissions,
+                emissions,
+                |value| format!("{value:+.1} GtCO2e/year"),
+                "≤ 0 GtCO2e/year",
+            ),
+            lower_is_better_row(
+                "Temperature anomaly",
+                start.temperature,
+                state.world.temperature,
+                |value| format!("{value:+.1} °C"),
+                "≤ +1.0 °C",
+            ),
+            lower_is_better_row(
+                "Extinction rate",
+                start.extinction_rate,
+                state.world.extinction_rate,
+                |value| format!("{value:.1}"),
+                "≤ 20",
+            ),
+            supply_row("Energy supplied", start_energy, end_energy),
+            supply_row("Calories supplied", start_calories, end_calories),
+        ],
+        contentedness: format!("{:.1}", state.outlook()),
+    }
+}
+
+fn lower_is_better_row(
+    label: &'static str,
+    from: f32,
+    to: f32,
+    format_value: impl Fn(f32) -> String,
+    target: &'static str,
+) -> WorkshopMetricRow {
+    WorkshopMetricRow {
+        label,
+        from: format_value(from),
+        to: format_value(to),
+        target,
+        direction: compare_metric(from, to, false),
+        shortage: None,
+    }
+}
+
+fn supply_row(label: &'static str, from: f32, to: f32) -> WorkshopMetricRow {
+    WorkshopMetricRow {
+        label,
+        from: format!("{from:.0}%"),
+        to: format!("{to:.0}%"),
+        target: "≥ 100%",
+        direction: compare_metric(from, to, true),
+        shortage: (to < 100.).then(|| format!("Shortage: only {to:.0}% of demand is supplied.")),
+    }
+}
+
+fn compare_metric(from: f32, to: f32, higher_is_better: bool) -> MetricDirection {
+    let delta = to - from;
+    if delta.abs() < 0.05 {
+        MetricDirection::Unchanged
+    } else if (delta > 0.) == higher_is_better {
+        MetricDirection::Improved
+    } else {
+        MetricDirection::Worsened
+    }
+}
+
+fn render_workshop_report(
+    ui: &mut egui::Ui,
+    report: &WorkshopReportData,
+    water_warning: Option<&str>,
+) -> bool {
+    let mut done = false;
+    ui.vertical_centered(|ui| {
+        ui.style_mut().visuals.override_text_color = Some(Color32::BLACK);
+        ui.add_space(20.);
+        ui.label(
+            egui::RichText::new(format!("Cycle {} report", report.cycle.cycle))
+                .family(egui::FontFamily::Name("TimesTen".into()))
+                .size(34.),
+        );
+        ui.label(
+            egui::RichText::new(format!(
+                "{} → {}",
+                report.cycle.start_year, report.cycle.end_year
+            ))
+            .size(21.),
+        );
+        ui.add_space(12.);
+
+        raised_frame()
+            .colors(
+                Color32::from_rgb(0xff, 0xff, 0xf8),
+                Color32::from_rgb(0x8b, 0x73, 0x45),
+                Color32::from_rgb(0xff, 0xfb, 0xe8),
+            )
+            .show(ui, |ui| {
+                let width = (ui.ctx().content_rect().width() - 96.).clamp(760., 1080.);
+                ui.set_width(width);
+                ui.label(
+                    egui::RichText::new("Choices this cycle")
+                        .size(27.)
+                        .strong()
+                        .color(Color32::BLACK),
+                );
+                if report.cycle.choices.is_empty() {
+                    ui.label(
+                        egui::RichText::new("No policies were passed or repealed.")
+                            .size(18.)
+                            .color(Color32::BLACK),
+                    );
+                } else {
+                    ui.horizontal_wrapped(|ui| {
+                        report.cycle.choices.iter().for_each(|choice| {
+                            let action = match choice.action {
+                                WorkshopPolicyAction::Passed => "Passed",
+                                WorkshopPolicyAction::Repealed => "Repealed",
+                            };
+                            ui.label(
+                                egui::RichText::new(format!("{action}: {}", choice.name))
+                                    .size(18.)
+                                    .strong()
+                                    .color(Color32::BLACK),
+                            );
+                        });
+                    });
+                }
+
+                ui.add_space(14.);
+                ui.label(
+                    egui::RichText::new("World change")
+                        .size(27.)
+                        .strong()
+                        .color(Color32::BLACK),
+                );
+                egui::Grid::new("workshop-report-metrics")
+                    .num_columns(5)
+                    .striped(true)
+                    .min_row_height(WORKSHOP_ROW_HEIGHT)
+                    .spacing(egui::vec2(24., 6.))
+                    .show(ui, |ui| {
+                        ["Metric", "Start", "End", "Direction", "Target"]
+                            .into_iter()
+                            .for_each(|heading| {
+                                ui.label(
+                                    egui::RichText::new(heading)
+                                        .size(18.)
+                                        .strong()
+                                        .color(Color32::BLACK),
+                                );
+                            });
+                        ui.end_row();
+
+                        report.metrics.iter().for_each(|metric| {
+                            ui.label(
+                                egui::RichText::new(metric.label)
+                                    .size(19.)
+                                    .strong()
+                                    .color(Color32::BLACK),
+                            );
+                            ui.label(
+                                egui::RichText::new(&metric.from)
+                                    .size(18.)
+                                    .color(Color32::BLACK),
+                            );
+                            ui.label(
+                                egui::RichText::new(&metric.to)
+                                    .size(18.)
+                                    .strong()
+                                    .color(Color32::BLACK),
+                            );
+                            let (direction, color) = match metric.direction {
+                                MetricDirection::Improved => {
+                                    ("Improved", Color32::from_rgb(0x0b, 0x65, 0x2d))
+                                }
+                                MetricDirection::Worsened => {
+                                    ("Worsened", Color32::from_rgb(0xa6, 0x11, 0x0b))
+                                }
+                                MetricDirection::Unchanged => ("No change", Color32::DARK_GRAY),
+                            };
+                            ui.colored_label(
+                                color,
+                                egui::RichText::new(direction).size(17.).strong(),
+                            );
+                            ui.label(
+                                egui::RichText::new(metric.target)
+                                    .size(18.)
+                                    .color(Color32::BLACK),
+                            );
+                            ui.end_row();
+                            if let Some(shortage) = &metric.shortage {
+                                ui.label(
+                                    egui::RichText::new(shortage)
+                                        .size(15.)
+                                        .strong()
+                                        .color(Color32::from_rgb(0xa6, 0x11, 0x0b)),
+                                );
+                                ui.end_row();
+                            }
+                        });
+                    });
+
+                if let Some(warning) = water_warning {
+                    ui.colored_label(
+                        Color32::from_rgb(0xa6, 0x11, 0x0b),
+                        egui::RichText::new(warning).size(16.).strong(),
+                    );
+                }
+                ui.label(
+                    egui::RichText::new(format!(
+                        "Secondary indicator — contentedness: {}",
+                        report.contentedness
+                    ))
+                    .size(17.)
+                    .color(Color32::BLACK),
+                );
+                ui.add_space(12.);
+                done = ui.add(button(t!("Next")).full_width()).clicked();
+            });
+    });
+    done
+}
+
 struct ChangeRow {
     icon: Icon,
     label: String,
@@ -941,5 +1247,102 @@ mod tests {
         };
         // (45 + 15) / (50 + 50) = 60%; energy is ignored.
         assert_eq!(calories_percent_met(produced, demand), 60.);
+    }
+
+    #[test]
+    fn workshop_report_has_five_interpretable_rows_and_shortages() {
+        let mut state = GameState::from_world(hes_engine::World::workshop());
+        state.ui.cycle_start_state.year = 2022;
+        state.ui.cycle_start_state.emissions = 12.;
+        state.ui.cycle_start_state.temperature = 1.2;
+        state.ui.cycle_start_state.extinction_rate = 30.;
+        state.ui.cycle_start_state.produced = OutputMap {
+            fuel: 30.,
+            electricity: 50.,
+            plant_calories: 60.,
+            animal_calories: 40.,
+        };
+        state.ui.cycle_start_state.output_demand = OutputMap {
+            fuel: 50.,
+            electricity: 50.,
+            plant_calories: 50.,
+            animal_calories: 50.,
+        };
+        state.core.emissions.co2 = 8e15;
+        state.core.emissions.ch4 = 0.;
+        state.core.emissions.n2o = 0.;
+        state.core.world.temperature = 1.1;
+        state.core.world.extinction_rate = 32.;
+        state.core.produced.amount = OutputMap {
+            fuel: 30.,
+            electricity: 40.,
+            plant_calories: 45.,
+            animal_calories: 45.,
+        };
+        state.core.output_demand.base = OutputMap {
+            fuel: 50.,
+            electricity: 50.,
+            plant_calories: 50.,
+            animal_calories: 50.,
+        };
+        let cycle = WorkshopCycleRecord {
+            cycle: 1,
+            start_year: 2022,
+            end_year: 2027,
+            choices: vec![WorkshopPolicyChoice {
+                name: "Solar Push".into(),
+                action: WorkshopPolicyAction::Passed,
+            }],
+        };
+
+        let report = workshop_report_data(&state, cycle.clone());
+
+        assert_eq!(report.cycle, cycle);
+        assert_eq!(report.metrics.len(), 5);
+        assert_eq!(
+            report.metrics,
+            vec![
+                WorkshopMetricRow {
+                    label: "CO2 emissions",
+                    from: "+12.0 GtCO2e/year".into(),
+                    to: "+8.0 GtCO2e/year".into(),
+                    target: "≤ 0 GtCO2e/year",
+                    direction: MetricDirection::Improved,
+                    shortage: None,
+                },
+                WorkshopMetricRow {
+                    label: "Temperature anomaly",
+                    from: "+1.2 °C".into(),
+                    to: "+1.1 °C".into(),
+                    target: "≤ +1.0 °C",
+                    direction: MetricDirection::Improved,
+                    shortage: None,
+                },
+                WorkshopMetricRow {
+                    label: "Extinction rate",
+                    from: "30.0".into(),
+                    to: "32.0".into(),
+                    target: "≤ 20",
+                    direction: MetricDirection::Worsened,
+                    shortage: None,
+                },
+                WorkshopMetricRow {
+                    label: "Energy supplied",
+                    from: "80%".into(),
+                    to: "70%".into(),
+                    target: "≥ 100%",
+                    direction: MetricDirection::Worsened,
+                    shortage: Some("Shortage: only 70% of demand is supplied.".into()),
+                },
+                WorkshopMetricRow {
+                    label: "Calories supplied",
+                    from: "100%".into(),
+                    to: "90%".into(),
+                    target: "≥ 100%",
+                    direction: MetricDirection::Worsened,
+                    shortage: Some("Shortage: only 90% of demand is supplied.".into()),
+                },
+            ]
+        );
     }
 }

@@ -1,14 +1,11 @@
-use std::{
-    borrow::Cow,
-    collections::{BTreeMap, BTreeSet},
-};
+use std::{borrow::Cow, collections::BTreeMap};
 
 use egui::{Align2, Color32, CornerRadius, Margin, Order, Rect, Sense, Shadow, Stroke};
 use egui_taffy::TuiBuilderLogic;
 use enum_map::EnumMap;
 use hes_engine::{
-    Effect, EventPhase, Feedstock, Group, Id, KindMap, Output, Process, Project, ProjectType,
-    Resource, State, Status,
+    EventPhase, Feedstock, Group, Id, KindMap, Output, Process, Project, ProjectType, Resource,
+    State, Status,
 };
 use hes_images::flavor_image;
 use rust_i18n::t;
@@ -34,7 +31,10 @@ use crate::{
         scanner::Cards,
         session::{TabItem, render_tabs},
     },
-    workshop::{WORKSHOP, land_gauge_segments, toggle_policy},
+    workshop::{
+        WORKSHOP, WorkshopLockReason, WorkshopTheme, land_gauge_segments, toggle_policy,
+        workshop_cycle, workshop_lock_reason, workshop_theme,
+    },
 };
 
 pub enum PlanAction {
@@ -46,16 +46,18 @@ pub enum PlanAction {
 pub struct Plan {
     page: Page,
 
-    /// Workshop mode: the single themed policy-card list,
-    /// grouped by the projects' `group` field. Persisted across
-    /// frames to keep per-card state (e.g. flipped cards).
-    workshop_groups: Option<Vec<(Group, Vec<Card<Project>>)>>,
+    /// Workshop mode: the single policy-card list grouped into the five
+    /// moderator-facing themes. Persisted across frames to keep per-card
+    /// state (e.g. flipped cards).
+    workshop_groups: Option<Vec<(WorkshopTheme, Vec<Card<Project>>)>>,
+    workshop_ready_confirmation: bool,
 }
 impl Plan {
     pub fn new() -> Self {
         Self {
             page: Page::Overview,
             workshop_groups: None,
+            workshop_ready_confirmation: false,
         }
     }
 
@@ -440,57 +442,55 @@ impl Plan {
 
         ui.add_space(56.);
 
-        render_workshop_budget(ui, &state.core);
+        render_workshop_context(ui, state);
 
         ui.add_space(12.);
         render_workshop_land_gauge(ui, &state.core);
         render_workshop_water_warning(ui, &state.core);
 
         let mut clicked: Option<Id> = None;
-        egui::ScrollArea::vertical().show(ui, |ui| {
-            for (group, cards) in groups.iter_mut() {
-                ui.add_space(24.);
-                render_workshop_group_header(ui, group);
-                ui.add_space(12.);
+        // `App` already supplies the page-level vertical scroll area. A second
+        // nested scroll area here captured the pointer event for the final
+        // Ready button instead of delivering it to the button.
+        for (group, cards) in groups.iter_mut() {
+            ui.add_space(24.);
+            render_workshop_group_header(ui, *group);
+            ui.add_space(12.);
 
-                egui::Frame::NONE
-                    .inner_margin(Margin::symmetric(24, 0))
-                    .show(ui, |ui| {
-                        ui.horizontal_wrapped(|ui| {
-                            ui.style_mut().spacing.item_spacing = egui::vec2(18., 18.);
-                            for card in cards {
-                                if let Some(id) = render_workshop_card(ui, state, card) {
-                                    clicked = Some(id);
-                                }
+            egui::Frame::NONE
+                .inner_margin(Margin::symmetric(24, 0))
+                .show(ui, |ui| {
+                    ui.horizontal_wrapped(|ui| {
+                        ui.style_mut().spacing.item_spacing = egui::vec2(18., 18.);
+                        for card in cards {
+                            if let Some(id) = render_workshop_card(ui, state, card) {
+                                clicked = Some(id);
                             }
-                        });
+                        }
                     });
-            }
+                });
+        }
 
-            ui.add_space(48.);
-
-            let resp = ui
-                .vertical_centered(|ui| {
-                    ui.set_width(320.);
-                    let b = button(t!("Ready")).full_width().colors(
-                        Color32::from_rgb(0xf7, 0x5c, 0x52),
-                        Color32::from_rgb(0x82, 0x14, 0x0c),
-                        Color32::from_rgb(0xfa, 0x23, 0x14),
-                        Color32::from_rgb(0xeb, 0x40, 0x34),
-                    );
-                    ui.add(b)
-                })
-                .inner;
-            if resp.clicked() {
+        let needs_confirmation = workshop_ready_needs_confirmation(state);
+        if render_workshop_ready_button(
+            ui.ctx(),
+            state,
+            needs_confirmation && self.workshop_ready_confirmation,
+        )
+        .clicked()
+        {
+            if needs_confirmation && !self.workshop_ready_confirmation {
+                self.workshop_ready_confirmation = true;
+            } else {
+                self.workshop_ready_confirmation = false;
                 ret_action = Some(PlanAction::EnterWorld);
             }
-
-            ui.add_space(48.);
-        });
+        }
 
         if let Some(id) = clicked
             && toggle_policy(&mut state.core, &mut state.ui.plan_changes, &id)
         {
+            self.workshop_ready_confirmation = false;
             ret_action = Some(PlanAction::PlanChanged);
         }
 
@@ -563,6 +563,55 @@ impl Plan {
     fn set_page(&mut self, page: Page) {
         self.page = page;
     }
+}
+
+/// Keep the primary action outside the scrollable policy canvas so it always
+/// receives a complete pointer gesture, even after the moderator has scrolled
+/// through the full deck.
+fn render_workshop_ready_button(
+    ctx: &egui::Context,
+    state: &GameState,
+    awaiting_confirmation: bool,
+) -> egui::Response {
+    egui::Area::new("workshop-ready".into())
+        .order(Order::Foreground)
+        .anchor(Align2::CENTER_BOTTOM, egui::vec2(0., -18.))
+        .show(ctx, |ui| {
+            egui::Frame::NONE
+                .fill(Color32::from_black_alpha(232))
+                .corner_radius(6)
+                .inner_margin(Margin::symmetric(12, 8))
+                .show(ui, |ui| {
+                    ui.set_width(720.);
+                    render_workshop_selection_summary(ui, state);
+                    if awaiting_confirmation {
+                        ui.colored_label(
+                            Color32::from_rgb(0xFF, 0xD1, 0x54),
+                            egui::RichText::new(t!(
+                                "No PC will be used this cycle. Select Confirm to continue anyway."
+                            ))
+                            .strong()
+                            .size(15.),
+                        );
+                    }
+                    ui.add_sized(
+                        egui::vec2(ui.available_width(), 42.),
+                        egui::Button::new(
+                            egui::RichText::new(if awaiting_confirmation {
+                                t!("Confirm — continue without using PC")
+                            } else {
+                                t!("Ready")
+                            })
+                            .heading()
+                            .color(Color32::BLACK),
+                        )
+                        .fill(Color32::from_rgb(0xfa, 0x23, 0x14))
+                        .stroke(Stroke::new(2., Color32::from_rgb(0x82, 0x14, 0x0c))),
+                    )
+                })
+                .inner
+        })
+        .inner
 }
 
 enum Page {
@@ -1152,62 +1201,47 @@ fn get_projects(
     projects
 }
 
-/// The workshop deck: every unlocked policy, plus locked policies
-/// reachable through `Effect::UnlocksProject` chains from unlocked
-/// policies (prereq-locked cards, shown as visible-but-locked).
-/// Grouped by the projects' existing `group` field.
-fn workshop_card_groups(state: &State) -> Vec<(Group, Vec<Card<Project>>)> {
-    let projects = &state.world.projects;
-
-    let mut visible: BTreeSet<Id> = projects
-        .iter()
-        .filter(|p| p.kind == ProjectType::Policy && !p.locked)
-        .map(|p| p.id)
-        .collect();
-    let mut frontier: Vec<Id> = visible.iter().copied().collect();
-    while let Some(id) = frontier.pop() {
-        let unlocks: Vec<Id> = projects[&id]
-            .effects
-            .iter()
-            .filter_map(|effect| match effect {
-                Effect::UnlocksProject(target) => Some(*target),
-                _ => None,
-            })
-            .collect();
-        for target in unlocks {
-            if projects[&target].kind == ProjectType::Policy && visible.insert(target) {
-                frontier.push(target);
-            }
-        }
-    }
-
-    Group::iter()
-        .filter_map(|group| {
-            let mut cards: Vec<Project> = visible
+/// The accepted 21-card deck, grouped by its workshop presentation metadata
+/// rather than by the normal game's legacy project groups.
+fn workshop_card_groups(state: &State) -> Vec<(WorkshopTheme, Vec<Card<Project>>)> {
+    WorkshopTheme::ALL
+        .into_iter()
+        .map(|theme| {
+            let mut cards = state
+                .world
+                .projects
                 .iter()
-                .map(|id| &projects[id])
-                .filter(|p| p.group == group)
+                .filter(|project| workshop_theme(project) == Some(theme))
                 .cloned()
-                .collect();
-            if cards.is_empty() {
-                None
-            } else {
-                cards.sort_by_key(|p| p.name.to_lowercase());
-                Some((group, cards.into_iter().map(Card::new).collect()))
-            }
+                .collect::<Vec<_>>();
+            cards.sort_by_key(|project| project.name.to_lowercase());
+            (theme, cards.into_iter().map(Card::new).collect())
         })
         .collect()
 }
 
-/// The expiring per-cycle budget, displayed prominently at the
-/// top of the workshop plan screen.
-fn render_workshop_budget(ui: &mut egui::Ui, state: &State) {
+/// Persistent planning context for a moderator and projected audience.
+fn render_workshop_context(ui: &mut egui::Ui, state: &GameState) {
+    let (cycle, start_year, end_year) =
+        workshop_cycle(state.world.year, state.ui.start_year, state.core.death_year);
     ui.vertical_centered(|ui| {
         egui::Frame::NONE
             .fill(Color32::from_black_alpha(208))
             .corner_radius(6)
-            .inner_margin(Margin::symmetric(14, 8))
+            .inner_margin(Margin::symmetric(18, 12))
             .show(ui, |ui| {
+                ui.set_width(760.);
+                ui.label(
+                    egui::RichText::new(t!(
+                        "Cycle %{cycle} of 6 · %{start}–%{end}",
+                        cycle = cycle,
+                        start = start_year,
+                        end = end_year
+                    ))
+                    .heading()
+                    .size(28.)
+                    .color(Color32::WHITE),
+                );
                 ui.horizontal(|ui| {
                     ui.style_mut().spacing.item_spacing.x = 6.;
                     ui.add(icons::POLITICAL_CAPITAL.size(26.));
@@ -1222,6 +1256,16 @@ fn render_workshop_budget(ui: &mut egui::Ui, state: &State) {
                         .color(Color32::WHITE),
                     );
                 });
+                ui.label(
+                    egui::RichText::new(t!("30 PC refreshes each cycle; unused PC expires."))
+                        .size(17.)
+                        .color(Color32::WHITE),
+                );
+                ui.label(
+                    egui::RichText::new(t!("Select a card to pass it; select it again to undo."))
+                        .size(17.)
+                        .color(Color32::WHITE),
+                );
             });
     });
 }
@@ -1324,8 +1368,15 @@ fn render_workshop_water_warning(ui: &mut egui::Ui, state: &State) {
     });
 }
 
-fn render_workshop_group_header(ui: &mut egui::Ui, group: &Group) {
-    let (bg, fg) = group_color(group);
+fn render_workshop_group_header(ui: &mut egui::Ui, theme: WorkshopTheme) {
+    let representative_group = match theme {
+        WorkshopTheme::Energy => Group::Energy,
+        WorkshopTheme::FoodAndAgriculture => Group::Food,
+        WorkshopTheme::LandAndBiodiversity => Group::Restoration,
+        WorkshopTheme::IndustryTransportAndGeoengineering => Group::Geoengineering,
+        WorkshopTheme::SocietyAndEconomy => Group::Limits,
+    };
+    let (bg, fg) = group_color(&representative_group);
     ui.vertical_centered(|ui| {
         egui::Frame::NONE
             .fill(bg)
@@ -1333,13 +1384,172 @@ fn render_workshop_group_header(ui: &mut egui::Ui, group: &Group) {
             .inner_margin(Margin::symmetric(12, 4))
             .show(ui, |ui| {
                 ui.label(
-                    egui::RichText::new(t!(group.to_string()).to_uppercase())
+                    egui::RichText::new(t!(theme.title()).to_uppercase())
                         .heading()
-                        .size(18.)
+                        .size(22.)
                         .color(fg),
                 );
             });
     });
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum WorkshopCardState {
+    Available,
+    SelectedThisCycle,
+    ActiveFromEarlierCycle,
+    RepealedThisCycle,
+    OverBudget,
+    Locked,
+}
+
+fn workshop_card_state(
+    project: &Project,
+    change: Option<&PlanChange>,
+    remaining_pc: isize,
+) -> WorkshopCardState {
+    if project.locked {
+        WorkshopCardState::Locked
+    } else if change.is_some_and(|change| change.passed) {
+        WorkshopCardState::SelectedThisCycle
+    } else if change.is_some_and(|change| change.withdrawn) {
+        WorkshopCardState::RepealedThisCycle
+    } else if project.is_building() || project.is_online() {
+        WorkshopCardState::ActiveFromEarlierCycle
+    } else if project.cost as isize > remaining_pc {
+        WorkshopCardState::OverBudget
+    } else {
+        WorkshopCardState::Available
+    }
+}
+
+fn workshop_lock_copy(reason: Option<&WorkshopLockReason>) -> String {
+    match reason {
+        Some(reason) if reason.available_next_cycle && reason.prerequisites.len() == 1 => t!(
+            "Requirement met: %{prerequisite}. Available next cycle.",
+            prerequisite = reason.prerequisites[0].clone()
+        )
+        .to_string(),
+        Some(reason) if reason.available_next_cycle => t!(
+            "Requirement met (OR: %{prerequisites}). Available next cycle.",
+            prerequisites = format_or_list(&reason.prerequisites)
+        )
+        .to_string(),
+        Some(reason) if reason.prerequisites.len() == 1 => t!(
+            "Requires %{prerequisite}. Pass it first; available next cycle.",
+            prerequisite = reason.prerequisites[0].clone()
+        )
+        .to_string(),
+        Some(reason) => t!(
+            "Requires any one (OR): %{prerequisites}. Pass one first; available next cycle.",
+            prerequisites = format_or_list(&reason.prerequisites)
+        )
+        .to_string(),
+        None => t!("Locked for this workshop.").to_string(),
+    }
+}
+
+fn format_or_list(items: &[String]) -> String {
+    match items {
+        [] => String::new(),
+        [item] => item.clone(),
+        [left, right] => format!("{left} or {right}"),
+        _ => {
+            let (last, initial) = items.split_last().expect("non-empty list");
+            format!("{}, or {last}", initial.join(", "))
+        }
+    }
+}
+
+fn workshop_card_state_copy(
+    card_state: WorkshopCardState,
+    project: &Project,
+    remaining_pc: isize,
+) -> String {
+    match card_state {
+        WorkshopCardState::Available => t!(
+            "AVAILABLE · Select to pass · %{cost} PC",
+            cost = project.cost
+        )
+        .to_string(),
+        WorkshopCardState::SelectedThisCycle => {
+            t!("SELECTED THIS CYCLE · Select again to undo").to_string()
+        }
+        WorkshopCardState::ActiveFromEarlierCycle => {
+            t!("ACTIVE FROM EARLIER CYCLE · Select to repeal").to_string()
+        }
+        WorkshopCardState::RepealedThisCycle => {
+            t!("REPEALED THIS CYCLE · Select again to restore").to_string()
+        }
+        WorkshopCardState::OverBudget => t!(
+            "OVER BUDGET · Requires %{required} PC · Remaining: %{remaining} PC",
+            required = project.cost,
+            remaining = remaining_pc
+        )
+        .to_string(),
+        WorkshopCardState::Locked => t!("LOCKED · prerequisite required").to_string(),
+    }
+}
+
+fn workshop_ready_needs_confirmation(state: &GameState) -> bool {
+    workshop_ready_needs_confirmation_for(&state.ui.plan_changes, state.political_capital)
+}
+
+fn workshop_ready_needs_confirmation_for(
+    plan_changes: &BTreeMap<Id, PlanChange>,
+    remaining_pc: isize,
+) -> bool {
+    let has_changes = plan_changes
+        .values()
+        .any(|change| change.passed || change.withdrawn);
+    !has_changes || remaining_pc == consts::WORKSHOP_PC_BUDGET
+}
+
+fn render_workshop_selection_summary(ui: &mut egui::Ui, state: &GameState) {
+    let changed_names = |passed: bool| {
+        let mut names = state
+            .ui
+            .plan_changes
+            .iter()
+            .filter(|(_, change)| {
+                if passed {
+                    change.passed
+                } else {
+                    change.withdrawn
+                }
+            })
+            .map(|(id, _)| state.world.projects[id].name.clone())
+            .collect::<Vec<_>>();
+        names.sort();
+        names
+    };
+    let passing = changed_names(true);
+    let repealing = changed_names(false);
+    let summary = match (passing.is_empty(), repealing.is_empty()) {
+        (true, true) => t!("Choices this cycle: No changes selected.").to_string(),
+        (false, true) => t!(
+            "Choices this cycle · Passing: %{passing}",
+            passing = passing.join(", ")
+        )
+        .to_string(),
+        (true, false) => t!(
+            "Choices this cycle · Repealing: %{repealing}",
+            repealing = repealing.join(", ")
+        )
+        .to_string(),
+        (false, false) => t!(
+            "Choices this cycle · Passing: %{passing} · Repealing: %{repealing}",
+            passing = passing.join(", "),
+            repealing = repealing.join(", ")
+        )
+        .to_string(),
+    };
+    ui.label(
+        egui::RichText::new(summary)
+            .strong()
+            .size(16.)
+            .color(Color32::WHITE),
+    );
 }
 
 /// Render one workshop policy card. Returns the project's id if the
@@ -1351,21 +1561,15 @@ fn render_workshop_card(
 ) -> Option<Id> {
     let id = card.id;
     let project = &state.world.projects[&id];
-    let locked = project.locked;
-    let passed = project.is_building() || project.is_online();
-    let free_repass = state
-        .ui
-        .plan_changes
-        .get(&id)
-        .is_some_and(|changes| changes.withdrawn);
-    let over_budget =
-        !locked && !passed && !free_repass && (project.cost as isize) > state.political_capital;
+    let card_state = workshop_card_state(
+        project,
+        state.ui.plan_changes.get(&id),
+        state.political_capital,
+    );
 
     let resp = ui
         .scope(|ui| {
-            if locked {
-                ui.set_opacity(0.4);
-            } else if over_budget {
+            if card_state == WorkshopCardState::OverBudget {
                 ui.set_opacity(0.65);
             }
             card.render(ui, state, false)
@@ -1373,54 +1577,72 @@ fn render_workshop_card(
         .inner;
     let rect = resp.rect;
 
-    if locked {
-        // Visible-but-locked: gray overlay with a lock icon,
-        // no interaction.
-        ui.painter()
-            .rect_filled(rect, 4., Color32::from_black_alpha(112));
-        let icon_rect = Rect::from_center_size(
-            rect.center() - egui::vec2(0., 16.),
-            egui::Vec2::splat(48.),
-        );
-        ui.place(icon_rect, icons::LOCKS.size(48.));
-        let label_rect = Rect::from_center_size(
-            rect.center() + egui::vec2(0., 28.),
-            egui::vec2(rect.width(), 20.),
-        );
-        ui.place(label_rect, |ui: &mut egui::Ui| {
-            ui.vertical_centered(|ui| {
-                ui.label(
-                    egui::RichText::new(t!("Locked"))
-                        .heading()
-                        .size(14.)
-                        .color(Color32::WHITE),
-                )
+    let status_text = workshop_card_state_copy(card_state, project, state.political_capital);
+    let status_color = match card_state {
+        WorkshopCardState::SelectedThisCycle => Color32::from_rgb(0x1B, 0xAC, 0x89),
+        WorkshopCardState::RepealedThisCycle | WorkshopCardState::OverBudget => {
+            Color32::from_rgb(0xD8, 0x31, 0x31)
+        }
+        WorkshopCardState::Locked => Color32::from_gray(35),
+        WorkshopCardState::ActiveFromEarlierCycle => Color32::from_rgb(0x38, 0x5C, 0xA8),
+        WorkshopCardState::Available => Color32::from_gray(20),
+    };
+    let banner_rect = Rect::from_center_size(
+        rect.center_top() + egui::vec2(0., 54.),
+        egui::vec2(rect.width() - 12., 42.),
+    );
+    ui.place(banner_rect, |ui: &mut egui::Ui| {
+        egui::Frame::NONE
+            .fill(status_color)
+            .corner_radius(3)
+            .inner_margin(Margin::symmetric(6, 4))
+            .show(ui, |ui| {
+                ui.set_width(banner_rect.width() - 12.);
+                ui.vertical_centered(|ui| {
+                    ui.label(
+                        egui::RichText::new(status_text)
+                            .strong()
+                            .size(12.)
+                            .color(Color32::WHITE),
+                    );
+                });
             })
             .response
-        });
-        None
-    } else if over_budget {
-        // Clear visual for cards blocked by the remaining budget.
-        let banner_rect = Rect::from_center_size(
-            rect.center_top() + egui::vec2(0., 38.),
-            egui::vec2(rect.width() - 12., 20.),
+    });
+
+    if card_state == WorkshopCardState::Locked {
+        // Keep the requirement panel high contrast; the underlying card stays
+        // visible enough to discuss what the prerequisite will unlock.
+        let icon_rect =
+            Rect::from_center_size(rect.center() - egui::vec2(0., 56.), egui::Vec2::splat(42.));
+        ui.place(icon_rect, icons::LOCKS.size(42.));
+        let label_rect = Rect::from_center_size(
+            rect.center() + egui::vec2(0., 30.),
+            egui::vec2(rect.width() - 20., 116.),
         );
-        ui.place(banner_rect, |ui: &mut egui::Ui| {
+        ui.place(label_rect, |ui: &mut egui::Ui| {
             egui::Frame::NONE
-                .fill(Color32::from_rgb(0xEF, 0x38, 0x38))
-                .corner_radius(3)
-                .inner_margin(Margin::symmetric(6, 2))
+                .fill(Color32::from_black_alpha(224))
+                .corner_radius(4)
+                .inner_margin(Margin::symmetric(8, 8))
                 .show(ui, |ui| {
+                    ui.set_width(label_rect.width() - 16.);
                     ui.vertical_centered(|ui| {
                         ui.label(
-                            egui::RichText::new(t!("Not enough political capital"))
-                                .size(12.)
-                                .color(Color32::WHITE),
-                        );
-                    });
+                            egui::RichText::new(workshop_lock_copy(
+                                workshop_lock_reason(&state.core, &id).as_ref(),
+                            ))
+                            .strong()
+                            .size(14.)
+                            .color(Color32::WHITE),
+                        )
+                    })
+                    .response
                 })
                 .response
         });
+        None
+    } else if card_state == WorkshopCardState::OverBudget {
         None
     } else {
         if resp.contains_pointer() {
@@ -1822,5 +2044,121 @@ impl egui::Widget for &Changes {
             })
             .response
         }
+    }
+}
+
+#[cfg(test)]
+mod workshop_planning_tests {
+    use super::*;
+
+    fn project(status: Status, locked: bool, cost: usize) -> Project {
+        Project {
+            status,
+            locked,
+            cost,
+            ..Default::default()
+        }
+    }
+
+    #[test]
+    fn all_six_workshop_card_states_are_distinct() {
+        let available = project(Status::Inactive, false, 10);
+        let active = project(Status::Active, false, 10);
+        let locked = project(Status::Inactive, true, 10);
+        let selected = PlanChange {
+            passed: true,
+            ..Default::default()
+        };
+        let repealed = PlanChange {
+            withdrawn: true,
+            ..Default::default()
+        };
+
+        assert_eq!(
+            workshop_card_state(&available, None, 30),
+            WorkshopCardState::Available
+        );
+        assert_eq!(
+            workshop_card_state(&available, Some(&selected), 20),
+            WorkshopCardState::SelectedThisCycle
+        );
+        assert_eq!(
+            workshop_card_state(&active, None, 30),
+            WorkshopCardState::ActiveFromEarlierCycle
+        );
+        assert_eq!(
+            workshop_card_state(&available, Some(&repealed), 30),
+            WorkshopCardState::RepealedThisCycle
+        );
+        assert_eq!(
+            workshop_card_state(&available, None, 5),
+            WorkshopCardState::OverBudget
+        );
+        assert_eq!(
+            workshop_card_state(&locked, None, 30),
+            WorkshopCardState::Locked
+        );
+    }
+
+    #[test]
+    fn over_budget_copy_names_required_and_remaining_pc() {
+        let project = project(Status::Inactive, false, 15);
+
+        assert_eq!(
+            workshop_card_state_copy(WorkshopCardState::OverBudget, &project, 10),
+            "OVER BUDGET · Requires 15 PC · Remaining: 10 PC"
+        );
+    }
+
+    #[test]
+    fn lock_copy_names_single_and_or_prerequisites_with_timing() {
+        assert_eq!(
+            workshop_lock_copy(Some(&WorkshopLockReason {
+                prerequisites: vec!["Regenerative Agriculture".to_string()],
+                available_next_cycle: false,
+            })),
+            "Requires Regenerative Agriculture. Pass it first; available next cycle."
+        );
+        assert_eq!(
+            workshop_lock_copy(Some(&WorkshopLockReason {
+                prerequisites: vec![
+                    "Nuclear Expansion".to_string(),
+                    "Solar Push".to_string(),
+                    "Wind Push".to_string(),
+                ],
+                available_next_cycle: false,
+            })),
+            "Requires any one (OR): Nuclear Expansion, Solar Push, or Wind Push. Pass one first; available next cycle."
+        );
+        assert_eq!(
+            workshop_lock_copy(Some(&WorkshopLockReason {
+                prerequisites: vec!["Regenerative Agriculture".to_string()],
+                available_next_cycle: true,
+            })),
+            "Requirement met: Regenerative Agriculture. Available next cycle."
+        );
+    }
+
+    #[test]
+    fn ready_confirmation_is_only_required_for_no_change_or_unused_budget() {
+        let id = Id::new_v4();
+        let no_changes = BTreeMap::new();
+        let meaningful_changes = BTreeMap::from([(
+            id,
+            PlanChange {
+                passed: true,
+                ..Default::default()
+            },
+        )]);
+
+        assert!(workshop_ready_needs_confirmation_for(&no_changes, 30));
+        assert!(workshop_ready_needs_confirmation_for(
+            &meaningful_changes,
+            30
+        ));
+        assert!(!workshop_ready_needs_confirmation_for(
+            &meaningful_changes,
+            20
+        ));
     }
 }

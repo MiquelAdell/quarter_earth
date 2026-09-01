@@ -17,28 +17,24 @@ const hectorOutputVars = {
 class Temperature {
   constructor(startYear) {
     this.startYear = startYear;
+    this.ready = false;
+    this.pendingEmissions = undefined;
 
     this.emissions = {
       startYear: START_YEAR,
       data: {},
     };
 
-    fetch('/hector/config.json')
-      .then((resp) => resp.json())
-      .then((config) => {
+    // Load all climate inputs together. Workshop mode advances the world
+    // immediately, so it can reach addEmissions before any individual fetch
+    // resolves. `ready` lets the Rust transition wait for a complete model.
+    Promise.all([
+      fetch('/hector/config.json').then((resp) => resp.json()),
+      fetch(defaultEmissionsScenario).then((resp) => resp.json()),
+      fetch(baseEmissionsScenario).then((resp) => resp.json()),
+    ]).then(([config, defaultEmissions, baseScenario]) => {
         this.config = config;
-      });
-
-    fetch(defaultEmissionsScenario)
-      .then((resp) => resp.json())
-      .then((defaultEmissions) => {
         this.defaultEmissions = defaultEmissions;
-      });
-
-    // Load the base emissions scenario history,
-    // for computing temperature changes
-    fetch(baseEmissionsScenario)
-      .then((resp) => resp.json()).then((baseScenario) => {
         this.emissions = {
           startYear: baseScenario['startYear'],
           data: {}
@@ -49,6 +45,11 @@ class Temperature {
         Object.keys(baseScenario['data']).forEach((k) => {
           this.emissions['data'][k] = baseScenario['data'][k].slice(0, baseYears);
         });
+
+        if (this.pendingEmissions !== undefined) {
+          this.emissions.data = this.pendingEmissions;
+        }
+        this.ready = true;
       });
   }
 
@@ -66,7 +67,15 @@ class Temperature {
   }
 
   setEmissions(emissions) {
-    this.emissions.data = emissions;
+    if (this.ready) {
+      this.emissions.data = emissions;
+    } else {
+      this.pendingEmissions = emissions;
+    }
+  }
+
+  isReady() {
+    return this.ready;
   }
 
   getEmissions() {
