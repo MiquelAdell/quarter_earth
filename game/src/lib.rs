@@ -179,7 +179,10 @@ impl eframe::App for App {
             .frame(egui::Frame::NONE.inner_margin(0.0))
             .show(ctx, |ui| {
                 draw_bg_image(ui);
-                egui::ScrollArea::vertical().show(ui, |ui| {
+                // Some game views deliberately use a canvas wider than the viewport
+                // (notably the workshop policy deck). Keep that overflow reachable
+                // instead of clipping it in a vertical-only scroll area.
+                egui::ScrollArea::both().show(ui, |ui| {
                     ui.set_width(ui.available_width());
                     match &mut self.view {
                         View::Start(start) => {

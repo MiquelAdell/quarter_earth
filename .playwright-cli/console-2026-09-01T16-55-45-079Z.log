@@ -1,0 +1,40 @@
+[    2260ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[    4745ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[    4846ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:2031
+[    4850ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[    7489ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[    7783ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[    7854ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:2031
+[    7855ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  461286ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[  461781ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  461846ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:2031
+[  461847ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  544806ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[  544969ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  545011ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:2031
+[  545012ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  689389ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[  689591ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  689631ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:2031
+[  689632ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-4de17afde08cae5e.js:1051
+[  897136ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[  897641ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[  897794ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:2031
+[  897799ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[  904342ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[  904608ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[  904718ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:2031
+[  904719ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[ 1244248ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[ 1244689ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[ 1244801ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:2031
+[ 1244801ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-187d7ebbe3d4a3d.js:1051
+[ 1524141ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[ 1524363ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:1051
+[ 1524463ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:2031
+[ 1524467ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:1051
+[ 1527534ms] [WARNING] The `integrity` attribute is currently ignored for preload destinations that do not support subresource integrity. See https://crbug.com/981419 for more information @ http://127.0.0.1:8080/?workshop=1:129
+[ 1527650ms] [INFO] [hes_game::workshop] game/src/workshop.rs:246: Workshop mode active @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:1051
+[ 1527697ms] [WARNING] ERROR: [hes_game::debug] game/src/debug.rs:158: Debug options:  @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:2031
+[ 1527698ms] [INFO] [eframe::web::web_runner] eframe-0.33.2/src/web/web_runner.rs:93: event handlers installed. @ http://127.0.0.1:8080/hes-game-c26f9d26c853ae97.js:1051
