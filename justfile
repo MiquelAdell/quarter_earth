@@ -6,7 +6,7 @@ run:
 
 # Run the game (web)
 run-web:
-    cd game && trunk serve
+    cd game && NO_COLOR=false trunk serve
 
 # Generate pre-computed earth surface textures.
 surfaces:

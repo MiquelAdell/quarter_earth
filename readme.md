@@ -1,5 +1,25 @@
 # Half-Earth Socialism: The Game
 
+## Run in a browser
+
+From a fresh checkout, install the web build prerequisites once:
+
+```bash
+rustup target add wasm32-unknown-unknown
+cargo install trunk
+cd game/assets/js && npm ci
+```
+
+Then, from the repository root, start the development server:
+
+```bash
+just run-web
+```
+
+Open [http://localhost:8080/](http://localhost:8080/) in a browser. The server watches the source files and rebuilds the game after changes; leave it running while developing and stop it with <kbd>Ctrl</kbd>+<kbd>C</kbd>.
+
+To run the simplified, facilitator-led version, open [http://localhost:8080/?workshop=1](http://localhost:8080/?workshop=1). Workshop mode has its world embedded in the web build, so no separate world file needs to be loaded.
+
 This repo includes:
 
 - `hes-engine` defines the model that drives the game.
