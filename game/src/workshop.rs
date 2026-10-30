@@ -13,6 +13,7 @@
 use std::{collections::BTreeMap, sync::LazyLock};
 
 use hes_engine::{Effect, Flag, Id, Project, ProjectType, State};
+use rust_i18n::t;
 
 use crate::{
     consts,
@@ -55,6 +56,10 @@ impl WorkshopTheme {
             Self::IndustryTransportAndGeoengineering => "Industry, Transport & Geoengineering",
             Self::SocietyAndEconomy => "Society & Economy",
         }
+    }
+
+    pub fn translated_title(self) -> String {
+        t!(self.title()).to_string()
     }
 }
 

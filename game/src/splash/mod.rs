@@ -100,13 +100,14 @@ impl Start {
                                 ui.style_mut().visuals.override_text_color =
                                     Some(egui::Color32::WHITE);
                                 let locales = rust_i18n::available_locales!();
-                                ui.selectable_value(&mut lang, "en-US".to_string(), "en");
+                                ui.selectable_value(&mut lang, "en".to_string(), "en");
                                 for locale in locales {
                                     ui.selectable_value(&mut lang, locale.to_string(), locale);
                                 }
                             });
                         if *rust_i18n::locale() != lang {
                             rust_i18n::set_locale(&lang);
+                            prefs.language = lang;
                         }
                     });
                 });

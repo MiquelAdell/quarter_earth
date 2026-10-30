@@ -210,11 +210,11 @@ impl Menu {
                 ui.add_space(18.);
 
                 if WORKSHOP.active {
-                    ui.label(RichText::new("Workshop mode").heading().size(20.));
+                    ui.label(RichText::new(t!("Workshop mode")).heading().size(20.));
                     ui.add_space(8.);
-                    ui.label("A six-cycle group exercise for shaping a livable planet.");
-                    ui.label("Each cycle gives 30 Political Capital. Unspent PC expires.");
-                    ui.label("Reach 2052, then assess emissions, temperature, and biodiversity.");
+                    ui.label(t!("A six-cycle group exercise for shaping a livable planet."));
+                    ui.label(t!("Each cycle gives 30 Political Capital. Unspent PC expires."));
+                    ui.label(t!("Reach 2052, then assess emissions, temperature, and biodiversity."));
                 } else {
                     ui.label(t!("A Planetary Crisis Planning Game"));
                 }

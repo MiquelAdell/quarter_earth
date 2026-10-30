@@ -699,7 +699,10 @@ fn supply_row(label: &'static str, from: f32, to: f32) -> WorkshopMetricRow {
         to: format!("{to:.0}%"),
         target: "≥ 100%",
         direction: compare_metric(from, to, true),
-        shortage: (to < 100.).then(|| format!("Shortage: only {to:.0}% of demand is supplied.")),
+        shortage: (to < 100.).then(|| {
+            t!("Shortage: only %{percent}% of demand is supplied.", percent = format!("{to:.0}"))
+                .to_string()
+        }),
     }
 }
 
@@ -724,7 +727,7 @@ fn render_workshop_report(
         ui.style_mut().visuals.override_text_color = Some(Color32::BLACK);
         ui.add_space(20.);
         ui.label(
-            egui::RichText::new(format!("Cycle {} report", report.cycle.cycle))
+            egui::RichText::new(format!("{} {}", t!("Cycle"), report.cycle.cycle))
                 .family(egui::FontFamily::Name("TimesTen".into()))
                 .size(34.),
         );
@@ -747,14 +750,14 @@ fn render_workshop_report(
                 let width = (ui.ctx().content_rect().width() - 96.).clamp(760., 1080.);
                 ui.set_width(width);
                 ui.label(
-                    egui::RichText::new("Choices this cycle")
+                    egui::RichText::new(t!("Choices this cycle"))
                         .size(27.)
                         .strong()
                         .color(Color32::BLACK),
                 );
                 if report.cycle.choices.is_empty() {
                     ui.label(
-                        egui::RichText::new("No policies were passed or repealed.")
+                        egui::RichText::new(t!("No policies were passed or repealed."))
                             .size(18.)
                             .color(Color32::BLACK),
                     );
@@ -762,11 +765,11 @@ fn render_workshop_report(
                     ui.horizontal_wrapped(|ui| {
                         report.cycle.choices.iter().for_each(|choice| {
                             let action = match choice.action {
-                                WorkshopPolicyAction::Passed => "Passed",
-                                WorkshopPolicyAction::Repealed => "Repealed",
+                                WorkshopPolicyAction::Passed => t!("Passed"),
+                                WorkshopPolicyAction::Repealed => t!("Repealed"),
                             };
                             ui.label(
-                                egui::RichText::new(format!("{action}: {}", choice.name))
+                                egui::RichText::new(format!("{action}: {}", t!(&choice.name)))
                                     .size(18.)
                                     .strong()
                                     .color(Color32::BLACK),
@@ -777,7 +780,7 @@ fn render_workshop_report(
 
                 ui.add_space(14.);
                 ui.label(
-                    egui::RichText::new("World change")
+                    egui::RichText::new(t!("World change"))
                         .size(27.)
                         .strong()
                         .color(Color32::BLACK),
@@ -792,7 +795,7 @@ fn render_workshop_report(
                             .into_iter()
                             .for_each(|heading| {
                                 ui.label(
-                                    egui::RichText::new(heading)
+                                    egui::RichText::new(t!(heading))
                                         .size(18.)
                                         .strong()
                                         .color(Color32::BLACK),
@@ -802,7 +805,7 @@ fn render_workshop_report(
 
                         report.metrics.iter().for_each(|metric| {
                             ui.label(
-                                egui::RichText::new(metric.label)
+                                egui::RichText::new(t!(metric.label))
                                     .size(19.)
                                     .strong()
                                     .color(Color32::BLACK),
@@ -820,19 +823,19 @@ fn render_workshop_report(
                             );
                             let (direction, color) = match metric.direction {
                                 MetricDirection::Improved => {
-                                    ("Improved", Color32::from_rgb(0x0b, 0x65, 0x2d))
+                                    (t!("Improved"), Color32::from_rgb(0x0b, 0x65, 0x2d))
                                 }
                                 MetricDirection::Worsened => {
-                                    ("Worsened", Color32::from_rgb(0xa6, 0x11, 0x0b))
+                                    (t!("Worsened"), Color32::from_rgb(0xa6, 0x11, 0x0b))
                                 }
-                                MetricDirection::Unchanged => ("No change", Color32::DARK_GRAY),
+                                MetricDirection::Unchanged => (t!("No change"), Color32::DARK_GRAY),
                             };
                             ui.colored_label(
                                 color,
                                 egui::RichText::new(direction).size(17.).strong(),
                             );
                             ui.label(
-                                egui::RichText::new(metric.target)
+                                    egui::RichText::new(t!(metric.target))
                                     .size(18.)
                                     .color(Color32::BLACK),
                             );
@@ -857,8 +860,8 @@ fn render_workshop_report(
                 }
                 ui.label(
                     egui::RichText::new(format!(
-                        "Secondary indicator — contentedness: {}",
-                        report.contentedness
+                        "{}: {}",
+                        t!("Secondary indicator — contentedness"), report.contentedness
                     ))
                     .size(17.)
                     .color(Color32::BLACK),

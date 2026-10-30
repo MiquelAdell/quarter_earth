@@ -35,7 +35,7 @@ impl AsCard for Project {
         let resp = egui::Frame::NONE
             .inner_margin(egui::Margin::symmetric(6, 6))
             .show(ui, |ui| {
-                flex_justified(ui, &self.name, |tui| {
+                flex_justified(ui, &t!(&self.name), |tui| {
                     let group = t!(self.group.to_string());
                     tui.style(taffy::Style {
                         flex_grow: 1.,
@@ -140,7 +140,7 @@ impl AsCard for Project {
     }
 
     fn name(&self, ui: &mut egui::Ui, _state: &GameState) {
-        super::card_title(ui, &self.name);
+        super::card_title(ui, &t!(&self.name));
     }
 
     fn body(&self, ui: &mut egui::Ui, state: &GameState) {

@@ -251,15 +251,15 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
     ui.vertical_centered(|ui| {
         ui.add_space(18.);
         let (verdict, verdict_color) = if debrief.won {
-            ("WORKSHOP GOALS MET", Color32::from_rgb(0x7f, 0xf0, 0x92))
+            (t!("WORKSHOP GOALS MET").to_string(), Color32::from_rgb(0x7f, 0xf0, 0x92))
         } else {
             (
-                "WORKSHOP GOALS NOT MET",
+                t!("WORKSHOP GOALS NOT MET").to_string(),
                 Color32::from_rgb(0xff, 0x8a, 0x80),
             )
         };
         ui.label(
-            egui::RichText::new("2052 FINAL DEBRIEF")
+            egui::RichText::new(t!("2052 FINAL DEBRIEF"))
                 .size(24.)
                 .color(Color32::WHITE),
         );
@@ -274,7 +274,7 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
         raised_frame().show(ui, |ui| {
             let width = (ui.ctx().content_rect().width() - 96.).clamp(760., 1080.);
             ui.set_width(width);
-            ui.heading("Win thresholds");
+            ui.heading(t!("Win thresholds"));
             egui::Grid::new("workshop-final-thresholds")
                 .num_columns(4)
                 .striped(true)
@@ -283,17 +283,17 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
                     ["Metric", "Final value", "Target", "Status"]
                         .into_iter()
                         .for_each(|heading| {
-                            ui.label(egui::RichText::new(heading).size(17.).strong());
+                            ui.label(egui::RichText::new(t!(heading)).size(17.).strong());
                         });
                     ui.end_row();
                     debrief.thresholds.iter().for_each(|threshold| {
-                        ui.label(egui::RichText::new(threshold.label).size(18.));
+                        ui.label(egui::RichText::new(t!(threshold.label)).size(18.));
                         ui.label(egui::RichText::new(&threshold.value).size(18.).strong());
-                        ui.label(egui::RichText::new(threshold.target).size(17.));
+                        ui.label(egui::RichText::new(t!(threshold.target)).size(17.));
                         let (status, color) = if threshold.passed {
-                            ("PASS", Color32::from_rgb(0x7f, 0xf0, 0x92))
+                            (t!("PASS"), Color32::from_rgb(0x7f, 0xf0, 0x92))
                         } else {
-                            ("FAIL", Color32::from_rgb(0xff, 0x8a, 0x80))
+                            (t!("FAIL"), Color32::from_rgb(0xff, 0x8a, 0x80))
                         };
                         ui.colored_label(color, egui::RichText::new(status).size(18.).strong());
                         ui.end_row();
@@ -301,12 +301,11 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
                 });
 
             ui.add_space(12.);
-            ui.heading("Final supply and land");
+            ui.heading(t!("Final supply and land"));
             ui.horizontal_wrapped(|ui| {
                 ui.label(
                     egui::RichText::new(format!(
-                        "Energy supplied: {:.0}%",
-                        debrief.energy_supplied
+                        "{}: {:.0}%", t!("Energy supplied"), debrief.energy_supplied
                     ))
                     .size(18.)
                     .strong(),
@@ -314,52 +313,53 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
                 ui.separator();
                 ui.label(
                     egui::RichText::new(format!(
-                        "Calories supplied: {:.0}%",
-                        debrief.calories_supplied
+                        "{}: {:.0}%", t!("Calories supplied"), debrief.calories_supplied
                     ))
                     .size(18.)
                     .strong(),
                 );
                 ui.separator();
                 ui.label(
-                    egui::RichText::new(format!("Land used: {:.0}%", debrief.land_used)).size(18.),
+                    egui::RichText::new(format!("{}: {:.0}%", t!("Land used"), debrief.land_used)).size(18.),
                 );
                 ui.label(
-                    egui::RichText::new(format!("Protected: {:.0}%", debrief.land_protected))
+                    egui::RichText::new(format!("{}: {:.0}%", t!("Protected"), debrief.land_protected))
                         .size(18.),
                 );
-                ui.label(egui::RichText::new(format!("Free: {:.0}%", debrief.land_free)).size(18.));
+                ui.label(egui::RichText::new(format!("{}: {:.0}%", t!("Free"), debrief.land_free)).size(18.));
             });
             ui.label(
                 egui::RichText::new(format!(
-                    "Secondary indicator — contentedness: {:.1}",
+                    "{}: {:.1}",
+                    t!("Secondary indicator — contentedness"),
                     debrief.contentedness
                 ))
                 .size(15.),
             );
 
             ui.add_space(12.);
-            ui.heading("Six-cycle policy history");
+            ui.heading(t!("Six-cycle policy history"));
             debrief.history.iter().for_each(|cycle| {
                 let choices = if cycle.choices.is_empty() {
-                    "No policy changes".to_string()
+                    t!("No policy changes").to_string()
                 } else {
                     cycle
                         .choices
                         .iter()
                         .map(|choice| {
                             let action = match choice.action {
-                                WorkshopPolicyAction::Passed => "Passed",
-                                WorkshopPolicyAction::Repealed => "Repealed",
+                                WorkshopPolicyAction::Passed => t!("Passed"),
+                                WorkshopPolicyAction::Repealed => t!("Repealed"),
                             };
-                            format!("{action}: {}", choice.name)
+                            format!("{action}: {}", t!(&choice.name))
                         })
                         .collect::<Vec<_>>()
                         .join(" · ")
                 };
                 ui.label(
                     egui::RichText::new(format!(
-                        "Cycle {} ({}–{}): {choices}",
+                            "{} {} ({}–{}): {choices}",
+                            t!("Cycle"),
                         cycle.cycle, cycle.start_year, cycle.end_year
                     ))
                     .size(16.),
@@ -368,7 +368,7 @@ fn render_workshop_debrief(ui: &mut egui::Ui, debrief: &WorkshopDebriefData) -> 
 
             ui.add_space(12.);
             restart = ui
-                .add(button("Start a new workshop").full_width())
+                .add(button(t!("Start a new workshop")).full_width())
                 .clicked();
         });
     });

@@ -7,5 +7,7 @@ pub struct Settings {
     pub sound: bool,
     pub runs_played: usize,
     pub tutorial: Tutorial,
+    /// Empty means use the system locale. Keep older saved preferences valid.
+    #[serde(default)]
     pub language: String,
 }

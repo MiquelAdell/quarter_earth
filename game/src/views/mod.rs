@@ -209,8 +209,12 @@ impl GameView {
                             self.phase = Phase::Ending(End::new(!state.won(), state));
                         }
                         ReportNextPhase::Interstitial => {
-                            let view = Interstitial::new(state);
-                            self.phase = Phase::Interstitial(view);
+                            if WORKSHOP.active {
+                                self.phase = Phase::Planning(Session::new(state));
+                            } else {
+                                let view = Interstitial::new(state);
+                                self.phase = Phase::Interstitial(view);
+                            }
                         }
                     }
                 }

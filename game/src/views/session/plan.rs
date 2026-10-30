@@ -1384,7 +1384,7 @@ fn render_workshop_group_header(ui: &mut egui::Ui, theme: WorkshopTheme) {
             .inner_margin(Margin::symmetric(12, 4))
             .show(ui, |ui| {
                 ui.label(
-                    egui::RichText::new(t!(theme.title()).to_uppercase())
+                        egui::RichText::new(theme.translated_title().to_uppercase())
                         .heading()
                         .size(22.)
                         .color(fg),
@@ -1427,7 +1427,7 @@ fn workshop_lock_copy(reason: Option<&WorkshopLockReason>) -> String {
     match reason {
         Some(reason) if reason.available_next_cycle && reason.prerequisites.len() == 1 => t!(
             "Requirement met: %{prerequisite}. Available next cycle.",
-            prerequisite = reason.prerequisites[0].clone()
+            prerequisite = t!(&reason.prerequisites[0]).to_string()
         )
         .to_string(),
         Some(reason) if reason.available_next_cycle => t!(
@@ -1437,7 +1437,7 @@ fn workshop_lock_copy(reason: Option<&WorkshopLockReason>) -> String {
         .to_string(),
         Some(reason) if reason.prerequisites.len() == 1 => t!(
             "Requires %{prerequisite}. Pass it first; available next cycle.",
-            prerequisite = reason.prerequisites[0].clone()
+            prerequisite = t!(&reason.prerequisites[0]).to_string()
         )
         .to_string(),
         Some(reason) => t!(
@@ -1518,7 +1518,7 @@ fn render_workshop_selection_summary(ui: &mut egui::Ui, state: &GameState) {
                     change.withdrawn
                 }
             })
-            .map(|(id, _)| state.world.projects[id].name.clone())
+            .map(|(id, _)| t!(&state.world.projects[id].name).to_string())
             .collect::<Vec<_>>();
         names.sort();
         names

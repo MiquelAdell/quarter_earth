@@ -2667,3 +2667,94 @@ New worlds can be made using the editor.,Se pueden crear nuevos mundos usando el
 Regional Factors,Factores Regionales
 This effect %{changeDir} the %{kind} of this project by %{tipAmount}.,Este efecto %{changeDir} el %{kind} de este proyecto en %{tipAmount}.
 Warning: Custom worlds may break parts of the game!,Advertencia: ¡Los mundos personalizados pueden romper partes del juego!
+Workshop mode,Modo taller
+A six-cycle group exercise for shaping a livable planet.,Un ejercicio grupal de seis ciclos para dar forma a un planeta habitable.
+Each cycle gives 30 Political Capital. Unspent PC expires.,Cada ciclo aporta 30 puntos de capital político. El capital no gastado caduca.
+"Reach 2052, then assess emissions, temperature, and biodiversity.","Llega a 2052 y evalúa las emisiones, la temperatura y la biodiversidad."
+Energy,Energía
+Food & Agriculture,Alimentación y agricultura
+Land & Biodiversity,Tierra y biodiversidad
+"Industry, Transport & Geoengineering","Industria, transporte y geoingeniería"
+Society & Economy,Sociedad y economía
+Cycle,Ciclo
+Cycle %{cycle} of 6 · %{start}–%{end},Ciclo %{cycle} de 6 · %{start}–%{end}
+%{pc}/%{budget} PC this cycle,%{pc}/%{budget} PC este ciclo
+30 PC refreshes each cycle; unused PC expires.,Cada ciclo se renuevan 30 PC; los PC no utilizados caducan.
+Select a card to pass it; select it again to undo.,Selecciona una tarjeta para aprobarla; vuelve a seleccionarla para deshacerlo.
+Used %{used}% · Protected %{protected}% · Free %{free}%,Utilizada: %{used}% · Protegida: %{protected}% · Libre: %{free}%
+Choices this cycle: No changes selected.,Decisiones de este ciclo: no se ha seleccionado ningún cambio.
+Choices this cycle · Passing: %{passing},Decisiones de este ciclo · Aprobadas: %{passing}
+Choices this cycle · Repealing: %{repealing},Decisiones de este ciclo · Derogadas: %{repealing}
+Choices this cycle · Passing: %{passing} · Repealing: %{repealing},Decisiones de este ciclo · Aprobadas: %{passing} · Derogadas: %{repealing}
+No PC will be used this cycle. Select Confirm to continue anyway.,No se utilizarán PC este ciclo. Selecciona Confirmar para continuar.
+Confirm — continue without using PC,Confirmar: continuar sin utilizar PC
+Requirement met: %{prerequisite}. Available next cycle.,Requisito cumplido: %{prerequisite}. Disponible el próximo ciclo.
+Requirement met (OR: %{prerequisites}). Available next cycle.,Requisito cumplido (O: %{prerequisites}). Disponible el próximo ciclo.
+Requires %{prerequisite}. Pass it first; available next cycle.,Requiere %{prerequisite}. Apruébalo primero; estará disponible el próximo ciclo.
+Requires any one (OR): %{prerequisites}. Pass one first; available next cycle.,Requiere una opción (O): %{prerequisites}. Aprueba una primero; estará disponible el próximo ciclo.
+Locked for this workshop.,Bloqueada para este taller.
+AVAILABLE · Select to pass · %{cost} PC,DISPONIBLE · Selecciona para aprobar · %{cost} PC
+SELECTED THIS CYCLE · Select again to undo,SELECCIONADA ESTE CICLO · Vuelve a seleccionarla para deshacerlo
+ACTIVE FROM EARLIER CYCLE · Select to repeal,ACTIVA DESDE UN CICLO ANTERIOR · Selecciona para derogar
+REPEALED THIS CYCLE · Select again to restore,DEROGADA ESTE CICLO · Vuelve a seleccionarla para restaurarla
+OVER BUDGET · Requires %{required} PC · Remaining: %{remaining} PC,SUPERA EL PRESUPUESTO · Requiere %{required} PC · Restantes: %{remaining} PC
+LOCKED · prerequisite required,BLOQUEADA · requiere un prerrequisito
+Choices this cycle,Decisiones de este ciclo
+No policies were passed or repealed.,No se ha aprobado ni derogado ninguna política.
+World change,Cambio del mundo
+Metric,Métrica
+Start,Inicio
+End,Final
+Direction,Dirección
+Target,Objetivo
+Improved,Mejora
+Worsened,Empeora
+No change,Sin cambios
+Shortage: only %{percent}% of demand is supplied.,Escasez: solo se cubre el %{percent}% de la demanda.
+Secondary indicator — contentedness,Indicador secundario: satisfacción
+WORKSHOP GOALS MET,OBJETIVOS DEL TALLER CUMPLIDOS
+WORKSHOP GOALS NOT MET,OBJETIVOS DEL TALLER NO CUMPLIDOS
+2052 FINAL DEBRIEF,INFORME FINAL DE 2052
+Win thresholds,Umbrales de éxito
+Final value,Valor final
+Status,Estado
+PASS,CUMPLE
+FAIL,NO CUMPLE
+Final supply and land,Suministro final y uso de la tierra
+Energy supplied,Suministro de energía
+Calories supplied,Suministro de calorías
+Land used,Tierra utilizada
+Protected,Protegida
+Free,Libre
+Six-cycle policy history,Historial de políticas de los seis ciclos
+No policy changes,Sin cambios de política
+Passed,Aprobada
+Repealed,Derogada
+Start a new workshop,Empezar un taller nuevo
+CO2 emissions,Emisiones de CO2
+Temperature anomaly,Anomalía de temperatura
+Extinction rate,Tasa de extinción
+≤ 0 GtCO2e/year,≤ 0 GtCO2e/año
+"≤ +1.0 °C","≤ +1,0 °C"
+≥ 100%,≥ 100%
+Solar Push,Impulso solar
+Wind Push,Impulso eólico
+Nuclear Expansion,Expansión nuclear
+Phase Out Coal,Eliminar el carbón
+Mass Electrification,Electrificación masiva
+Energy Quotas,Cuotas de energía
+Crack Down on Crypto-Mining,Perseguir la minería de criptomonedas
+Vegetarian Mandate,Obligación vegetariana
+Meatless Mondays,Lunes sin carne
+Cellular Meat,Carne cultivada
+Organic Transition,Transición ecológica
+Regenerative Agriculture,Agricultura regenerativa
+Expand Nature Preserves,Ampliar las reservas naturales
+Remediate and Protect Ecosystems,"Restaurar y proteger los ecosistemas"
+Ban Outdoor Cats,Prohibir los gatos al aire libre
+Solar Radiation Management (SRM),Gestión de la radiación solar (GRS)
+Expand Public Transit,Ampliar el transporte público
+Ban Cars,Prohibir los coches
+Restrict Air Travel,Restringir los viajes en avión
+Degrowth in Developed Regions,Decrecimiento en las regiones desarrolladas
+Luxury for All,Lujos para todos

@@ -37,13 +37,17 @@ impl Session {
         // expiring PC budget (no-op in normal mode).
         WORKSHOP.begin_planning(&mut state.core);
 
-        let mut events: Vec<_> = StateExt::roll_events(&mut state.core, EventPhase::PlanningStart)
-            .into_iter()
-            .chain(StateExt::roll_events(
-                &mut state.core,
-                EventPhase::PlanningPlan,
-            ))
-            .collect();
+        let mut events: Vec<_> = if WORKSHOP.active {
+            vec![]
+        } else {
+            StateExt::roll_events(&mut state.core, EventPhase::PlanningStart)
+                .into_iter()
+                .chain(StateExt::roll_events(
+                    &mut state.core,
+                    EventPhase::PlanningPlan,
+                ))
+                .collect()
+        };
 
         update_factors(state);
 

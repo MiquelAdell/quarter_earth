@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guía de juego · Taller de Half-Earth Socialism</title>
+  <style>
+    :root { --ink:#19151d; --paper:#fff8e7; --magenta:#c72c78; --yellow:#ffd44d; --blue:#273c70; --muted:#665e68; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:#201923; font:17px/1.55 Georgia,serif; }
+    main { max-width:1100px; margin:auto; background:var(--paper); padding:clamp(24px,5vw,72px); }
+    header { border:4px solid var(--ink); padding:clamp(24px,5vw,56px); background:var(--yellow); box-shadow:12px 12px 0 var(--magenta); }
+    h1,h2,h3 { font-family:Arial,Helvetica,sans-serif; line-height:1.05; }
+    h1 { font-size:clamp(2.4rem,7vw,5.8rem); margin:.1em 0; max-width:850px; letter-spacing:-.06em; }
+    h2 { margin-top:2.4em; font-size:2rem; color:var(--blue); border-bottom:3px solid var(--magenta); padding-bottom:.25em; }
+    h3 { margin-bottom:.35em; }
+    a { color:var(--blue); font-weight:bold; text-decoration-thickness:2px; }
+    a:focus-visible { outline:4px solid var(--magenta); outline-offset:4px; }
+    .dek { max-width:690px; font-size:1.25rem; }
+    .eyebrow { font:700 .85rem/1 Arial,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; }
+    .card { border:2px solid var(--ink); padding:20px; background:#fff; box-shadow:5px 5px 0 #e7b8cc; }
+    .callout { border-left:8px solid var(--magenta); background:#f7e2ed; padding:16px 20px; margin:24px 0; }
+    code { background:#eee2bd; padding:.1em .3em; font-family:ui-monospace,monospace; }
+    figure { margin:28px 0; }
+    figure img { display:block; width:100%; height:auto; border:2px solid var(--ink); background:#ddd; }
+    figcaption { color:var(--muted); font-size:.9rem; margin-top:7px; }
+    ol,ul { padding-left:1.35em; }
+    li { margin:.45em 0; }
+    .checklist { columns:2 260px; }
+    footer { margin-top:4em; border-top:2px solid var(--ink); padding-top:16px; color:var(--muted); }
+    @media (max-width:600px) { body { font-size:16px; } main { padding:22px 18px; } header { box-shadow:7px 7px 0 var(--magenta); } .checklist { columns:1; } }
+    @media print { body,main { background:#fff; } main { max-width:none; padding:0; } header,.card { box-shadow:none; } a { color:inherit; } figure { break-inside:avoid; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Guía de juego · modo taller</p>
+    <h1>Un planeta habitable no se improvisa.</h1>
+    <p class="dek">Este taller es una partida compartida de seis ciclos. El grupo debate; la persona moderadora decide qué tarjetas se aprueban y después observa sus consecuencias.</p>
+    <p><strong>La ruta de las capturas es ilustrativa.</strong> No es una receta para ganar: las decisiones cambian qué se desbloquea y cómo termina cada partida.</p>
+  </header>
+
+  <h2>Antes de empezar</h2>
+  <div class="grid">
+    <section class="card"><h3>1. Arranca la partida</h3><p>Desde la raíz del repositorio ejecuta <code>env -u NO_COLOR just run-web</code>. Abre <code>http://localhost:8080/?workshop=1</code> y elige <strong>es</strong>.</p></section>
+    <section class="card"><h3>2. Reparte el papel</h3><p>Una pantalla proyectada, una persona moderadora y una conversación. El grupo puede votar en voz alta; no hace falta un dispositivo por participante.</p></section>
+    <section class="card"><h3>3. Mira las restricciones</h3><p>Cada ciclo empieza con 30 PC. Las tarjetas cuestan 5, 10 o 15 PC y el saldo que no gastes desaparece al pasar de ciclo.</p></section>
+  </div>
+
+  <h2>El bucle de un turno</h2>
+  <ol>
+    <li><strong>Lee el año y el presupuesto.</strong> La partida recorre seis ciclos de cinco años: 2022–2027, 2027–2032, hasta 2047–2052.</li>
+    <li><strong>Compara las tarjetas.</strong> Cada una muestra su coste, sus efectos y, si está bloqueada, el prerrequisito que la habilita.</li>
+    <li><strong>Aprueba o deroga.</strong> Seleccionar una tarjeta la aprueba; seleccionarla otra vez deshace la selección. Una política activa se puede derogar en un ciclo posterior.</li>
+    <li><strong>Pulsa «Listo».</strong> La simulación avanza al siguiente informe. Las consecuencias de las decisiones aparecen allí, junto con sus tendencias.</li>
+    <li><strong>Comenta el cambio.</strong> Una cifra aislada cuenta menos que la dirección del cambio y la tensión entre suministro, tierra, clima y biodiversidad.</li>
+  </ol>
+  <div class="callout"><strong>Idea práctica:</strong> antes de retirar una fuente de energía fósil, comprueba que ya has creado una alternativa suficiente. Reducir suministro antes de reemplazarlo puede provocar una escasez visible en el informe.</div>
+
+  <h2>Qué conviene vigilar</h2>
+  <div class="grid">
+    <section class="card"><h3>Clima</h3><p>Emisiones de CO₂ y anomalía de temperatura. Las políticas pueden mejorar una métrica y empeorar otra.</p></section>
+    <section class="card"><h3>Vida</h3><p>La tasa de extinción resume la presión sobre la biodiversidad. El uso y la protección de la tierra importan.</p></section>
+    <section class="card"><h3>Suministro</h3><p>La energía y las calorías comparan producción con demanda. Un porcentaje menor del 100% es una señal de escasez.</p></section>
+    <section class="card"><h3>Tierra</h3><p>El indicador separa tierra utilizada, protegida y libre. Es una restricción persistente, no una puntuación que se pueda ignorar.</p></section>
+    <section class="card"><h3>Satisfacción</h3><p>La satisfacción aparece como indicador secundario. Ayuda a hablar de los costes sociales de una decisión sin convertirla en el único objetivo.</p></section>
+  </div>
+
+  <h2>Progresión y final</h2>
+  <p>Los prerrequisitos se comprueban entre ciclos. Una tarjeta que habilites durante el ciclo actual suele aparecer como disponible en el siguiente; por eso el grupo debe mirar también la columna de tarjetas bloqueadas.</p>
+  <p>Al llegar a 2052 aparece el informe final. El taller considera tres umbrales: emisiones de CO₂ de 0 o menos, temperatura de +1 °C o menos y tasa de extinción de 20 o menos. La pantalla muestra además suministro final, tierra, satisfacción e historial de políticas. Son umbrales de evaluación del modo taller, no promesas de un resultado concreto.</p>
+
+  <h2>Capturas de referencia</h2>
+  <p>Estas imágenes documentan una sesión concreta. Úsalas para orientarte por la interfaz, no para copiar una secuencia exacta.</p>
+  <figure><img src="gameplay-guide-es/01-inicio-es.png" alt="Pantalla inicial del modo taller en español, con el selector de idioma y el botón Nueva partida"><figcaption>Inicio y selección de idioma.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/02-plan-inicial-es.png" alt="Primer panel de planificación con seis ciclos y 30 puntos de capital político"><figcaption>Planificación inicial: presupuesto, tierra y tarjetas.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/03-tarjetas-bloqueadas-es.png" alt="Panel de planificación que muestra tarjetas disponibles, seleccionadas y bloqueadas con sus prerrequisitos"><figcaption>Una selección completa y las tarjetas bloqueadas.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/04-informe-ciclo-1-es.png" alt="Informe del primer ciclo con decisiones y cambios de métricas"><figcaption>El primer informe: mira la dirección, no solo el valor.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/05-desbloqueos-es.png" alt="Planificación del ciclo siguiente con nuevas tarjetas desbloqueadas"><figcaption>El ciclo siguiente y sus nuevas opciones.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/06-informe-intermedio-es.png" alt="Informe intermedio con efectos acumulados y una advertencia de escasez"><figcaption>Una consecuencia acumulada o una escasez merece conversación.</figcaption></figure>
+  <figure><img src="gameplay-guide-es/07-final-2052-es.png" alt="Informe final de 2052 en español con umbrales, suministros, tierra e historial de políticas"><figcaption>Debrief final de 2052 e historial completo.</figcaption></figure>
+
+  <h2>Qué debe registrar el grupo</h2>
+  <ul class="checklist">
+    <li>¿Se entiende qué se puede seleccionar y cuánto cuesta?</li>
+    <li>¿Se entiende por qué una tarjeta está bloqueada?</li>
+    <li>¿El ritmo deja tiempo para debatir?</li>
+    <li>¿Las consecuencias aparecen donde el grupo las espera?</li>
+    <li>¿Se ven los intercambios entre clima, suministro, tierra y biodiversidad?</li>
+    <li>¿Algún efecto parece demasiado fuerte, débil o difícil de interpretar?</li>
+    <li>¿Una decisión produce un resultado contradictorio?</li>
+    <li>¿Hay texto cortado, inglés inesperado, botones confusos o errores de consola?</li>
+    <li>¿El contenido horizontal sigue siendo accesible a 1280×800?</li>
+    <li>¿Qué momento hizo que el grupo cambiara de opinión?</li>
+  </ul>
+  <div class="callout"><strong>Para informar de un defecto:</strong> apunta el ciclo, la tarjeta, la resolución del navegador, los pasos para repetirlo y una captura. Separa un problema reproducible de una opinión sobre el equilibrio del juego.</div>
+
+  <footer>Documento offline para el playtest del modo taller. Las capturas pertenecen a la sesión documentada y pueden cambiar cuando cambien las tarjetas o sus efectos.</footer>
+</main>
+</body>
+</html>

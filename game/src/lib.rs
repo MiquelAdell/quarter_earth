@@ -72,6 +72,9 @@ impl App {
         cc.egui_ctx.set_theme(egui::Theme::Dark);
 
         let mut prefs = load_prefs(cc.storage).unwrap_or_default();
+        if !prefs.language.is_empty() {
+            rust_i18n::set_locale(&prefs.language);
+        }
         let state = load_game(cc.storage, WORKSHOP.active);
         let has_save = state.is_some();
         let mut state = state.unwrap_or_default();
@@ -175,6 +178,7 @@ impl eframe::App for App {
         };
         ctx.memory_mut(|mem| mem.data.insert_temp(egui::Id::NULL, sizing));
 
+        let language_before_render = self.prefs.language.clone();
         egui::CentralPanel::default()
             .frame(egui::Frame::NONE.inner_margin(0.0))
             .show(ctx, |ui| {
@@ -250,6 +254,12 @@ impl eframe::App for App {
                     }
                 });
             });
+
+        if self.prefs.language != language_before_render {
+            if let Some(storage) = frame.storage_mut() {
+                self.save_prefs(storage);
+            }
+        }
     }
 }
 
