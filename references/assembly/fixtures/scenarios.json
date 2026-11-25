@@ -1,0 +1,63 @@
+{
+  "schema": "assembly-parity-scenarios/v1",
+  "reference_revision": "b9b11964b668c432fe991931582bc262442205c0",
+  "world": {
+    "path": "engine/assets/WORKSHOP.world",
+    "sha256": "e42723ddae162eb841020610e34d36eabab9d374d797ad5057c17973f105ea5d",
+    "loaded_by": "hes_engine::World::workshop() (GameState::default() when WORKSHOP=1 / ?workshop=1)"
+  },
+  "budget_pc_per_cycle": 30,
+  "planning_years": [2022, 2027, 2032, 2037, 2042, 2047],
+  "end_year": 2052,
+  "decision_semantics": "Cards listed under a year are passed, in list order, during that year's planning session (PC reset to 30 first). Order matters: it is the policy_queue order in which effects are applied at the pre-planning year.",
+  "opening_cards": [
+    {"id": "692486e9-b3d0-47cb-8f42-05ab925b0d93", "name": "Vegetarian Mandate", "cost": 15, "mandates": ["food_land", "living_standards"]},
+    {"id": "13ddc13d-2d1a-5445-a9f7-ca06ad8166f4", "name": "Organic Transition", "cost": 10, "mandates": ["food_land", "living_world"]},
+    {"id": "06e94431-9582-5f6b-a1ca-5adba1d1c913", "name": "Solar Push", "cost": 15, "mandates": ["energy_industry"]},
+    {"id": "3a2f8e4c-33ff-57aa-bd27-ce76864c72e6", "name": "Phase Out Coal", "cost": 10, "mandates": ["energy_industry", "living_standards"]},
+    {"id": "43467272-49b6-4106-b22c-8c9aea5a9cb7", "name": "Luxury for All", "cost": 15, "mandates": ["living_standards", "energy_industry"]},
+    {"id": "d9ef52e4-9dc2-45dc-aad3-d363f4a79b2b", "name": "Degrowth in Developed Regions", "cost": 15, "mandates": ["living_standards", "energy_industry"]},
+    {"id": "f759d87d-69ff-433b-8e3d-f3dbb776543a", "name": "Expand Nature Preserves", "cost": 15, "mandates": ["living_world", "food_land"]},
+    {"id": "1b98f39e-bb87-4e9f-8c95-565839b72197", "name": "Ban Outdoor Cats", "cost": 5, "mandates": ["living_world"]}
+  ],
+  "scenarios": [
+    {
+      "id": "a_no_action",
+      "title": "No action for all six cycles",
+      "decisions": {}
+    },
+    {
+      "id": "b_comfort_and_technology",
+      "title": "Comfort and technology first, then land and nature",
+      "decisions": {
+        "2022": [
+          {"id": "06e94431-9582-5f6b-a1ca-5adba1d1c913", "name": "Solar Push"},
+          {"id": "43467272-49b6-4106-b22c-8c9aea5a9cb7", "name": "Luxury for All"}
+        ],
+        "2027": [
+          {"id": "13ddc13d-2d1a-5445-a9f7-ca06ad8166f4", "name": "Organic Transition"},
+          {"id": "1b98f39e-bb87-4e9f-8c95-565839b72197", "name": "Ban Outdoor Cats"},
+          {"id": "f759d87d-69ff-433b-8e3d-f3dbb776543a", "name": "Expand Nature Preserves"}
+        ]
+      }
+    },
+    {
+      "id": "c_sufficiency",
+      "title": "Sufficiency: degrowth and land first, then diet and coal",
+      "decisions": {
+        "2022": [
+          {"id": "d9ef52e4-9dc2-45dc-aad3-d363f4a79b2b", "name": "Degrowth in Developed Regions"},
+          {"id": "f759d87d-69ff-433b-8e3d-f3dbb776543a", "name": "Expand Nature Preserves"}
+        ],
+        "2027": [
+          {"id": "692486e9-b3d0-47cb-8f42-05ab925b0d93", "name": "Vegetarian Mandate"},
+          {"id": "3a2f8e4c-33ff-57aa-bd27-ce76864c72e6", "name": "Phase Out Coal"},
+          {"id": "1b98f39e-bb87-4e9f-8c95-565839b72197", "name": "Ban Outdoor Cats"}
+        ],
+        "2032": [
+          {"id": "13ddc13d-2d1a-5445-a9f7-ca06ad8166f4", "name": "Organic Transition"}
+        ]
+      }
+    }
+  ]
+}

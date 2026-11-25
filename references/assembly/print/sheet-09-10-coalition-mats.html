@@ -1,0 +1,130 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — coalition mats A and B.
+  Kit sheets 9–10: this file prints TWO pages (page 1 = mat A, page 2 = mat B). Print once.
+  A4 LANDSCAPE, single-sided, 100% scale, no headers/footers.
+  Reuse: slide each mat into an A4 sheet protector and write with dry-wipe markers
+  (pencil is the fallback). The operator's ballot entry is the durable record.
+
+  Slot size = card size + 2 mm. Keep --card-w / --card-h identical to the deck sheets.
+  Localisation: every visible string lives in STRINGS below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Coalition mats</title>
+<style>
+  @page { size: A4 landscape; margin: 8mm; }
+  :root { --card-w: 66mm; --card-h: 90mm; --slot-pad: 1mm; --ink: #19151d; --muted: #4a434d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff; font: 8.5pt/1.25 Arial, Helvetica, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 281mm; height: 193mm; overflow: hidden; display: grid; gap: 3mm;
+    grid-template-rows: 13mm auto 1fr; break-after: page; }
+  .sheet:last-child { break-after: auto; }
+  .head { display: flex; align-items: center; gap: 4mm; border-bottom: 0.6mm solid var(--ink); }
+  .badge { width: 13mm; height: 12mm; display: flex; align-items: center; justify-content: center; font: 700 22pt/1 Arial, sans-serif; }
+  .badge.A { background: var(--ink); color: #fff; }
+  .badge.B { background: #fff; color: var(--ink); border: 0.8mm dotted var(--ink); outline: 0.4mm solid var(--ink); outline-offset: 0.6mm; }
+  .title { font: 700 14pt/1.1 Arial, sans-serif; }
+  .sub { font-size: 7.5pt; color: var(--muted); }
+  .round { margin-left: auto; font-size: 9pt; white-space: nowrap; }
+  .line { display: inline-block; border-bottom: 0.3mm solid var(--ink); min-width: 18mm; height: 4mm; vertical-align: bottom; }
+  .mid { display: grid; grid-template-columns: repeat(3, calc(var(--card-w) + 2 * var(--slot-pad))) 1fr; gap: 3mm; }
+  .slot { display: flex; flex-direction: column; gap: 1.5mm; }
+  .slot-box { width: calc(var(--card-w) + 2 * var(--slot-pad)); height: calc(var(--card-h) + 2 * var(--slot-pad));
+    border: 0.5mm solid var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: repeating-linear-gradient(135deg, #fff 0 3mm, #eee 3mm 3.4mm); color: var(--muted); text-align: center; padding: 4mm; }
+  .slot-box .n { font: 700 30pt/1 Arial, sans-serif; color: #bbb; }
+  .slot-meta { border: 0.3mm solid var(--ink); padding: 1.2mm 1.5mm; font-size: 7.5pt; line-height: 1.5; }
+  .box { display: inline-block; width: 3.2mm; height: 3.2mm; border: 0.35mm solid var(--ink); vertical-align: -0.5mm; margin-right: 0.8mm; }
+  .side { border: 0.5mm solid var(--ink); padding: 2mm; display: flex; flex-direction: column; gap: 2mm; overflow: hidden; }
+  h3 { margin: 0; font-size: 8pt; text-transform: uppercase; letter-spacing: .06em; }
+  .sum { font-size: 8.5pt; line-height: 1.9; display: grid; grid-template-columns: auto 1fr; column-gap: 2mm; }
+  .sum .line { min-width: 9mm; }
+  .gauge { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1mm; }
+  .gauge span { height: 7mm; border: 0.4mm solid var(--ink); font-size: 6.5pt; display: flex; align-items: flex-end; justify-content: center; }
+  .checks { font-size: 7.5pt; line-height: 1.45; }
+  .bottom { display: grid; grid-template-columns: 1.15fr 1fr; gap: 3mm; min-height: 0; }
+  .panel { border: 0.5mm solid var(--ink); padding: 2mm; overflow: hidden; }
+  .sig { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 1.5mm; }
+  .sig > div { border-top: 0.3mm dashed var(--ink); padding-top: 1mm; font-size: 8.5pt; line-height: 2.6; }
+  .sig .line { min-width: 34mm; height: 6mm; }
+  .pred { width: 100%; border-collapse: collapse; margin-top: 1.5mm; font-size: 9pt; }
+  .pred td, .pred th { border: 0.3mm solid var(--ink); padding: 1mm 1.5mm; text-align: left; height: 13mm; }
+  .pred th { font-size: 6.5pt; text-transform: uppercase; letter-spacing: .05em; }
+  .note { font-size: 7pt; color: var(--muted); margin-top: 1mm; }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: 0 auto 10mm; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div id="mats"></div>
+<script>
+/* ===== STRINGS: replace this block per language (W3/W7) ===== */
+const STRINGS = {
+  title: "Coalition mat",
+  package: "Package",
+  sub: "Lay up to three different cards here. Write on the sleeve with dry-wipe marker.",
+  round: "Round",
+  slot: "Card",
+  slotHint: "Place a card here",
+  slotCost: "Cost",
+  swapped: "Swapped in (amendment)",
+  replaces: "replaces",
+  byTable: "proposed by table",
+  budget: "Budget",
+  sumLine: ["Card 1", "Card 2", "Card 3", "Total"],
+  of30: "of 30",
+  gaugeHint: "Shade one box per pip (5 points). Six boxes = 30. A seventh pip is over budget.",
+  checksTitle: "Before signing, check",
+  checks: [
+    "1 to 3 cards",
+    "No card twice",
+    "Every “Requires” card already in force",
+    "No “Cannot combine with” pair",
+    "Total 30 or less",
+    "Two different tables sign"
+  ],
+  sponsorsTitle: "Sponsors — two different tables",
+  sponsorTable: "Table",
+  sponsorSign: "Signed for the table",
+  envoyBack: "Our envoy came back to our table before we signed",
+  sponsorNote: "A table signs only one mat per round. Any change after a signature cancels both signatures: sign again.",
+  predTitle: "Predictions — write before the vote",
+  predCols: ["", "Indicator", "Up ↑", "Down ↓"],
+  predRows: ["1", "2"],
+  predNote: "Mark the direction with a tick, not with colour. The operator copies these before the vote.",
+  tables: "FL · EI · LS · LW"
+};
+const MATS = ["A", "B"];
+/* ===== renderer (no text below this line) ===== */
+const S = STRINGS, esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const slot = i => `<div class="slot"><div class="slot-box"><span class="n">${i}</span>${esc(S.slotHint)}</div>
+  <div class="slot-meta">${esc(S.slot)} ${i} · ${esc(S.slotCost)} <span class="line" style="min-width:12mm"></span><br>
+  <span class="box"></span>${esc(S.swapped)}<br>${esc(S.replaces)} <span class="line" style="min-width:28mm"></span><br>
+  ${esc(S.byTable)} <span class="line" style="min-width:16mm"></span></div></div>`;
+const sponsor = () => `<div>${esc(S.sponsorTable)} <span class="line"></span><br>${esc(S.sponsorSign)} <span class="line"></span><br>
+  <span class="box"></span>${esc(S.envoyBack)}</div>`;
+document.getElementById("mats").innerHTML = MATS.map(m => `<section class="sheet">
+  <div class="head"><div class="badge ${m}">${m}</div>
+    <div><div class="title">${esc(S.title)} · ${esc(S.package)} ${m}</div><div class="sub">${esc(S.sub)}</div></div>
+    <div class="round">${esc(S.round)} <span class="line" style="min-width:10mm"></span></div></div>
+  <div class="mid">${[1,2,3].map(slot).join("")}
+    <div class="side"><h3>${esc(S.budget)}</h3>
+      <div class="sum">${S.sumLine.slice(0,3).map((l,i) => `<span>${i ? "+ " : "&nbsp;&nbsp;"}${esc(l)}</span><span class="line"></span>`).join("")}
+        <span>= <b>${esc(S.sumLine[3])}</b></span><span><span class="line"></span> ${esc(S.of30)}</span></div>
+      <div class="gauge">${[5,10,15,20,25,30].map(v => `<span>${v}</span>`).join("")}</div>
+      <div class="note">${esc(S.gaugeHint)}</div>
+      <h3>${esc(S.checksTitle)}</h3>
+      <div class="checks">${S.checks.map(c => `<span class="box"></span>${esc(c)}`).join("<br>")}</div></div></div>
+  <div class="bottom">
+    <div class="panel"><h3>${esc(S.sponsorsTitle)}</h3><div class="sig">${sponsor()}${sponsor()}</div>
+      <div class="note">${esc(S.sponsorNote)} (${esc(S.tables)})</div></div>
+    <div class="panel"><h3>${esc(S.predTitle)}</h3>
+      <table class="pred"><tr>${S.predCols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>
+      ${S.predRows.map(r => `<tr><td style="width:6mm">${r}</td><td></td><td style="width:16mm"><span class="box"></span>↑</td><td style="width:16mm"><span class="box"></span>↓</td></tr>`).join("")}</table>
+      <div class="note">${esc(S.predNote)}</div></div></div>
+</section>`).join("");
+</script>
+</body>
+</html>

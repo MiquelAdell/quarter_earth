@@ -1,0 +1,51 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — voting cards. Outside the ten-sheet kit.
+  A4 PORTRAIT, nine cards per page = three voters (each row is one voter's set: A, B, current policy).
+  24 players = 8 pages; 12 players = 4 pages. Reusable across all rounds.
+  Voting is an individual show of hands holding ONE card up. Each option differs by letter, word,
+  symbol and pattern, never by colour alone. Badges match the coalition mats.
+  Localisation: every visible string lives in STRINGS below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Voting cards</title>
+<style>
+  @page { size: A4 portrait; margin: 8mm; }
+  :root { --ink: #19151d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff; font: 9pt/1.2 Arial, Helvetica, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 194mm; height: 280mm; overflow: hidden; display: grid; grid-template-columns: repeat(3, 63mm);
+    grid-template-rows: repeat(3, 88mm); gap: 2.5mm; justify-content: center; }
+  .vote { border: 0.4mm dashed var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 4mm; gap: 3mm; overflow: hidden; }
+  .glyph { width: 40mm; height: 40mm; display: flex; align-items: center; justify-content: center; font: 700 34mm/1 Arial, sans-serif; }
+  .A .glyph { background: var(--ink); color: #fff; }
+  .B .glyph { border: 1.6mm dotted var(--ink); outline: 0.6mm solid var(--ink); outline-offset: 1.2mm; }
+  .C .glyph { background: repeating-linear-gradient(45deg, #fff 0 2mm, #ccc 2mm 2.6mm); border: 1.2mm double var(--ink); font-size: 28mm; }
+  .word { font: 700 13pt/1.1 Arial, sans-serif; }
+  .sub { font-size: 8pt; }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: auto; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet"></div>
+<script>
+/* ===== STRINGS: replace per language (W3/W7) ===== */
+const STRINGS = {
+  options: [
+    { cls: "A", glyph: "A", word: "Package A", sub: "Black square" },
+    { cls: "B", glyph: "B", word: "Package B", sub: "Dotted square" },
+    { cls: "C", glyph: "=", word: "Carry current policy forward", sub: "Striped square · no new measures" }
+  ]
+};
+/* ===== renderer ===== */
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const row = STRINGS.options.map(o => `<div class="vote ${o.cls}"><div class="glyph">${esc(o.glyph)}</div>
+  <div class="word">${esc(o.word)}</div><div class="sub">${esc(o.sub)}</div></div>`).join("");
+document.getElementById("sheet").innerHTML = row.repeat(3);
+</script>
+</body>
+</html>

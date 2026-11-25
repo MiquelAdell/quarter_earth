@@ -1,0 +1,63 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — package slips (table drafts). Outside the ten-sheet kit.
+  Four slips per A4 PORTRAIT page. One slip per table per round (practice + 6 rounds = 7 pages for 4 tables).
+  The slip is the table's draft and its durable record; the mat is wiped between rounds.
+  Localisation: every visible string lives in STRINGS below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Package slips</title>
+<style>
+  @page { size: A4 portrait; margin: 8mm; }
+  :root { --ink: #19151d; --muted: #4a434d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff; font: 8.5pt/1.3 Arial, Helvetica, sans-serif; }
+  .sheet { width: 194mm; height: 280mm; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 4mm; }
+  .slip { border: 0.4mm dashed var(--ink); padding: 3.5mm; display: flex; flex-direction: column; gap: 2mm; overflow: hidden; }
+  h2 { margin: 0; font-size: 11pt; }
+  .meta { display: flex; justify-content: space-between; }
+  .line { display: inline-block; border-bottom: 0.3mm solid var(--ink); min-width: 16mm; height: 4mm; vertical-align: bottom; }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { border: 0.3mm solid var(--ink); padding: 1mm 1.5mm; text-align: left; height: 9mm; }
+  th { font-size: 6.5pt; text-transform: uppercase; letter-spacing: .04em; height: auto; }
+  .tick { display: inline-block; width: 3.2mm; height: 3.2mm; border: 0.35mm solid var(--ink); vertical-align: -0.5mm; margin: 0 0.8mm 0 1.5mm; }
+  .hint { font-size: 7pt; color: var(--muted); }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: auto; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet"></div>
+<script>
+/* ===== STRINGS: replace per language (W3/W7) ===== */
+const STRINGS = {
+  title: "Package slip — our draft offer",
+  table: "Table", round: "Round",
+  cols: ["#", "Card ID", "Card name", "Cost"],
+  total: "Total (30 or less)",
+  hint: "1 to 3 different cards. Unspent points expire at the end of the round.",
+  predTitle: "Our two predictions (before the vote)",
+  predCols: ["Indicator", "↑ up", "↓ down"],
+  outcome: "What happened to this offer",
+  outcomes: ["moved to mat A", "moved to mat B", "merged into another table's package", "dropped"],
+  signedWith: "Co-sponsor table"
+};
+/* ===== renderer ===== */
+const S = STRINGS, esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const slip = `<div class="slip"><h2>${esc(S.title)}</h2>
+  <div class="meta"><span>${esc(S.table)} <span class="line"></span></span><span>${esc(S.round)} <span class="line" style="min-width:10mm"></span></span></div>
+  <table><tr>${S.cols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>
+  ${[1,2,3].map(i => `<tr><td style="width:5mm">${i}</td><td style="width:20mm"></td><td></td><td style="width:13mm"></td></tr>`).join("")}
+  <tr><td colspan="3" style="text-align:right"><b>${esc(S.total)}</b></td><td></td></tr></table>
+  <div class="hint">${esc(S.hint)}</div>
+  <b>${esc(S.predTitle)}</b>
+  <table><tr>${S.predCols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>
+  ${[1,2].map(() => `<tr><td></td><td style="width:14mm"><span class="tick"></span></td><td style="width:14mm"><span class="tick"></span></td></tr>`).join("")}</table>
+  <b>${esc(S.outcome)}</b>
+  <div>${S.outcomes.map(o => `<span class="tick" style="margin-left:0"></span>${esc(o)}`).join("<br>")}</div>
+  <div>${esc(S.signedWith)} <span class="line" style="min-width:25mm"></span></div></div>`;
+document.getElementById("sheet").innerHTML = slip.repeat(4);
+</script>
+</body>
+</html>

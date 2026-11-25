@@ -1,0 +1,114 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — table mandate sheet.
+  Kit sheet 7 of 10 (Living Standards). Sheets 5–8 are the same template with a different TABLE block.
+  A4 PORTRAIT, single-sided, 100% scale, no headers/footers. Print 1 copy.
+  Localisation: every visible string lives in STRINGS and TABLE below.
+  Evidence values are placeholders until W1 verifies the opening world.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Mandate</title>
+<style>
+  @page { size: A4 portrait; margin: 10mm; }
+  :root { --ink: #19151d; --muted: #4a434d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff; font: 9.5pt/1.3 Arial, Helvetica, sans-serif;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 190mm; height: 276mm; overflow: hidden; display: flex; flex-direction: column; gap: 3mm; }
+  header { display: flex; gap: 4mm; align-items: center; border-bottom: 0.8mm solid var(--ink); padding-bottom: 2mm; }
+  .code { font: 700 20pt/1 Arial, sans-serif; border: 0.8mm solid var(--ink); padding: 2mm 3mm; }
+  .eyebrow { font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  h1 { margin: 0; font-size: 20pt; line-height: 1.05; }
+  h2 { margin: 0 0 1.5mm; font-size: 9pt; text-transform: uppercase; letter-spacing: .06em; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .box { border: 0.5mm solid var(--ink); padding: 2.5mm; }
+  .big { font-size: 11pt; line-height: 1.3; }
+  .hint { font-size: 7.5pt; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; }
+  td, th { border: 0.3mm solid var(--ink); padding: 1.2mm 1.5mm; text-align: left; vertical-align: top; }
+  th { font-size: 7pt; text-transform: uppercase; letter-spacing: .04em; }
+  .ev td { height: 8mm; }
+  .write { border-bottom: 0.3mm solid var(--ink); height: 7mm; }
+  .tick { display: inline-block; width: 3.4mm; height: 3.4mm; border: 0.35mm solid var(--ink); vertical-align: -0.6mm; margin: 0 0.8mm 0 2mm; }
+  .roles td { height: 7.2mm; }
+  .roles td:first-child { width: 14mm; font-weight: 700; }
+  .stretch { flex: 1 1 auto; display: flex; flex-direction: column; }
+  .stretch .lines { flex: 1; background: repeating-linear-gradient(#fff 0 6.7mm, var(--ink) 6.7mm 7mm); }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: auto; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header><div class="code" id="code"></div>
+    <div><div class="eyebrow" data-s="eyebrow"></div><h1 id="name"></h1></div></header>
+  <div class="two">
+    <div class="box"><h2 data-s="answerable"></h2><div class="big" id="answerable"></div></div>
+    <div class="box"><h2 data-s="question"></h2><div class="big" id="question"></div>
+      <div class="hint" data-s="questionHint"></div></div>
+  </div>
+  <div class="box"><h2 data-s="evidence"></h2>
+    <table class="ev"><tr><th data-s="evIndicator"></th><th data-s="evValue"></th><th data-s="evWhy"></th></tr>
+      <tbody id="evidence"></tbody></table></div>
+  <div class="box"><h2 data-s="promise"></h2><div class="hint" data-s="promiseHint"></div>
+    <table><tr><th data-s="pIndicator"></th><th data-s="pDirection"></th><th data-s="pTarget"></th><th data-s="pBy"></th></tr>
+      <tr><td style="height:11mm"></td><td style="width:42mm"><span class="tick"></span>↑ <span data-s="above"></span><br><span class="tick"></span>↓ <span data-s="below"></span></td><td style="width:30mm"></td><td style="width:22mm"></td></tr></table>
+    <div class="hint" style="margin-top:1mm"><span class="tick" style="margin-left:0"></span><span data-s="onWall"></span></div></div>
+  <div class="box"><h2 data-s="unanswerable"></h2><div class="hint" data-s="unanswerableHint"></div>
+    <div class="write"></div><div class="write"></div></div>
+  <div class="box"><h2 data-s="roles"></h2><div class="hint" data-s="rolesHint"></div>
+    <table class="roles"><thead id="roleHead"></thead><tbody id="roleBody"></tbody></table></div>
+  <div class="box stretch"><h2 data-s="debrief"></h2><div class="hint" data-s="debriefHint"></div><div class="lines"></div></div>
+</div>
+<script>
+/* ===== TABLE: the only block that differs between the four mandate sheets ===== */
+const TABLE = {
+  code: "LS",
+  name: "Living Standards",
+  answerable: "Defend everyday well-being and access to essentials.",
+  question: "Whose consumption changes first?",
+  /* TODO W1: opening-world values with units, from references/assembly/model-baseline.md */
+  evidence: [
+    ["{{LS_EV_1_LABEL}}", "{{LS_EV_1_VALUE}} {{LS_EV_1_UNIT}}", "{{LS_EV_1_NOTE}}"],
+    ["{{LS_EV_2_LABEL}}", "{{LS_EV_2_VALUE}} {{LS_EV_2_UNIT}}", "{{LS_EV_2_NOTE}}"],
+    ["{{LS_EV_3_LABEL}}", "{{LS_EV_3_VALUE}} {{LS_EV_3_UNIT}}", "{{LS_EV_3_NOTE}}"]
+  ]
+};
+/* ===== STRINGS: shared by all four mandate sheets; replace per language (W3/W7) ===== */
+const STRINGS = {
+  eyebrow: "Quarter Earth · Assembly · Table mandate",
+  answerable: "What you are answerable for",
+  question: "A question you can bring to another table",
+  questionHint: "Ask it of a visiting envoy before you sign their package.",
+  evidence: "Evidence from the opening world",
+  evIndicator: "Indicator", evValue: "Opening value", evWhy: "Why it matters to you",
+  promise: "Our public promise (measurable)",
+  promiseHint: "Choose after the opening reading. One indicator, a direction and a target you can check on the report at the end.",
+  pIndicator: "Indicator", pDirection: "Direction", pTarget: "Target value", pBy: "By year",
+  above: "end above", below: "end below",
+  onWall: "Copied to the wall",
+  unanswerable: "A question the model cannot answer",
+  unanswerableHint: "Something the dashboard will never show but you still owe the room an answer to. Also goes on the wall.",
+  roles: "Rotating roles — write a name in each box",
+  rolesHint: "Move every role one seat to the left each round. Nobody is envoy again until everyone at the table has had a turn. The envoy must be back at the table before the table signs a mat.",
+  roleCols: ["Round", "Envoy", "Recorder", "Timekeeper", "Spokesperson", "We signed mat"],
+  roundLabels: ["Practice", "1", "2", "3", "4", "5", "6"],
+  signedOptions: "A · B · none",
+  debrief: "Debrief — did we keep our promise?",
+  debriefHint: "What the report says, one concession we made or refused, and one cost the dashboard missed."
+};
+/* ===== renderer (no text below this line) ===== */
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+document.querySelectorAll("[data-s]").forEach(el => { el.textContent = STRINGS[el.dataset.s]; });
+document.getElementById("code").textContent = TABLE.code;
+document.getElementById("name").textContent = TABLE.name;
+document.getElementById("answerable").textContent = TABLE.answerable;
+document.getElementById("question").textContent = TABLE.question;
+document.getElementById("evidence").innerHTML = TABLE.evidence.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("");
+document.getElementById("roleHead").innerHTML = `<tr>${STRINGS.roleCols.map(c => `<th>${esc(c)}</th>`).join("")}</tr>`;
+document.getElementById("roleBody").innerHTML = STRINGS.roundLabels.map(r =>
+  `<tr><td>${esc(r)}</td><td></td><td></td><td></td><td></td><td class="hint">${esc(STRINGS.signedOptions)}</td></tr>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — personal prediction slips. Outside the ten-sheet kit.
+  A4 PORTRAIT, eight slips per page. Each person writes one during the opening (minute 15–30)
+  and checks it at the debrief. 24 players = 3 pages.
+  (Package predictions are written on the coalition mat, not here.)
+  Localisation: every visible string lives in STRINGS below.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Prediction slips</title>
+<style>
+  @page { size: A4 portrait; margin: 8mm; }
+  :root { --ink: #19151d; --muted: #4a434d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff; font: 9pt/1.3 Arial, Helvetica, sans-serif; }
+  .sheet { width: 194mm; height: 280mm; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, 1fr); gap: 3mm; }
+  .slip { border: 0.4mm dashed var(--ink); padding: 3mm; display: flex; flex-direction: column; gap: 1.6mm; overflow: hidden; }
+  h2 { margin: 0; font-size: 10.5pt; }
+  .line { display: inline-block; border-bottom: 0.3mm solid var(--ink); min-width: 20mm; height: 4.5mm; vertical-align: bottom; }
+  .full { border-bottom: 0.3mm solid var(--ink); height: 5.5mm; }
+  .tick { display: inline-block; width: 3.4mm; height: 3.4mm; border: 0.35mm solid var(--ink); vertical-align: -0.6mm; margin: 0 0.8mm 0 2mm; }
+  .hint { font-size: 7pt; color: var(--muted); }
+  .check { margin-top: auto; border-top: 0.3mm solid var(--ink); padding-top: 1mm; }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: auto; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div class="sheet" id="sheet"></div>
+<script>
+/* ===== STRINGS: replace per language (W3/W7) ===== */
+const STRINGS = {
+  title: "My prediction",
+  nameTable: "Name or initials (optional)", table: "Table",
+  by: "By the end of round", indicator: "this indicator", will: "will go",
+  up: "↑ up", down: "↓ down",
+  because: "because",
+  check: "At the debrief:", right: "right", wrong: "wrong", unclear: "can't tell"
+};
+/* ===== renderer ===== */
+const S = STRINGS, esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const slip = `<div class="slip"><h2>${esc(S.title)}</h2>
+  <div class="hint">${esc(S.nameTable)} <span class="line" style="min-width:24mm"></span> · ${esc(S.table)} <span class="line" style="min-width:10mm"></span></div>
+  <div>${esc(S.by)} <span class="line" style="min-width:8mm"></span>, ${esc(S.indicator)}</div><div class="full"></div>
+  <div>${esc(S.will)} <span class="tick"></span>${esc(S.up)} <span class="tick"></span>${esc(S.down)}</div>
+  <div>${esc(S.because)}</div><div class="full"></div>
+  <div class="check">${esc(S.check)} <span class="tick"></span>${esc(S.right)} <span class="tick"></span>${esc(S.wrong)} <span class="tick"></span>${esc(S.unclear)}</div></div>`;
+document.getElementById("sheet").innerHTML = slip.repeat(8);
+</script>
+</body>
+</html>

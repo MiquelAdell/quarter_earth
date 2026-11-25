@@ -1,0 +1,107 @@
+<!doctype html>
+<!--
+  Quarter Earth · The Assembly — opening deck (Deck A), eight cards.
+  Kit sheets 1–4: print this ONE page FOUR times (one complete deck per table).
+  A4 LANDSCAPE, single-sided, 100% scale ("actual size"), no headers/footers.
+
+  Localisation: every visible string lives in STRINGS and CARDS below.
+  Card values are placeholders until W1 (references/assembly/model-baseline.md)
+  verifies IDs, costs, effects, prerequisites and exclusions.
+  Card size is shared with the coalition mat slots: keep --card-w / --card-h
+  identical in sheet-09-10-coalition-mat.html.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarter Earth · Assembly · Deck A</title>
+<style>
+  @page { size: A4 landscape; margin: 8mm; }
+  :root {
+    --card-w: 66mm; --card-h: 90mm; --gutter: 4mm;
+    --ink: #19151d; --muted: #4a434d; --rule: #19151d;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; color: var(--ink); background: #fff;
+    font: 9pt/1.25 Arial, Helvetica, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sheet { width: 281mm; height: 193mm; overflow: hidden; display: flex; flex-direction: column; align-items: center; }
+  .sheet-head { width: 100%; display: flex; justify-content: space-between; font-size: 7pt; color: var(--muted); height: 5mm; }
+  .grid { display: grid; grid-template-columns: repeat(4, var(--card-w)); grid-template-rows: repeat(2, var(--card-h));
+    gap: var(--gutter); }
+  /* Card: dashed outer line = cut line */
+  .card { position: relative; width: var(--card-w); height: var(--card-h); border: 0.4mm dashed var(--rule);
+    padding: 3mm; display: flex; flex-direction: column; overflow: hidden; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2mm; }
+  .theme { font-size: 7.5pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .theme .shape { font-size: 11pt; margin-right: 1mm; vertical-align: -1pt; }
+  .id { font: 7pt ui-monospace, Menlo, monospace; color: var(--muted); text-align: right; }
+  .name { font: 700 12.5pt/1.1 Arial, Helvetica, sans-serif; margin: 2mm 0 2mm; min-height: 12mm; }
+  .cost { display: flex; align-items: center; gap: 2mm; border: 0.5mm solid var(--rule); padding: 1.5mm 2mm; }
+  .cost .num { font: 700 22pt/1 Arial, Helvetica, sans-serif; min-width: 12mm; text-align: center; }
+  .cost .num.ph { font-size: 7pt; font-family: ui-monospace, Menlo, monospace; min-width: 0; }
+  .cost .unit { font-size: 7pt; line-height: 1.1; }
+  .pips { display: flex; gap: 1mm; margin-left: auto; }
+  .pip { width: 4.5mm; height: 4.5mm; border: 0.5mm solid var(--rule); background: repeating-linear-gradient(45deg, var(--ink) 0 0.6mm, #fff 0.6mm 1.4mm); }
+  .label { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-top: 2mm; }
+  .effect { font-size: 8.5pt; line-height: 1.25; flex: 1 1 auto; overflow: hidden; }
+  .rules { border-top: 0.3mm solid var(--rule); padding-top: 1mm; font-size: 7.5pt; line-height: 1.2; }
+  .rules b { font-weight: 700; }
+  .foot { display: flex; justify-content: space-between; font-size: 6.5pt; color: var(--muted); margin-top: 1mm; }
+  @media screen { body { background: #ddd; padding: 10mm; } .sheet { background: #fff; margin: auto; outline: 1px solid #999; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="sheet-head"><span data-s="sheetTitle"></span><span data-s="cutNote"></span></div>
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+/* ===== STRINGS: replace this block per language (W3/W7) ===== */
+const STRINGS = {
+  sheetTitle: "Quarter Earth · Assembly · Deck A — print 4 copies, one per table",
+  cutNote: "Cut along the dashed lines",
+  costUnit: "points of\n30 per package",
+  pipNote: "1 pip = 5 points",
+  effectLabel: "What it does",
+  requires: "Requires:",
+  excludes: "Cannot combine with:",
+  none: "—",
+  deck: "Deck A",
+  themes: {
+    energy:   { shape: "▲", label: "Energy" },
+    food:     { shape: "●", label: "Food" },
+    land:     { shape: "■", label: "Land & nature" },
+    industry: { shape: "◆", label: "Industry & transport" },
+    society:  { shape: "✚", label: "Society" },
+    unknown:  { shape: "?", label: "{{THEME}}" }
+  }
+};
+/* ===== CARDS: values come from W1's verified list. Do not invent. ===== */
+/* theme: one of energy | food | land | industry | society  (TODO W1)      */
+const CARDS = [1,2,3,4,5,6,7,8].map(n => ({
+  id: `{{CARD_${n}_ID}}`, name: `{{CARD_${n}_NAME}}`, theme: `{{CARD_${n}_THEME}}`,
+  cost: `{{CARD_${n}_COST}}`, effect: `{{CARD_${n}_EFFECT}}`,
+  requires: `{{CARD_${n}_REQUIRES}}`, excludes: `{{CARD_${n}_EXCLUDES}}`, no: n
+}));
+/* ===== renderer (no text below this line) ===== */
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+document.querySelectorAll("[data-s]").forEach(el => { el.textContent = STRINGS[el.dataset.s]; });
+const pips = cost => { const n = Number(cost) / 5;
+  return Number.isInteger(n) && n > 0 ? Array.from({length: n}, () => '<span class="pip"></span>').join("")
+                                      : '<span class="pip"></span><span>×?</span>'; };
+document.getElementById("grid").innerHTML = CARDS.map(c => {
+  const t = STRINGS.themes[c.theme] || STRINGS.themes.unknown;
+  return `<article class="card" data-card="${esc(c.id)}">
+    <div class="card-top"><span class="theme"><span class="shape" aria-hidden="true">${t.shape}</span>${esc(t.label)}</span>
+      <span class="id">${esc(c.id)}</span></div>
+    <div class="name">${esc(c.name)}</div>
+    <div class="cost" title="${esc(STRINGS.pipNote)}"><span class="num${isNaN(Number(c.cost)) ? ' ph' : ''}">${esc(c.cost)}</span>
+      <span class="unit">${esc(STRINGS.costUnit).replace("\n","<br>")}</span><span class="pips">${pips(c.cost)}</span></div>
+    <div class="label">${esc(STRINGS.effectLabel)}</div>
+    <div class="effect">${esc(c.effect)}</div>
+    <div class="rules"><div><b>${esc(STRINGS.requires)}</b> ${esc(c.requires || STRINGS.none)}</div>
+      <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div></div>
+    <div class="foot"><span>${esc(STRINGS.pipNote)}</span><span>${esc(STRINGS.deck)} · ${c.no}/8</span></div>
+  </article>`; }).join("");
+</script>
+</body>
+</html>
