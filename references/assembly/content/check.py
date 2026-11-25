@@ -91,7 +91,7 @@ PH = re.compile(r"%\{([a-z_][a-z0-9_]*)\}")
 # ------------------------------------------------------------------ W1 data
 def load_w1():
     sc = json.load(open(FIX / "scenarios.json"))
-    a = json.load(open(FIX / "a_no_action" / "ozone_appended.json"))
+    a = json.load(open(FIX / "a_no_action.json"))
     base = (ASSEMBLY / "model-baseline.md").read_text()
     r0, r1 = a["rows"][0], a["rows"][1]
     mix = r0["discrete"]["mix_share_5pct_units"]

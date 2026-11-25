@@ -1,340 +1,222 @@
 {
-  "profile": "debug",
-  "runs_per_scenario": 5,
+  "profiles": [
+    "debug",
+    "release"
+  ],
+  "runs_per_profile": 3,
   "scenarios": {
     "a_no_action": {
       "runs": [
         {
+          "profile": "debug",
           "run": 1,
-          "variant": "oh_appended",
-          "rows_sha256": "ca08c5250238857d7b27e65f79d3d31aa2718efab3a86c5673a2c4cb11a40e69"
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 2,
-          "variant": "ozone_appended",
-          "rows_sha256": "4f65391a3f65751f1f729dedff4eb3eac8b74b50a0114679480b49cc1a6ce56a"
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 3,
-          "variant": "oh_appended",
-          "rows_sha256": "ca08c5250238857d7b27e65f79d3d31aa2718efab3a86c5673a2c4cb11a40e69"
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 4,
-          "variant": "ozone_appended",
-          "rows_sha256": "4f65391a3f65751f1f729dedff4eb3eac8b74b50a0114679480b49cc1a6ce56a"
+          "profile": "release",
+          "run": 1,
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 5,
-          "variant": "oh_appended",
-          "rows_sha256": "ca08c5250238857d7b27e65f79d3d31aa2718efab3a86c5673a2c4cb11a40e69"
+          "profile": "release",
+          "run": 2,
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "release",
+          "run": 3,
+          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
-      "variants": {
-        "oh_appended": {
-          "runs": 3,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        },
-        "ozone_appended": {
-          "runs": 2,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        }
-      },
-      "cross_variant": {
-        "discrete_mismatches": [],
-        "numeric_max_abs": {
-          "numeric.base_outlook": {
-            "max_abs": 0.9449667930603027,
-            "year": 2052
-          },
-          "numeric.extinction_from_slr": {
-            "max_abs": 0.00184660404920578,
-            "year": 2052
-          },
-          "numeric.extinction_from_tgav": {
-            "max_abs": 0.12895727157592773,
-            "year": 2052
-          },
-          "numeric.extinction_rate": {
-            "max_abs": 0.1273651123046875,
-            "year": 2052
-          },
-          "numeric.mean_habitability": {
-            "max_abs": 0.26000213623046875,
-            "year": 2048
-          },
-          "numeric.outlook": {
-            "max_abs": 1.322950839996338,
-            "year": 2052
-          },
-          "numeric.region_mean_outlook": {
-            "max_abs": 0.37798404693603516,
-            "year": 2052
-          },
-          "numeric.sea_level_rise_m": {
-            "max_abs": 0.0033235251903533936,
-            "year": 2052
-          },
-          "numeric.temperature_c": {
-            "max_abs": 0.027894973754882812,
-            "year": 2052
-          },
-          "numeric.tgav_input_c": {
-            "max_abs": 0.027894973754882812,
-            "year": 2052
-          },
-          "numeric.world_outlook": {
-            "max_abs": 1.322950839996338,
-            "year": 2052
-          },
-          "regions.habitability": {
-            "max_abs": 2.80000638961792,
-            "year": 2048
-          },
-          "regions.outlook": {
-            "max_abs": 0.37798404693603516,
-            "year": 2052
-          }
-        }
-      },
+      "distinct_outputs": 1,
+      "bit_identical_within_profile": true,
+      "bit_identical_across_profiles": true,
+      "cross_profile": {},
+      "nox_sections_equal": true,
       "web_replay": {
-        "oh_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.027964296176585357,
-          "open_loop_tgav_minus_native_max_c": -0.007748848906609984,
-          "open_loop_tgav_minus_native_2052_c": -0.027964296176585357
-        },
-        "ozone_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.0013468448017261991,
-          "open_loop_tgav_minus_native_max_c": 0.0017035804549587752,
-          "open_loop_tgav_minus_native_2052_c": -6.932242170254455e-05
-        }
+        "open_loop_tgav_minus_native_min_c": -0.0021696287379695534,
+        "open_loop_tgav_minus_native_max_c": 7.970727811112965e-08,
+        "open_loop_tgav_minus_native_max_abs_year": 2037,
+        "open_loop_tgav_minus_native_2052_c": -0.0019211195255843805
       }
     },
     "b_comfort_and_technology": {
       "runs": [
         {
+          "profile": "debug",
           "run": 1,
-          "variant": "oh_appended",
-          "rows_sha256": "79309a9fa82e7bbe8ffd581388c6f2519c9c2981f7b78790862e8251e3a0f14c"
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 2,
-          "variant": "oh_appended",
-          "rows_sha256": "79309a9fa82e7bbe8ffd581388c6f2519c9c2981f7b78790862e8251e3a0f14c"
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 3,
-          "variant": "ozone_appended",
-          "rows_sha256": "4012fefaa2216c0bf51c6a98f5564aa425e7cb6d40da556dc19fe0b34a7bb962"
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 4,
-          "variant": "oh_appended",
-          "rows_sha256": "79309a9fa82e7bbe8ffd581388c6f2519c9c2981f7b78790862e8251e3a0f14c"
+          "profile": "release",
+          "run": 1,
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 5,
-          "variant": "ozone_appended",
-          "rows_sha256": "4012fefaa2216c0bf51c6a98f5564aa425e7cb6d40da556dc19fe0b34a7bb962"
+          "profile": "release",
+          "run": 2,
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "release",
+          "run": 3,
+          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
-      "variants": {
-        "oh_appended": {
-          "runs": 3,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        },
-        "ozone_appended": {
-          "runs": 2,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        }
-      },
-      "cross_variant": {
-        "discrete_mismatches": [],
-        "numeric_max_abs": {
-          "numeric.base_outlook": {
-            "max_abs": 0.6715755462646484,
-            "year": 2052
-          },
-          "numeric.extinction_from_slr": {
-            "max_abs": 0.0016767755150794983,
-            "year": 2052
-          },
-          "numeric.extinction_from_tgav": {
-            "max_abs": 0.10834312438964844,
-            "year": 2052
-          },
-          "numeric.extinction_rate": {
-            "max_abs": 0.10856151580810547,
-            "year": 2052
-          },
-          "numeric.mean_habitability": {
-            "max_abs": 0.04000091552734375,
-            "year": 2045
-          },
-          "numeric.outlook": {
-            "max_abs": 0.9402046203613281,
-            "year": 2052
-          },
-          "numeric.region_mean_outlook": {
-            "max_abs": 0.2686314582824707,
-            "year": 2052
-          },
-          "numeric.sea_level_rise_m": {
-            "max_abs": 0.0032187998294830322,
-            "year": 2052
-          },
-          "numeric.temperature_c": {
-            "max_abs": 0.028081417083740234,
-            "year": 2052
-          },
-          "numeric.tgav_input_c": {
-            "max_abs": 0.028081417083740234,
-            "year": 2052
-          },
-          "numeric.world_outlook": {
-            "max_abs": 0.9402046203613281,
-            "year": 2052
-          },
-          "regions.habitability": {
-            "max_abs": 0.49999237060546875,
-            "year": 2045
-          },
-          "regions.outlook": {
-            "max_abs": 0.2686333656311035,
-            "year": 2052
-          }
-        }
-      },
+      "distinct_outputs": 1,
+      "bit_identical_within_profile": true,
+      "bit_identical_across_profiles": true,
+      "cross_profile": {},
+      "nox_sections_equal": true,
       "web_replay": {
-        "oh_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.025189815440747942,
-          "open_loop_tgav_minus_native_max_c": -0.007748848906609984,
-          "open_loop_tgav_minus_native_2052_c": -0.008790267100376115
-        },
-        "ozone_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.0011820156673705284,
-          "open_loop_tgav_minus_native_max_c": 0.01929114998336412,
-          "open_loop_tgav_minus_native_2052_c": 0.01929114998336412
-        }
+        "open_loop_tgav_minus_native_min_c": -0.002001341114453048,
+        "open_loop_tgav_minus_native_max_c": 0.01733182610030748,
+        "open_loop_tgav_minus_native_max_abs_year": 2052,
+        "open_loop_tgav_minus_native_2052_c": 0.01733182610030748
       }
     },
     "c_sufficiency": {
       "runs": [
         {
+          "profile": "debug",
           "run": 1,
-          "variant": "ozone_appended",
-          "rows_sha256": "f2865a5fb84b655e59a5c0eba1040d497902ae91c903a3aed17af96cdb82c494"
+          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 2,
-          "variant": "ozone_appended",
-          "rows_sha256": "f2865a5fb84b655e59a5c0eba1040d497902ae91c903a3aed17af96cdb82c494"
+          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
+          "profile": "debug",
           "run": 3,
-          "variant": "ozone_appended",
-          "rows_sha256": "f2865a5fb84b655e59a5c0eba1040d497902ae91c903a3aed17af96cdb82c494"
+          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 4,
-          "variant": "oh_appended",
-          "rows_sha256": "cccf9db6ea0f798ba3c142bf12f4e08da7fc1be8f2f6024b99d5d7df17d8dc3c"
+          "profile": "release",
+          "run": 1,
+          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 5,
-          "variant": "ozone_appended",
-          "rows_sha256": "f2865a5fb84b655e59a5c0eba1040d497902ae91c903a3aed17af96cdb82c494"
+          "profile": "release",
+          "run": 2,
+          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
         {
-          "run": 6,
-          "variant": "oh_appended",
-          "rows_sha256": "cccf9db6ea0f798ba3c142bf12f4e08da7fc1be8f2f6024b99d5d7df17d8dc3c"
+          "profile": "release",
+          "run": 3,
+          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
-      "variants": {
-        "oh_appended": {
-          "runs": 2,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        },
-        "ozone_appended": {
-          "runs": 4,
-          "distinct_outputs": 1,
-          "bit_identical": true
-        }
-      },
-      "cross_variant": {
-        "discrete_mismatches": [],
-        "numeric_max_abs": {
-          "numeric.base_outlook": {
-            "max_abs": 0.7825813293457031,
-            "year": 2052
-          },
-          "numeric.extinction_from_slr": {
-            "max_abs": 0.0017373785376548767,
-            "year": 2052
-          },
-          "numeric.extinction_from_tgav": {
-            "max_abs": 0.1171255111694336,
-            "year": 2052
-          },
-          "numeric.extinction_rate": {
-            "max_abs": 0.11627197265625,
-            "year": 2052
-          },
-          "numeric.mean_habitability": {
-            "max_abs": 0.1399993896484375,
-            "year": 2046
-          },
-          "numeric.outlook": {
-            "max_abs": 1.0956096649169922,
-            "year": 2052
-          },
-          "numeric.region_mean_outlook": {
-            "max_abs": 0.31302833557128906,
-            "year": 2052
-          },
-          "numeric.sea_level_rise_m": {
-            "max_abs": 0.0032566189765930176,
-            "year": 2052
-          },
-          "numeric.temperature_c": {
-            "max_abs": 0.027965784072875977,
-            "year": 2052
-          },
-          "numeric.tgav_input_c": {
-            "max_abs": 0.027965784072875977,
-            "year": 2052
-          },
-          "numeric.world_outlook": {
-            "max_abs": 1.0956096649169922,
-            "year": 2052
-          },
-          "regions.habitability": {
-            "max_abs": 1.6000041961669922,
-            "year": 2046
-          },
-          "regions.outlook": {
-            "max_abs": 0.31302976608276367,
-            "year": 2052
+      "distinct_outputs": 2,
+      "bit_identical_within_profile": true,
+      "bit_identical_across_profiles": false,
+      "cross_profile": {
+        "debug_vs_release": {
+          "discrete_mismatches": [],
+          "numeric_max_abs": {
+            "numeric.extinction_rate": {
+              "max_abs": 7.62939453125e-06,
+              "year": 2040
+            }
           }
         }
       },
+      "nox_sections_equal": true,
       "web_replay": {
-        "ozone_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.0011578402008201039,
-          "open_loop_tgav_minus_native_max_c": 0.0017346989237632116,
-          "open_loop_tgav_minus_native_2052_c": 0.0008210359259770428
+        "open_loop_tgav_minus_native_min_c": -0.0015644630874778187,
+        "open_loop_tgav_minus_native_max_c": 0.0008822812697037996,
+        "open_loop_tgav_minus_native_max_abs_year": 2027,
+        "open_loop_tgav_minus_native_2052_c": -0.001056987221605965
+      }
+    },
+    "d_preserves_only": {
+      "runs": [
+        {
+          "profile": "debug",
+          "run": 1,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
         },
-        "oh_appended": {
-          "open_loop_tgav_minus_native_min_c": -0.027144748146898934,
-          "open_loop_tgav_minus_native_max_c": -0.007748848906609984,
-          "open_loop_tgav_minus_native_2052_c": -0.027144748146898934
+        {
+          "profile": "debug",
+          "run": 2,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "debug",
+          "run": 3,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "release",
+          "run": 1,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "release",
+          "run": 2,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
+        },
+        {
+          "profile": "release",
+          "run": 3,
+          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "nox_append_lengths": "OH:287,ozone:287"
         }
+      ],
+      "distinct_outputs": 1,
+      "bit_identical_within_profile": true,
+      "bit_identical_across_profiles": true,
+      "cross_profile": {},
+      "nox_sections_equal": true,
+      "web_replay": {
+        "open_loop_tgav_minus_native_min_c": -0.0021634284351490507,
+        "open_loop_tgav_minus_native_max_c": 0.014341083110039676,
+        "open_loop_tgav_minus_native_max_abs_year": 2052,
+        "open_loop_tgav_minus_native_2052_c": 0.014341083110039676
       }
     }
   }

@@ -1,28 +1,31 @@
 # Assembly parity fixtures
 
 These fixtures are the numerical reference for the assembly simulation (W5).
-They were produced by the headless reference driver at revision
-`b9b11964b668c432fe991931582bc262442205c0`, using the embedded workshop world
+They were produced by the headless reference driver on branch
+`feature/assembly-workshop` (base `b9b11964`, regenerated on top of `a10e47f6`
+with the native climate fix in `game/src/climate.rs`), using the embedded workshop world
 `engine/assets/WORKSHOP.world` (sha256
 `e42723ddae162eb841020610e34d36eabab9d374d797ad5057c17973f105ea5d`).
-Read `../model-baseline.md` first. It explains the driver, the climate
-variants and the tolerances.
+Read `../model-baseline.md` first. It explains the driver, the climate path
+and the tolerances.
 
 ## Files
 
 | Path | Content |
 |---|---|
 | `scenarios.json` | The scenario definitions: the eight opening cards and, for each scenario, the card IDs passed in each planning year, in order. |
-| `<scenario>/ozone_appended.{json,csv}` | Canonical run for the native climate variant in which the yearly NOX/CO/NMVOC defaults are appended to Hector's `ozone` section. The browser path is closest to this variant. |
-| `<scenario>/oh_appended.{json,csv}` | Canonical run for the other native variant, where the defaults are appended to the `OH` section. |
-| `reproducibility.json` | Per-run hashes, bit-identity per variant, the cross-variant maximum differences, and the open-loop browser-Hector replay deltas. |
+| `<scenario>.{json,csv}` | The canonical native run for each scenario. There is one trajectory per scenario. |
+| `reproducibility.json` | Per-run hashes per build profile, bit-identity flags, any cross-profile last-bit differences, and the open-loop browser-Hector replay deltas. |
 
-Scenarios: `a_no_action`, `b_comfort_and_technology`, `c_sufficiency`.
+Scenarios:
+
+- `a_no_action`, `b_comfort_and_technology`, `c_sufficiency`: the parity scenarios.
+- `d_preserves_only`: a diagnostic for the land-squeeze mechanism (model-baseline §7.1).
 
 ### JSON layout
 
 - `meta.units` gives the unit of every numeric field.
-- `meta.nox_append_lengths` identifies the variant.
+- `meta.nox_append_lengths` gives the Hector `OH` and `ozone` NOX series lengths, which must be equal. This is a regression check for the climate fix.
 - `decision_log` lists every pass, with the PC left afterwards.
 - `rows[]` has one entry per year from 2022 to 2052 (31 rows). Each row has:
   - `numeric`: continuous indicators; compare these within tolerance.
@@ -46,10 +49,14 @@ From the repository root:
 ```sh
 export CXXFLAGS="-I/opt/homebrew/include"
 cargo build -p hes-game --example assembly_baseline
-python3 references/assembly/tools/assembly_baseline.py --runs 5          # add --no-web to skip Node
+cargo build -p hes-game --example assembly_baseline --release
+python3 references/assembly/tools/assembly_baseline.py --runs 3 --profiles debug,release
+# add --no-web to skip the Node replay; --profiles debug to skip release
 ```
 
-- `references/assembly/tools/assembly_baseline.py` runs each scenario in at least 5 separate processes, topping up until each native variant has been seen at least twice. It checks that runs of the same variant are bit-identical, copies one run per variant here, and writes `reproducibility.json`.
+- The script runs each scenario in `--runs` separate processes per profile.
+- It fails if two runs of the same profile differ, if discrete state differs across profiles, or if the `OH` and `ozone` NOX lengths differ.
+- It records any cross-profile numeric differences and copies the first debug run to `<scenario>.{json,csv}`.
 - To run a single scenario by hand:
 
   ```sh
@@ -61,6 +68,8 @@ python3 references/assembly/tools/assembly_baseline.py --runs 5          # add -
 
 ## Reproducibility, as captured
 
-- Within each variant, every run was bit-identical. The 2026-11-25 generation ran each scenario in 5 debug-build processes, covering both variants at least twice, plus 6 more release-build processes per scenario.
-- The debug and `--release` builds produce bit-identical engine state. The only differences are in the harness-recomputed diagnostics `extinction_from_tgav` (≤2.4e-7) and `extinction_from_slr` (≤3.7e-9), which is `powf` noise.
-- The two variants differ in climate-coupled fields only: temperature up to 0.028 °C and outlook up to 1.3 by 2052. Discrete state was identical across variants in all three scenarios. See `reproducibility.json`.
+- For each scenario, 3 debug-build and 3 release-build processes ran. Every run within a profile was bit-identical.
+- Debug vs release:
+  - a, b and d: identical.
+  - c: `extinction_rate` differed by one f32 ulp (7.6e-6) from 2040; nothing else differed.
+- Browser Hector (open loop) is within 0.0022 °C of native under steady emissions. Under the on/off oscillation in b and d it is up to 0.0173 °C. See `reproducibility.json` and model-baseline §4.

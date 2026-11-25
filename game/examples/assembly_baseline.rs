@@ -90,10 +90,10 @@ fn outputs(map: &hes_engine::OutputMap) -> Value {
     })
 }
 
-/// Which hector section received the appended NOX default this process.
-/// Native `Climate::add_emissions` walks nested HashMaps and stops at the
-/// first section containing the key; NOX/CO/NMVOC exist under both `OH` and
-/// `ozone`, so the target depends on HashMap iteration order.
+/// Lengths of the NOX series in Hector's `OH` and `ozone` sections. NOX, CO
+/// and NMVOC feed both sections; since `Climate::add_emissions` appends to
+/// every section containing a key, the two lengths must be equal. (Before
+/// that fix only the first section in HashMap order was appended.)
 fn nox_append_section(data: &EmissionsData) -> String {
     let len = |section: &str| {
         data.get(section)
@@ -176,8 +176,6 @@ fn snapshot(state: &State, tgav_input: f32, hector_in: Option<&HashMap<&'static 
             "hector_ch4_tg": hector_in.map(|h| h["CH4_emissions"]),
             "hector_n2o_tg": hector_in.map(|h| h["N2O_emissions"]),
             "extinction_rate": world.extinction_rate,
-            "extinction_from_tgav": world.tgav_extinction_rate(),
-            "extinction_from_slr": world.slr_extinction_rate(),
             "sea_level_rise_m": world.sea_level_rise,
             "outlook": state.outlook(),
             "world_outlook": world.outlook(),

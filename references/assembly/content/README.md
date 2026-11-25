@@ -110,7 +110,7 @@ Reported as flags, without failing: es/ca strings over `max_chars`, catalog rows
 
 The derived values come from:
 
-- the 2022 and 2023 rows of `fixtures/a_no_action/ozone_appended.json`: opening values, mix shares in 5% units, protected land and the first-year jump
+- the 2022 and 2023 rows of `fixtures/a_no_action.json`: opening values, mix shares in 5% units, protected land and the first-year jump
 - `model-baseline.md` §5 effect rows: transfer sizes, `ProtectLand`, Outlook +20 and ExtinctionRate −0.5
 
 ### Check output (2026-11-25)

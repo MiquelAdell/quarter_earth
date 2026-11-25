@@ -1,5 +1,5 @@
 key,en,es,ca,max_chars,sources,params,notes
-common.game_title,Quarter Earth,Quarter Earth,Quarter Earth,,,,Game title kept in English in all editions (outstanding: confirm).
+common.game_title,Quarter Earth,Quarter Earth,Quarter Earth,,,,Game title kept in English in all editions (decided 2026-11-25: localized).
 common.assembly,Assembly,Asamblea,Assemblea,,,,
 common.table,Table,Mesa,Taula,6,slips:STRINGS.table; predictions:STRINGS.table; mats:STRINGS.sponsorTable,,
 common.round,Round,Ronda,Ronda,6,slips:STRINGS.round; mats:STRINGS.round; wall:STRINGS.round; mandates:STRINGS.roleCols[0],,
@@ -48,7 +48,7 @@ card.f759d87d-69ff-433b-8e3d-f3dbb776543a.effect,"Protects another %{added} of h
 card.1b98f39e-bb87-4e9f-8c95-565839b72197.effect,Lowers extinction pressure by %{drop} on the biodiversity index (opening value %{opening}).,Reduce la presión de extinción en %{drop} puntos del índice de biodiversidad (valor inicial: %{opening}).,Redueix la pressió d’extinció en %{drop} punts de l’índex de biodiversitat (valor inicial: %{opening}).,211,deck-a:CARDS[7].effect,drop=cats_extinction_drop:dec1; opening=extinction_2022:dec1,Card effect text. Numbers come from params (W1 fixtures/baseline); keep ≤160 en chars.
 card.06e94431-9582-5f6b-a1ca-5adba1d1c913.excludes,Phase Out Coal (not enough coal power for both: the second does nothing),Eliminar el carbón (no hay electricidad de carbón para las dos: la segunda no hace nada),Eliminar el carbó (no hi ha electricitat de carbó per a totes dues: la segona no fa res),97,deck-a:CARDS[2].excludes,,Printed after 'Cannot combine with:'. Hidden coal conflict (model-baseline §5.1). Card names must match card.*.name.
 card.3a2f8e4c-33ff-57aa-bd27-ce76864c72e6.excludes,"Solar Push, Nuclear Expansion (not enough coal power for both: the second does nothing)","Impulso solar, Expansión nuclear (no hay electricidad de carbón para las dos: la segunda no hace nada)","Impuls solar, Expansió nuclear (no hi ha electricitat de carbó per a totes dues: la segona no fa res)",117,deck-a:CARDS[3].excludes,,Printed after 'Cannot combine with:'. Hidden coal conflict (model-baseline §5.1). Card names must match card.*.name.
-mandate.food_land.code,FL,AT,AT,2,mandate-fl:TABLE.code,,Display code written on mats and slips. Localized initials (outstanding: confirm); stable ID is the key segment.
+mandate.food_land.code,FL,AT,AT,2,mandate-fl:TABLE.code,,Display code written on mats and slips. Localized initials (decided 2026-11-25: localized); stable ID is the key segment.
 mandate.food_land.name,Food and Land,Alimentación y tierra,Alimentació i terra,17,mandate-fl:TABLE.name,,
 mandate.food_land.answerable,Feed people through the transition.,Alimentar a la población durante la transición.,Alimentar la població durant la transició.,47,mandate-fl:TABLE.answerable,,
 mandate.food_land.question,Where will the land come from?,¿De dónde saldrá la tierra?,D’on sortirà la terra?,40,mandate-fl:TABLE.question,,
@@ -61,7 +61,7 @@ mandate.food_land.evidence.2.why,The Vegetarian Mandate moves three-quarters of 
 mandate.food_land.evidence.3.label,Industrial farming,Agricultura industrial,Agricultura industrial,24,mandate-fl:TABLE.evidence[2][0],,
 mandate.food_land.evidence.3.value,%{value} of plant-calorie output,%{value} de las calorías vegetales,%{value} de les calories vegetals,36,mandate-fl:TABLE.evidence[2][1],value=industrial_crop_from_pct:pct,"Opening value, 2022 row of fixtures/a_no_action (W1)."
 mandate.food_land.evidence.3.why,Organic Transition moves %{shift} points of it to organic,La «Transición ecológica» pasa %{shift} puntos a ecológica,La «Transició ecològica» en passa %{shift} punts a ecològica,70,mandate-fl:TABLE.evidence[2][2],shift=organic_shift_points:int,
-mandate.energy_industry.code,EI,EI,EI,2,mandate-ei:TABLE.code,,Display code written on mats and slips. Localized initials (outstanding: confirm); stable ID is the key segment.
+mandate.energy_industry.code,EI,EI,EI,2,mandate-ei:TABLE.code,,Display code written on mats and slips. Localized initials (decided 2026-11-25: localized); stable ID is the key segment.
 mandate.energy_industry.name,Energy and Industry,Energía e industria,Energia i indústria,25,mandate-ei:TABLE.name,,
 mandate.energy_industry.answerable,Keep production working while cutting emissions.,Mantener la producción mientras se recortan emisiones.,Mantenir la producció mentre es retallen emissions.,64,mandate-ei:TABLE.answerable,,
 mandate.energy_industry.question,What replaces the supply we retire?,¿Qué sustituye al suministro que retiramos?,Què substitueix el subministrament que retirem?,47,mandate-ei:TABLE.question,,
@@ -74,7 +74,7 @@ mandate.energy_industry.evidence.2.why,Solar Push and Phase Out Coal both draw o
 mandate.energy_industry.evidence.3.label,Electricity demand,Demanda de electricidad,Demanda d’electricitat,24,mandate-ei:TABLE.evidence[2][0],,
 mandate.energy_industry.evidence.3.value,"%{value} PWh per year, all met","%{value} PWh al año, toda cubierta","%{value} PWh l’any, tota coberta",33,mandate-ei:TABLE.evidence[2][1],value=electricity_2022_pwh:dec1,"Opening value, 2022 row of fixtures/a_no_action (W1)."
 mandate.energy_industry.evidence.3.why,Cutting supply without replacing it causes shortages,Recortar el suministro sin sustituirlo provoca escasez,Retallar el subministrament sense substituir-lo provoca escassetat,70,mandate-ei:TABLE.evidence[2][2],,
-mandate.living_standards.code,LS,NV,NV,2,mandate-ls:TABLE.code,,Display code written on mats and slips. Localized initials (outstanding: confirm); stable ID is the key segment.
+mandate.living_standards.code,LS,NV,NV,2,mandate-ls:TABLE.code,,Display code written on mats and slips. Localized initials (decided 2026-11-25: localized); stable ID is the key segment.
 mandate.living_standards.name,Living Standards,Nivel de vida,Nivell de vida,21,mandate-ls:TABLE.name,,
 mandate.living_standards.answerable,Defend everyday well-being and access to essentials.,Defender el bienestar diario y el acceso a lo básico.,Defensar el benestar diari i l’accés als béns bàsics.,70,mandate-ls:TABLE.answerable,,
 mandate.living_standards.question,Whose consumption changes first?,¿Quién cambia primero su consumo?,Qui canvia primer el seu consum?,43,mandate-ls:TABLE.question,,
@@ -87,7 +87,7 @@ mandate.living_standards.evidence.2.why,Everyone the plan has to feed and supply
 mandate.living_standards.evidence.3.label,Shortages,Escasez,Escassetat,12,mandate-ls:TABLE.evidence[2][0],,
 mandate.living_standards.evidence.3.value,none: all demand met,"ninguna, demanda cubierta","cap, demanda coberta",27,mandate-ls:TABLE.evidence[2][1],,"Opening value, 2022 row of fixtures/a_no_action (W1)."
 mandate.living_standards.evidence.3.why,Supply cuts or higher demand can change this,Recortes de suministro o más demanda pueden cambiarlo,Retallades o més demanda ho poden canviar,59,mandate-ls:TABLE.evidence[2][2],,
-mandate.living_world.code,LW,MV,MV,2,mandate-lw:TABLE.code,,Display code written on mats and slips. Localized initials (outstanding: confirm); stable ID is the key segment.
+mandate.living_world.code,LW,MV,MV,2,mandate-lw:TABLE.code,,Display code written on mats and slips. Localized initials (decided 2026-11-25: localized); stable ID is the key segment.
 mandate.living_world.name,Living World,Mundo vivo,Món viu,16,mandate-lw:TABLE.name,,
 mandate.living_world.answerable,Leave habitats and biodiversity in recoverable condition.,Dejar hábitats y biodiversidad en condiciones de recuperarse.,Deixar hàbitats i biodiversitat en condicions de recuperar-se.,76,mandate-lw:TABLE.answerable,,
 mandate.living_world.question,What protection survives the next budget?,¿Qué protección sobrevive al próximo presupuesto?,Quina protecció sobreviu al pròxim pressupost?,55,mandate-lw:TABLE.question,,

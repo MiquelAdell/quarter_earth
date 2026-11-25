@@ -45,16 +45,18 @@ mod tgav {
             for (k, val) in self.default_emissions.iter() {
                 let val = emissions.get(k).unwrap_or(val);
 
-                let mut found = false;
-                'outer: for (_, hm) in self.emissions.iter_mut() {
-                    for (k_, vals) in hm.iter_mut() {
-                        if k_ == k {
-                            vals.push(*val);
-                            found = true;
-                            break 'outer;
-                        }
-                    }
-                }
+                // Some sources (NOX, CO, NMVOC) feed more than one Hector
+                // section (`OH` and `ozone`). Append to every section that
+                // lists the key, as the browser path does. Writing only the
+                // first match made the result depend on HashMap order.
+                let found = self
+                    .emissions
+                    .values_mut()
+                    .filter_map(|section| section.get_mut(*k))
+                    .fold(false, |_, vals| {
+                        vals.push(*val);
+                        true
+                    });
 
                 if !found {
                     panic!("{k} not found");
@@ -163,3 +165,60 @@ mod tgav {
 }
 
 pub use tgav::*;
+
+#[cfg(all(test, not(target_arch = "wasm32")))]
+mod tests {
+    use std::collections::HashMap;
+
+    use super::Climate;
+
+    const START_YEAR: usize = 2022;
+    /// Values from 1765 up to (excluding) the start year.
+    const HISTORY_LEN: usize = START_YEAR - 1765;
+    /// `NOX_emissions` in assets/hector/rcp26.default_emissions.json.
+    const DEFAULT_NOX: f64 = 29.013509999999997;
+    const SHARED_SOURCES: [&str; 3] = ["NOX_emissions", "CO_emissions", "NMVOC_emissions"];
+
+    fn series(climate: &Climate, section: &str, source: &str) -> Vec<f64> {
+        climate.emissions_data()[section][source].clone()
+    }
+
+    #[test]
+    fn test_add_emissions_appends_shared_sources_to_every_section() {
+        let mut climate = Climate::new(START_YEAR);
+        let year = HashMap::from([
+            ("ffi_emissions", 10.0),
+            ("CH4_emissions", 300.0),
+            ("N2O_emissions", 8.0),
+        ]);
+        climate.add_emissions(year.clone());
+        climate.add_emissions(year);
+
+        for source in SHARED_SOURCES {
+            let oh = series(&climate, "OH", source);
+            let ozone = series(&climate, "ozone", source);
+            assert_eq!(oh.len(), HISTORY_LEN + 2, "{source} in OH");
+            assert_eq!(ozone.len(), HISTORY_LEN + 2, "{source} in ozone");
+            assert_eq!(oh, ozone, "{source} differs between OH and ozone");
+        }
+        let nox = series(&climate, "OH", "NOX_emissions");
+        assert_eq!(nox[HISTORY_LEN..].to_vec(), vec![DEFAULT_NOX, DEFAULT_NOX]);
+        assert_eq!(
+            series(&climate, "simpleNbox", "ffi_emissions")[HISTORY_LEN..].to_vec(),
+            vec![10.0, 10.0]
+        );
+    }
+
+    #[test]
+    fn test_add_emissions_keeps_every_series_the_same_length() {
+        let mut climate = Climate::new(START_YEAR);
+        climate.add_emissions(HashMap::new());
+
+        let lengths = climate
+            .emissions_data()
+            .values()
+            .flat_map(|section| section.values().map(Vec::len))
+            .collect::<std::collections::BTreeSet<_>>();
+        assert_eq!(lengths, std::collections::BTreeSet::from([HISTORY_LEN + 1]));
+    }
+}
