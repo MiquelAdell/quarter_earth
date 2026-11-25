@@ -205,7 +205,7 @@ Prompts to keep ready:
 
 ## Prediction indicators
 
-Predictions have to be checkable on the Report, so offer this fixed list. The metric IDs and units come from W1's fixtures (`meta.units`), with opening values from the 2022 no-action row. TODO W3: the display names in each language.
+Predictions have to be checkable on the Report, so offer this fixed list. The metric IDs and units come from W1's fixtures (`meta.units`), with opening values from the 2022 no-action row. Display names per language are in `content/strings.csv` (`metric.*`).
 
 | Indicator | Metric ID | Unit | 2022 value |
 |---|---|---|---|
@@ -232,7 +232,7 @@ Pass the gate when both rounds fit 20 minutes, at least three tables name a conc
 ## Open items
 
 - **TODO (deck B):** choose the optional eight cards and their themes, effects and gates from model-baseline.md §5.1. `optional-deck-b.html` still uses placeholders.
-- **TODO W3:** display names for the indicators and the card copy in Spanish and Catalan.
+- Indicator names and card copy in Spanish and Catalan: `content/strings.csv` (pending fluent review).
 - **TODO W5:** decide whether the assembly rejects the coal conflict or only warns, per model-baseline.md open item 4. This sheet treats it as a warning.
 - **TODO W5/W6:** the restore, one-round branch and return-to-actual operations used in the opening demo and the replay.
 - **Spec review:** whether "Decide never moves; overruns come out of Reveal" and the one-minute revision window should be written into the assembly-session spec.

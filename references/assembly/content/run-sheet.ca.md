@@ -207,7 +207,7 @@ Preguntes per tenir a mà:
 
 ## Indicadors per a les prediccions
 
-Les prediccions s’han de poder comprovar a l’Informe, així que ofereix aquesta llista tancada. Els ID dels indicadors i les unitats vénen dels fixtures de W1 (`meta.units`), i els valors inicials de la fila del 2022 sense mesures. TODO W3: els noms en cada llengua.
+Les prediccions s’han de poder comprovar a l’Informe, així que ofereix aquesta llista tancada. Els ID dels indicadors i les unitats vénen dels fixtures de W1 (`meta.units`), i els valors inicials de la fila del 2022 sense mesures. Els noms en cada llengua són a `content/strings.csv` (`metric.*`).
 
 | Indicador | ID de l’indicador | Unitat | Valor el 2022 |
 |---|---|---|---|
@@ -234,7 +234,7 @@ L’assaig se supera quan les dues rondes caben en 20 minuts, almenys tres taule
 ## Qüestions obertes
 
 - **TODO (baralla B):** triar les vuit cartes opcionals i els seus temes, efectes i requisits a partir de model-baseline.md §5.1. `optional-deck-b.html` encara fa servir marcadors de posició.
-- **TODO W3:** els noms dels indicadors i els textos de les cartes en castellà i català.
+- Noms dels indicadors i textos de les cartes en castellà i català: `content/strings.csv` (pendent de revisió).
 - **TODO W5:** decidir si l’assemblea rebutja el conflicte del carbó o només avisa, segons el punt obert 4 de model-baseline.md. Aquest guió el tracta com a avís.
 - **TODO W5/W6:** les operacions de restaurar, branca d’una ronda i tornar a la història real que es fan servir a la demostració inicial i a la repetició.
 - **Revisió de l’especificació:** si «La Decisió no es mou mai; els retards surten de Resultats» i la finestra d’un minut per corregir s’han d’escriure a l’especificació assembly-session.

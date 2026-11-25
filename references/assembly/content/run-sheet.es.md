@@ -207,7 +207,7 @@ Preguntas para tener a mano:
 
 ## Indicadores para las predicciones
 
-Las predicciones tienen que poder comprobarse en el Informe, así que ofrece esta lista cerrada. Los ID de los indicadores y las unidades vienen de los fixtures de W1 (`meta.units`), y los valores iniciales de la fila de 2022 sin medidas. TODO W3: los nombres en cada idioma.
+Las predicciones tienen que poder comprobarse en el Informe, así que ofrece esta lista cerrada. Los ID de los indicadores y las unidades vienen de los fixtures de W1 (`meta.units`), y los valores iniciales de la fila de 2022 sin medidas. Los nombres en cada idioma están en `content/strings.csv` (`metric.*`).
 
 | Indicador | ID del indicador | Unidad | Valor en 2022 |
 |---|---|---|---|
@@ -234,7 +234,7 @@ El ensayo se supera cuando las dos rondas caben en 20 minutos, al menos tres mes
 ## Asuntos abiertos
 
 - **TODO (baraja B):** elegir las ocho cartas opcionales y sus temas, efectos y requisitos a partir de model-baseline.md §5.1. `optional-deck-b.html` todavía usa marcadores de posición.
-- **TODO W3:** los nombres de los indicadores y los textos de las cartas en castellano y catalán.
+- Nombres de los indicadores y textos de las cartas en castellano y catalán: `content/strings.csv` (pendiente de revisión).
 - **TODO W5:** decidir si la asamblea rechaza el conflicto del carbón o solo avisa, según el punto abierto 4 de model-baseline.md. Este guion lo trata como aviso.
 - **TODO W5/W6:** las operaciones de restaurar, rama de una ronda y volver a la historia real que se usan en la demostración inicial y en la repetición.
 - **Revisión de la especificación:** si «La Decisión nunca se mueve; los retrasos salen de Resultados» y la ventana de un minuto para corregir deben escribirse en la especificación assembly-session.

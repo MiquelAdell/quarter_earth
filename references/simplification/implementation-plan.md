@@ -295,7 +295,7 @@ Conventional-Commits branch off `main`.
   tick (~10 ms/yr), interstitial gate ignores `won()`/`game_over` and ends at
   `start + WORKSHOP_YEARS(30)`. 42 game tests green. **Gotchas:** (a) cycle
   boundaries are `year % 5 == 0`, world starts 2022 → ending fires at the
-  2055 boundary, not 2052 — fix in W8 via start year / lifespan alignment;
+  2055 boundary, not 2052 — since fixed by `planning_anchor`/`lifespan` (ends 2052; see `references/assembly/model-baseline.md`);
   (b) workshop sessions share the normal save slot — follow-up.
 - **2026-07-02 — W6 done, verified.** Policies-only plan screen behind the
   flag: themed card groups (`workshop_card_groups`), click-to-toggle
