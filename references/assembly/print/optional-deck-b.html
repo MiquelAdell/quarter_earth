@@ -65,7 +65,8 @@ const STRINGS = {
   effectLabel: "What it does",
   requires: "Requires:",
   excludes: "Cannot combine with:",
-  none: "—",
+  none: "none",
+  timing: "Takes effect about 4 years after it passes.",
   deck: "Deck B",
   themes: {
     energy:   { shape: "▲", label: "Energy" },
@@ -77,7 +78,9 @@ const STRINGS = {
   }
 };
 /* ===== CARDS: values come from W1's verified list. Do not invent. ===== */
-/* theme: one of energy | food | land | industry | society  (TODO W1)      */
+/* TODO: Deck B card choice is not made (W1 verified only Deck A). Candidates and gates are in      */
+/* model-baseline.md §5.1. Gated cards: Requires = the enabler(s); they are passable the round after. */
+/* theme: one of energy | food | land | industry | society                                           */
 const CARDS = [9,10,11,12,13,14,15,16].map(n => ({
   id: `{{CARD_${n}_ID}}`, name: `{{CARD_${n}_NAME}}`, theme: `{{CARD_${n}_THEME}}`,
   cost: `{{CARD_${n}_COST}}`, effect: `{{CARD_${n}_EFFECT}}`,
@@ -93,14 +96,15 @@ document.getElementById("grid").innerHTML = CARDS.map(c => {
   const t = STRINGS.themes[c.theme] || STRINGS.themes.unknown;
   return `<article class="card" data-card="${esc(c.id)}">
     <div class="card-top"><span class="theme"><span class="shape" aria-hidden="true">${t.shape}</span>${esc(t.label)}</span>
-      <span class="id">${esc(c.id)}</span></div>
+      <span class="id">${esc(c.id.length > 12 ? c.id.slice(0, 8) : c.id)}</span></div>
     <div class="name">${esc(c.name)}</div>
     <div class="cost" title="${esc(STRINGS.pipNote)}"><span class="num${isNaN(Number(c.cost)) ? ' ph' : ''}">${esc(c.cost)}</span>
       <span class="unit">${esc(STRINGS.costUnit).replace("\n","<br>")}</span><span class="pips">${pips(c.cost)}</span></div>
     <div class="label">${esc(STRINGS.effectLabel)}</div>
     <div class="effect">${esc(c.effect)}</div>
     <div class="rules"><div><b>${esc(STRINGS.requires)}</b> ${esc(c.requires || STRINGS.none)}</div>
-      <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div></div>
+      <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div>
+      <div><i>${esc(STRINGS.timing)}</i></div></div>
     <div class="foot"><span>${esc(STRINGS.pipNote)}</span><span>${esc(STRINGS.deck)} · ${c.no - 8}/8</span></div>
   </article>`; }).join("");
 </script>

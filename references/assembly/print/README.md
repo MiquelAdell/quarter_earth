@@ -32,9 +32,9 @@ All four decks are identical, so a card coming back from a mat can go to any tab
 
 - **Card** (66 × 90 mm, cut on the dashed line). Each card shows:
   - the theme as a shape plus a word (▲ Energy, ● Food, ■ Land & nature, ◆ Industry & transport, ✚ Society)
-  - a stable card ID and the name
+  - the first 8 characters of the card's stable ID (the full ID is in `CARDS` and in model-baseline.md §5), and the name
   - the cost as a large number plus hatched **pips**, where 1 pip = 5 points
-  - the effect, with a "Requires:" line and a "Cannot combine with:" line
+  - the effect, with a "Requires:" line, a "Cannot combine with:" line and "Takes effect about 4 years after it passes"
   - the deck letter and its position, such as "Deck A · 3/8"
 - **Mandate**:
   - what the table answers for, and the question it can bring to another table
@@ -84,10 +84,11 @@ A typical print for 24 players is 10 + 7 + 8 + 3 + 7 = **35 sheets**, or 39 with
 ## Localisation hooks (for W3/W7)
 
 - Each file has one `STRINGS` block near the top. The mandates also have a `TABLE` block and the decks a `CARDS` block. All visible text is in those blocks, and the renderer below them has no copy of its own. Swap the blocks for each language. Each print run uses one language only.
-- **Placeholders waiting for W1** (`references/assembly/model-baseline.md`):
-  - `{{CARD_n_ID|NAME|THEME|COST|EFFECT|REQUIRES|EXCLUDES}}` for n = 1–8 (deck A) and 9–16 (deck B). `THEME` is one of `energy|food|land|industry|society`. `COST` must be a multiple of 5 so the pips render.
-  - `{{FL|EI|LS|LW_EV_n_LABEL|VALUE|UNIT|NOTE}}`, the three opening-evidence rows per mandate.
-  - `{{ROUND_1..6_YEARS}}` and `{{REPLAY_YEARS}}` on the wall timeline. Whether the last cycle ends in 2052 or 2055 is still open.
+- **Data now filled from W1** (`references/assembly/model-baseline.md`, commit 45277e6e):
+  - Deck A `CARDS`: the eight verified cards (IDs, names, costs, themes). The effect copy is plain language written from the decoded effects and uses only numbers the baseline gives. Mix shares are converted from 5% units to percent. Nobody has a prerequisite. Solar Push and Phase Out Coal carry the hidden coal conflict on their "Cannot combine with" line, and Phase Out Coal also names Nuclear Expansion.
+  - The evidence rows on the mandates come from the 2022 row of `fixtures/a_no_action/ozone_appended.json`, with units from `meta.units`. Two are derived from that row: calories from animals (animal ÷ total calorie demand) and the mix percentages.
+  - Wall timeline years run 2022 → 2027 … 2047 → 2052. The replay page has blank years to fill in.
+- **Placeholders still open:** deck B, `{{CARD_n_ID|NAME|THEME|COST|EFFECT|REQUIRES|EXCLUDES}}` for n = 9–16. `THEME` is one of `energy|food|land|industry|society`, and `COST` must be a multiple of 5 so the pips render.
 - **Card and slot size.** The CSS variables `--card-w: 66mm; --card-h: 90mm` are duplicated in the deck files and the mat file. If you change them in one, change them in all.
 - **Text headroom.** `check-fit.py` prints every file to PDF and reports the page count and size. It then runs a stress pass in which:
   - card fields are filled with long English sample text
@@ -103,11 +104,11 @@ A typical print for 24 players is 10 + 7 + 8 + 3 + 7 = **35 sheets**, or 39 with
 
   W7 should run it again on each real language edition.
 
-## Proof status (2026-11-25, headless Chrome)
+## Proof status (2026-11-25, headless Chrome, after the W1 data fill)
 
 | File | Pages | Size | As-is | Stress ×1.35 | Stress ×1.6 |
 |---|---|---|---|---|---|
-| sheet-01-04-deck-a | 1 | A4 landscape | OK | OK | overflows (card effect box) |
+| sheet-01-04-deck-a (real W1 copy) | 1 | A4 landscape | OK | OK | OK (Phase Out Coal is the tightest card) |
 | sheet-05…08 mandates | 1 each | A4 portrait | OK | OK | overflows (page) |
 | sheet-09-10-coalition-mats | 2 (= sheets 9 and 10) | A4 landscape | OK | OK | OK |
 | optional-deck-b | 1 | A4 landscape | OK | OK | overflows (card effect box) |
@@ -120,7 +121,8 @@ Every sheet has about 35% headroom over long English copy. Card effect text shou
 
 ## Still pending
 
-- **W1 data.** The eight verified cards (IDs, costs, effects, requires and excludes), the opening evidence values and the round years. Until these arrive the cards print as placeholders, so **do not print for players yet**.
+- **Deck B content.** Which eight cards it holds has not been decided, so it still prints placeholders. Do not hand it out yet.
+- **Human read-through of the card copy.** The effect texts are W2's plain-language reading of W1's decoded effects. Someone should check them for political framing before printing for players. W3 translates them.
 - **Human test: this is the real acceptance for W2.** Four tables and two mats need to carry out a physical amendment and vote: substitute a card on a mat, re-sign, check the budget against the gauge and vote with the cards. It has not been run yet. W4's rehearsal is where it should happen. Things to watch:
   - whether 66 × 90 mm cards are readable across a table
   - whether sleeves and dry-wipe markers hold up over six rounds

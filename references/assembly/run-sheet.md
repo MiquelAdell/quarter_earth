@@ -4,7 +4,7 @@ This sheet covers a three-hour Quarter Earth assembly for 12–24 people at four
 
 The paper kit is listed in [`print/README.md`](print/README.md). The rules here are written to match `openspec/changes/assembly-workshop/specs/assembly-session/spec.md` in the personal project folder. If a rule here contradicts that spec, the spec wins: amend it first, then change this sheet.
 
-> **TODO W1** marks anything that waits on verified data from `references/assembly/model-baseline.md`: card IDs, prerequisites and exclusions, opening values, indicator names and the cycle years. Do not print or run the full session until every TODO W1 is resolved.
+> Card data, gates, the hidden coal conflict, timing, opening values and round years come from W1's `references/assembly/model-baseline.md` (commit 45277e6e) and the 2022 row of `fixtures/a_no_action/ozone_appended.json`. The remaining TODOs are listed under Open items.
 
 ## The clock: 180 minutes
 
@@ -24,16 +24,18 @@ The paper kit is listed in [`print/README.md`](print/README.md). The rules here 
 
 Check: 30 + 40 + 10 + 40 + 30 + 15 + 15 = **180**.
 
-TODO W1: round years. The six five-year rounds start in 2022. It is still open whether the last cycle ends in **2052** or **2055**. Write the confirmed years into the wall timeline (`{{ROUND_n_YEARS}}`) and into this table:
+Round years (model-baseline.md §3). Tables plan in the first year of each round, and the game ends in 2052.
 
-| Round | Years |
-|---|---|
-| 1 | `{{ROUND_1_YEARS}}` |
-| 2 | `{{ROUND_2_YEARS}}` |
-| 3 | `{{ROUND_3_YEARS}}` |
-| 4 | `{{ROUND_4_YEARS}}` |
-| 5 | `{{ROUND_5_YEARS}}` |
-| 6 | `{{ROUND_6_YEARS}}` |
+| Round | Planning year | Years covered |
+|---|---|---|
+| 1 | 2022 | 2022 → 2027 |
+| 2 | 2027 | 2027 → 2032 |
+| 3 | 2032 | 2032 → 2037 |
+| 4 | 2037 | 2037 → 2042 |
+| 5 | 2042 | 2042 → 2047 |
+| 6 | 2047 | 2047 → 2052 |
+
+**Cards take about four years to come online.** A card passed in planning year Y is under construction for the next three years. It becomes active in year Y+4 and first changes production in the last year of the round, Y+4 → Y+5. So the Reveal straight after a vote shows **one year of effect at most**, and the full effect appears in the following rounds. Tell the room this at 0:15 and again before the first Reveal, and keep it in mind when you judge predictions.
 
 ### Inside a round
 
@@ -57,7 +59,7 @@ Overruns come out of **Reveal**. Decide never moves. A runoff or an invalid pack
 - [ ] The operator laptop has the pinned world loaded. Restore and replay have been tested on this laptop.
   - For the rehearsal (W4), use the existing workshop mode with `WORKSHOP=1 just run` or `?workshop=1`. Load the world from the main menu. Do not use `DEBUG_VIEW=Plan`. The M1 launch notes are in `references/simplification/m1-run-sheet.md`.
   - TODO W5/W6: the assembly entry point and its Planet / Ballot / Report views replace this step.
-- [ ] Card eligibility list for round 1 is on the operator's sheet (TODO W1).
+- [ ] Card eligibility list is on the operator's sheet. In round 1, all eight deck A cards are eligible. Gated cards and the coal conflict are in the operator check below.
 
 ## Tables and mandates
 
@@ -94,13 +96,13 @@ The table decides who fills each role, within these limits:
 | Clock | Do |
 |---|---|
 | 0:00–0:05 | Seat people at four tables with three to six each. Hand out mandates. Choose practice roles. |
-| 0:05–0:10 | Project the opening planet and read it together: year, emissions, temperature, biodiversity pressure, well-being and the land gauge. Each table reads its evidence box aloud (TODO W1 values). |
+| 0:05–0:10 | Project the opening planet and read it together: year, emissions, temperature, biodiversity pressure, well-being and the land gauge. Each table reads its evidence box aloud. These are the 2022 values from W1's no-action run. |
 | 0:10–0:15 | **Demonstrate one card** on a disposable copy of the world. Show a card on a mat, its cost against the 30-point budget, entry, advance and the report. Then **reset** to the opening world in front of the room, so everyone sees that nothing carried over. |
 | 0:15–0:20 | Each table writes its **public promise**: one indicator, a direction, a target and a year. It also writes **a question the model cannot answer**. Recorders copy both onto the wall. |
 | 0:20–0:27 | **Practice deal.** FL pairs with LW and EI pairs with LS. Each pair builds one package on a mat, fills in the budget and the checks, writes two predictions and signs. Nothing is voted on or entered. Wipe the mats afterwards. |
 | 0:27–0:30 | Everyone writes one **personal prediction slip** and keeps it until the debrief. |
 
-Say this at 0:15: "There are 30 points per package. They don't carry over. A package needs two tables' signatures. Each table can sign one package per round, so at most two packages reach the vote. Signing doesn't bind how anyone votes."
+Say this at 0:15: "There are 30 points per package. They don't carry over. A package needs two tables' signatures. Each table can sign one package per round, so at most two packages reach the vote. Signing doesn't bind how anyone votes. A card takes about four years to come online, so most of what you pass shows up in later rounds."
 
 ## Round procedure (rounds 1–6)
 
@@ -108,7 +110,10 @@ Say this at 0:15: "There are 30 points per package. They don't carry over. A pac
 
 - The operator projects the **Planet** view. The spokesperson at each table reads the headline aloud.
 - Ask one table: "What surprised you last round?" Skip this in round 1, and skip it after a round that overran.
-- The operator announces **eligible cards**: those whose prerequisites are now in force, minus cards already in force. TODO W1: this needs the prerequisite and exclusion table, and W1 must confirm that a policy already in force cannot be passed again (house rule). Tables turn ineligible cards face down.
+- The operator announces **eligible cards**: those whose prerequisites are now in force, minus cards already passed. Tables turn ineligible cards face down.
+  - **A card can be passed only once.** The engine accepts a card only while it is `Inactive`. After it passes it is `Building` and then `Active`, so it cannot be passed again (model-baseline.md §2, §5.1). This is an engine rule, not a house rule.
+  - None of the deck A cards has a prerequisite.
+  - A gated card becomes passable in the **planning year after its enabler is passed**, i.e. the next round. Gates in the full deck: Regenerative Agriculture → Cellular Meat. Solar Push, Wind Push or Nuclear Expansion → Mass Electrification. Remediate and Protect Ecosystems → Solar Radiation Management.
 
 ### 2. Build an offer (4 min, or 3 in rounds 5–6)
 
@@ -135,8 +140,10 @@ Enter each mat into the facilitator view as soon as it arrives. Until W6 builds 
 |---|---|---|
 | Over budget (total > 30) | The sum of the slot costs, which matches the pips on the gauge | Dropping or swapping a card until the total is 30 or less |
 | Repeated card | The same card ID in two slots | Removing the duplicate, and optionally adding a different card |
-| Prerequisite not in force | The card's "Requires" line against the cards in force (TODO W1) | Swapping the card or dropping it |
-| Exclusion conflict | Two cards whose "Cannot combine with" lines name each other (TODO W1) | Keeping one of the pair |
+| Card already passed | The card was passed in an earlier round. The engine only accepts cards that are still `Inactive` | Swapping it for an eligible card |
+| Prerequisite not passed yet | The card's "Requires" line against the cards already passed in **earlier** rounds. An enabler passed this round does not count yet. None of the deck A cards has a prerequisite (see the gates under Read the year) | Swapping the card or dropping it |
+| Declared exclusion | There are none in the current deck | — |
+| **Warning, not a rejection: coal conflict** | **Phase Out Coal** together with **Solar Push** (or Nuclear Expansion), in the same package or across rounds. Coal power starts at 35% of electricity, which is too little for both shifts. The engine accepts both, charges for both and shows both as active, but whichever card applies second does nothing (model-baseline.md §5.1). Both cards' "Cannot combine with" lines say so | Read the warning aloud. The table either keeps one of the pair or knowingly pays for a card that will do nothing |
 | Reused sponsor (one table on both mats) | The sponsor codes on both mats | The table picks one mat. The other mat needs a different second table to sign, or it does not reach the floor |
 | Fewer than two distinct tables | Sponsor codes | Finding a second table, or the package does not reach the floor |
 | More than three cards or none | Slot count | Bringing it to 1–3 |
@@ -168,7 +175,7 @@ If the projector fails, the operator reads the report aloud and fills the wall t
 ## Rounds 3–4 and the optional deck B
 
 - At the break, rotate who speaks, so spokespersons who haven't spoken plenary take rounds 3–4.
-- Newly eligible cards appear because of choices made in rounds 1–2, as prerequisites come into force (TODO W1).
+- Newly eligible cards appear because of choices made in rounds 1–2. A gated card is passable the round after its enabler passes. Deck A has no gated cards, so this only happens if deck B is in play.
 - **Deck B** has eight more cards on four more sheets. Hand it out at the break **only if** the rehearsal showed the room could handle eight choices (design.md decision 5). Otherwise leave it in the box.
 
 ## Replay (2:30–2:45)
@@ -198,15 +205,17 @@ Prompts to keep ready:
 
 ## Prediction indicators
 
-Predictions have to be checkable on the Report, so offer this fixed list (TODO W1/W3: exact metric IDs, names and units).
+Predictions have to be checkable on the Report, so offer this fixed list. The metric IDs and units come from W1's fixtures (`meta.units`), with opening values from the 2022 no-action row. TODO W3: the display names in each language.
 
-| Indicator | Metric ID | Unit |
-|---|---|---|
-| Emissions | `{{METRIC_EMISSIONS}}` | TODO |
-| Temperature | `{{METRIC_TEMPERATURE}}` | °C |
-| Biodiversity / extinction pressure | `{{METRIC_EXTINCTION}}` | TODO |
-| Human well-being | `{{METRIC_WELLBEING}}` | TODO |
-| Land use | `{{METRIC_LAND}}` | % |
+| Indicator | Metric ID | Unit | 2022 value |
+|---|---|---|---|
+| Emissions | `emissions_gtco2eq` | Gt CO₂-eq per year | 51.6 |
+| Temperature | `temperature_c` | °C warming (anomaly) | 1.10 |
+| Biodiversity / extinction pressure | `extinction_rate` | index, dimensionless (lower is better) | 90.2 |
+| Well-being (contentedness) | `outlook` | index, dimensionless | 30.0 |
+| Land use | `land_use_fraction` | % of starting habitable land, protected land included | 59% |
+
+Note for the first Reveal: whatever the room chooses, the model jumps in its first year. Temperature goes from 1.10 to 1.37 °C in 2023 and contentedness from 30.0 to 25.9, because the world's initial temperature does not match the climate model's history (model-baseline.md §2). Say this before the first Reveal, so nobody reads it as the result of the vote.
 
 ## Observer tally (rehearsal and pilot)
 
@@ -222,8 +231,9 @@ Pass the gate when both rounds fit 20 minutes, at least three tables name a conc
 
 ## Open items
 
-- **TODO W1:** the eight deck A card IDs, names, costs and effects, plus the "Requires" and "Cannot combine with" pairs and the eligibility for each round. These fill the deck templates (`{{CARD_n_*}}`) and the operator check table above.
-- **TODO W1:** the opening evidence values for each mandate (`{{XX_EV_n_*}}`), and the cycle years (2052 or 2055).
+- **TODO (deck B):** choose the optional eight cards and their themes, effects and gates from model-baseline.md §5.1. `optional-deck-b.html` still uses placeholders.
+- **TODO W3:** display names for the indicators and the card copy in Spanish and Catalan.
+- **TODO W5:** decide whether the assembly rejects the coal conflict or only warns, per model-baseline.md open item 4. This sheet treats it as a warning.
 - **TODO W5/W6:** the restore, one-round branch and return-to-actual operations used in the opening demo and the replay.
 - **Spec review:** whether "Decide never moves; overruns come out of Reveal" and the one-minute revision window should be written into the assembly-session spec.
 - **Human test:** the real acceptance for W2 is a physical amendment and vote with four tables and two mats. It has not been done yet.

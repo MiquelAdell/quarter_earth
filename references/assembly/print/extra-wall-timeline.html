@@ -3,7 +3,7 @@
   Quarter Earth · The Assembly — wall timeline. Outside the ten-sheet kit.
   A4 LANDSCAPE, seven pages: one per round (1–6) plus one for the replay. Tape side by side on the wall.
   Fallback if the projector fails: the operator reads the report aloud and writes the actual changes here.
-  Round years are placeholders until W1 confirms whether the six cycles end in 2052 or 2055.
+  Round years from W1: planning in 2022, 2027, 2032, 2037, 2042, 2047; the game ends in 2052.
   Localisation: every visible string lives in STRINGS below.
 -->
 <html lang="en">
@@ -39,8 +39,8 @@
 const STRINGS = {
   round: "Round", replay: "Replay",
   replayNote: "Same starting world as round ___ · losing package substituted",
-  /* TODO W1: confirm cycle years (2022→2052 or →2055) */
-  years: ["{{ROUND_1_YEARS}}", "{{ROUND_2_YEARS}}", "{{ROUND_3_YEARS}}", "{{ROUND_4_YEARS}}", "{{ROUND_5_YEARS}}", "{{ROUND_6_YEARS}}", "{{REPLAY_YEARS}}"],
+  /* W1: planning years 2022, 2027 … 2047; the game ends in 2052 (model-baseline.md §3). */
+  years: ["2022 → 2027", "2027 → 2032", "2032 → 2037", "2037 → 2042", "2042 → 2047", "2047 → 2052", "____ → ____"],
   result: "Result of the vote",
   outcomes: ["Package A", "Package B", "Current policy carried forward"],
   votes: "Votes A / B / current policy",

@@ -68,11 +68,11 @@ const TABLE = {
   name: "Energy and Industry",
   answerable: "Keep production working while cutting emissions.",
   question: "What replaces the supply we retire?",
-  /* TODO W1: opening-world values with units, from references/assembly/model-baseline.md */
+  /* Opening world, 2022 row of fixtures/a_no_action (W1). Units from meta.units; shares x100. */
   evidence: [
-    ["{{EI_EV_1_LABEL}}", "{{EI_EV_1_VALUE}} {{EI_EV_1_UNIT}}", "{{EI_EV_1_NOTE}}"],
-    ["{{EI_EV_2_LABEL}}", "{{EI_EV_2_VALUE}} {{EI_EV_2_UNIT}}", "{{EI_EV_2_NOTE}}"],
-    ["{{EI_EV_3_LABEL}}", "{{EI_EV_3_VALUE}} {{EI_EV_3_UNIT}}", "{{EI_EV_3_NOTE}}"]
+    ["Emissions", "51.6 Gt CO₂-eq per year", "The number you are asked to bring down"],
+    ["Coal in electricity", "35% of supply", "Solar Push and Phase Out Coal both draw on this coal"],
+    ["Electricity demand", "26.0 PWh per year, all met", "Cutting supply without replacing it causes shortages"]
   ]
 };
 /* ===== STRINGS: shared by all four mandate sheets; replace per language (W3/W7) ===== */

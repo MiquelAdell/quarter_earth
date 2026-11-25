@@ -64,7 +64,8 @@ const STRINGS = {
   effectLabel: "What it does",
   requires: "Requires:",
   excludes: "Cannot combine with:",
-  none: "—",
+  none: "none",
+  timing: "Takes effect about 4 years after it passes.",
   deck: "Deck A",
   themes: {
     energy:   { shape: "▲", label: "Energy" },
@@ -75,13 +76,37 @@ const STRINGS = {
     unknown:  { shape: "?", label: "{{THEME}}" }
   }
 };
-/* ===== CARDS: values come from W1's verified list. Do not invent. ===== */
-/* theme: one of energy | food | land | industry | society  (TODO W1)      */
-const CARDS = [1,2,3,4,5,6,7,8].map(n => ({
-  id: `{{CARD_${n}_ID}}`, name: `{{CARD_${n}_NAME}}`, theme: `{{CARD_${n}_THEME}}`,
-  cost: `{{CARD_${n}_COST}}`, effect: `{{CARD_${n}_EFFECT}}`,
-  requires: `{{CARD_${n}_REQUIRES}}`, excludes: `{{CARD_${n}_EXCLUDES}}`, no: n
-}));
+/* ===== CARDS: W1-verified (references/assembly/model-baseline.md §5, commit 45277e6e). ===== */
+/* All eight are Policy cards, unlocked in 2022, no prerequisites. Effect copy is plain-language */
+/* from the decoded effects; numbers are only those the baseline gives (mix units x5 = percent). */
+/* The card face prints the first 8 characters of the ID; the operator matches on those.        */
+/* theme: one of energy | food | land | industry | society                                        */
+const CARDS = [
+  { no: 1, id: "692486e9-b3d0-47cb-8f42-05ab925b0d93", name: "Vegetarian Mandate", theme: "food", cost: 15,
+    effect: "Three-quarters of the demand for animal calories moves to plant calories. Contentedness dips, most where meat demand is high.",
+    requires: "", excludes: "" },
+  { no: 2, id: "13ddc13d-2d1a-5445-a9f7-ca06ad8166f4", name: "Organic Transition", theme: "food", cost: 10,
+    effect: "Shifts plant farming from industrial to organic: industrial 70% → 50% of output, organic 0% → 20%. Lower-input farming uses more land.",
+    requires: "", excludes: "" },
+  { no: 3, id: "06e94431-9582-5f6b-a1ca-5adba1d1c913", name: "Solar Push", theme: "energy", cost: 15,
+    effect: "Moves electricity from coal to solar: coal 35% → 15% of supply, solar 5% → 25%. Unlocks Mass Electrification for the next round.",
+    requires: "", excludes: "Phase Out Coal (not enough coal power for both: the second does nothing)" },
+  { no: 4, id: "3a2f8e4c-33ff-57aa-bd27-ce76864c72e6", name: "Phase Out Coal", theme: "energy", cost: 10,
+    effect: "Retires coal power (35% → 10% of electricity supply) and replaces none of it, so electricity supply falls short of demand.",
+    requires: "", excludes: "Solar Push, Nuclear Expansion (not enough coal power for both: the second does nothing)" },
+  { no: 5, id: "43467272-49b6-4106-b22c-8c9aea5a9cb7", name: "Luxury for All", theme: "society", cost: 15,
+    effect: "Contentedness rises by 20 points, and demand for electricity and for fuel per person doubles.",
+    requires: "", excludes: "" },
+  { no: 6, id: "d9ef52e4-9dc2-45dc-aad3-d363f4a79b2b", name: "Degrowth in Developed Regions", theme: "society", cost: 15,
+    effect: "High-income regions step down a level of development. Upper-middle-income regions stop rising.",
+    requires: "", excludes: "" },
+  { no: 7, id: "f759d87d-69ff-433b-8e3d-f3dbb776543a", name: "Expand Nature Preserves", theme: "land", cost: 15,
+    effect: "Protects another 30% of habitable land: protected land goes from 10% to 40%, leaving less land for farms and energy.",
+    requires: "", excludes: "" },
+  { no: 8, id: "1b98f39e-bb87-4e9f-8c95-565839b72197", name: "Ban Outdoor Cats", theme: "land", cost: 5,
+    effect: "Lowers extinction pressure by 0.5 on the biodiversity index (opening value 90.2).",
+    requires: "", excludes: "" }
+];
 /* ===== renderer (no text below this line) ===== */
 const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
 document.querySelectorAll("[data-s]").forEach(el => { el.textContent = STRINGS[el.dataset.s]; });
@@ -92,14 +117,15 @@ document.getElementById("grid").innerHTML = CARDS.map(c => {
   const t = STRINGS.themes[c.theme] || STRINGS.themes.unknown;
   return `<article class="card" data-card="${esc(c.id)}">
     <div class="card-top"><span class="theme"><span class="shape" aria-hidden="true">${t.shape}</span>${esc(t.label)}</span>
-      <span class="id">${esc(c.id)}</span></div>
+      <span class="id">${esc(c.id.length > 12 ? c.id.slice(0, 8) : c.id)}</span></div>
     <div class="name">${esc(c.name)}</div>
     <div class="cost" title="${esc(STRINGS.pipNote)}"><span class="num${isNaN(Number(c.cost)) ? ' ph' : ''}">${esc(c.cost)}</span>
       <span class="unit">${esc(STRINGS.costUnit).replace("\n","<br>")}</span><span class="pips">${pips(c.cost)}</span></div>
     <div class="label">${esc(STRINGS.effectLabel)}</div>
     <div class="effect">${esc(c.effect)}</div>
     <div class="rules"><div><b>${esc(STRINGS.requires)}</b> ${esc(c.requires || STRINGS.none)}</div>
-      <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div></div>
+      <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div>
+      <div><i>${esc(STRINGS.timing)}</i></div></div>
     <div class="foot"><span>${esc(STRINGS.pipNote)}</span><span>${esc(STRINGS.deck)} · ${c.no}/8</span></div>
   </article>`; }).join("");
 </script>
