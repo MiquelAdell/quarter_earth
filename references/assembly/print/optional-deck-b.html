@@ -65,6 +65,7 @@ const STRINGS = {
   effectLabel: "What it does",
   requires: "Requires:",
   excludes: "Cannot combine with:",
+  note: "Watch out:",
   none: "none",
   timing: "Takes effect about 4 years after it passes.",
   deck: "Deck B",
@@ -104,6 +105,7 @@ document.getElementById("grid").innerHTML = CARDS.map(c => {
     <div class="effect">${esc(c.effect)}</div>
     <div class="rules"><div><b>${esc(STRINGS.requires)}</b> ${esc(c.requires || STRINGS.none)}</div>
       <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div>
+      ${c.note ? `<div><b>${esc(STRINGS.note)}</b> ${esc(c.note)}</div>` : ""}
       <div><i>${esc(STRINGS.timing)}</i></div></div>
     <div class="foot"><span>${esc(STRINGS.pipNote)}</span><span>${esc(STRINGS.deck)} · ${c.no - 8}/8</span></div>
   </article>`; }).join("");

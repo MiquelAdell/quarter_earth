@@ -64,6 +64,7 @@ const STRINGS = {
   effectLabel: "What it does",
   requires: "Requires:",
   excludes: "Cannot combine with:",
+  note: "Watch out:",
   none: "none",
   timing: "Takes effect about 4 years after it passes.",
   deck: "Deck A",
@@ -102,7 +103,8 @@ const CARDS = [
     requires: "", excludes: "" },
   { no: 7, id: "f759d87d-69ff-433b-8e3d-f3dbb776543a", name: "Expand Nature Preserves", theme: "land", cost: 15,
     effect: "Protects another 30% of habitable land: protected land goes from 10% to 40%, leaving less land for farms and energy.",
-    requires: "", excludes: "" },
+    requires: "", excludes: "",
+    note: "Without a diet or demand cut, farms run short of land and food falls short in later rounds." },
   { no: 8, id: "1b98f39e-bb87-4e9f-8c95-565839b72197", name: "Ban Outdoor Cats", theme: "land", cost: 5,
     effect: "Lowers extinction pressure by 0.5 on the biodiversity index (opening value 90.2).",
     requires: "", excludes: "" }
@@ -125,6 +127,7 @@ document.getElementById("grid").innerHTML = CARDS.map(c => {
     <div class="effect">${esc(c.effect)}</div>
     <div class="rules"><div><b>${esc(STRINGS.requires)}</b> ${esc(c.requires || STRINGS.none)}</div>
       <div><b>${esc(STRINGS.excludes)}</b> ${esc(c.excludes || STRINGS.none)}</div>
+      ${c.note ? `<div><b>${esc(STRINGS.note)}</b> ${esc(c.note)}</div>` : ""}
       <div><i>${esc(STRINGS.timing)}</i></div></div>
     <div class="foot"><span>${esc(STRINGS.pipNote)}</span><span>${esc(STRINGS.deck)} · ${c.no}/8</span></div>
   </article>`; }).join("");
