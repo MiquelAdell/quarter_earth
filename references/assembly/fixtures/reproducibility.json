@@ -10,37 +10,37 @@
         {
           "profile": "debug",
           "run": 1,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 2,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 3,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 1,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 2,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 3,
-          "rows_sha256": "23c07964b693d9fa4fccf6ad545c72939e1a2b02d2c48d4635dea35ff5f51db4",
+          "rows_sha256": "8e648805d97ffb1f1abda59f18c724f878fc28cc1a69e03456028cea3f8e23ef",
           "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
@@ -50,10 +50,10 @@
       "cross_profile": {},
       "nox_sections_equal": true,
       "web_replay": {
-        "open_loop_tgav_minus_native_min_c": -0.0021696287379695534,
-        "open_loop_tgav_minus_native_max_c": 7.970727811112965e-08,
+        "open_loop_tgav_minus_native_min_c": -0.0021696233231751627,
+        "open_loop_tgav_minus_native_max_c": 8.446721100341392e-08,
         "open_loop_tgav_minus_native_max_abs_year": 2037,
-        "open_loop_tgav_minus_native_2052_c": -0.0019211195255843805
+        "open_loop_tgav_minus_native_2052_c": -0.001921115319003075
       }
     },
     "b_comfort_and_technology": {
@@ -61,50 +61,60 @@
         {
           "profile": "debug",
           "run": 1,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "c6d731bb59174ad335a6dd7c354273df20e8ea99be887657f87f26e286026095",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 2,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "c6d731bb59174ad335a6dd7c354273df20e8ea99be887657f87f26e286026095",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 3,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "c6d731bb59174ad335a6dd7c354273df20e8ea99be887657f87f26e286026095",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 1,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "be04bc71ffb8598bb5f37ca1b128a7fa5db3eb77725b24392ff681b04d9f69e0",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 2,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "be04bc71ffb8598bb5f37ca1b128a7fa5db3eb77725b24392ff681b04d9f69e0",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 3,
-          "rows_sha256": "22c98f2f82bea65287e96fa22b01dee3d1f2745a4a8fc9c3d5f27fba3b299cea",
+          "rows_sha256": "be04bc71ffb8598bb5f37ca1b128a7fa5db3eb77725b24392ff681b04d9f69e0",
           "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
-      "distinct_outputs": 1,
+      "distinct_outputs": 2,
       "bit_identical_within_profile": true,
-      "bit_identical_across_profiles": true,
-      "cross_profile": {},
+      "bit_identical_across_profiles": false,
+      "cross_profile": {
+        "debug_vs_release": {
+          "discrete_mismatches": [],
+          "numeric_max_abs": {
+            "numeric.extinction_rate": {
+              "max_abs": 7.62939453125e-06,
+              "year": 2046
+            }
+          }
+        }
+      },
       "nox_sections_equal": true,
       "web_replay": {
-        "open_loop_tgav_minus_native_min_c": -0.002001341114453048,
-        "open_loop_tgav_minus_native_max_c": 0.01733182610030748,
+        "open_loop_tgav_minus_native_min_c": -0.002001337958517979,
+        "open_loop_tgav_minus_native_max_c": 0.006356556294775162,
         "open_loop_tgav_minus_native_max_abs_year": 2052,
-        "open_loop_tgav_minus_native_2052_c": 0.01733182610030748
+        "open_loop_tgav_minus_native_2052_c": 0.006356556294775162
       }
     },
     "c_sufficiency": {
@@ -112,37 +122,37 @@
         {
           "profile": "debug",
           "run": 1,
-          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "rows_sha256": "fb77fb9a0ae568a0ff20e6c8fa7f76d15e14260574ee7a5f23c690350411e92c",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 2,
-          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "rows_sha256": "fb77fb9a0ae568a0ff20e6c8fa7f76d15e14260574ee7a5f23c690350411e92c",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 3,
-          "rows_sha256": "6886471fa1dd2aea05647cbf28ece056a12566bc9594c2560ff8a766337a84f6",
+          "rows_sha256": "fb77fb9a0ae568a0ff20e6c8fa7f76d15e14260574ee7a5f23c690350411e92c",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 1,
-          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "rows_sha256": "df9087255ffc3ccd44ac6946efb33583cae564e63eae8331cf0e6dbf126cf9e9",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 2,
-          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "rows_sha256": "df9087255ffc3ccd44ac6946efb33583cae564e63eae8331cf0e6dbf126cf9e9",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 3,
-          "rows_sha256": "85eaa0748866fed4db000e3e0be0e542edcea13d54dcdd72481268de76a39ad4",
+          "rows_sha256": "df9087255ffc3ccd44ac6946efb33583cae564e63eae8331cf0e6dbf126cf9e9",
           "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
@@ -162,10 +172,10 @@
       },
       "nox_sections_equal": true,
       "web_replay": {
-        "open_loop_tgav_minus_native_min_c": -0.0015644630874778187,
-        "open_loop_tgav_minus_native_max_c": 0.0008822812697037996,
+        "open_loop_tgav_minus_native_min_c": -0.0015644637242422377,
+        "open_loop_tgav_minus_native_max_c": 0.0008822825411045621,
         "open_loop_tgav_minus_native_max_abs_year": 2027,
-        "open_loop_tgav_minus_native_2052_c": -0.001056987221605965
+        "open_loop_tgav_minus_native_2052_c": -0.0010570055532994616
       }
     },
     "d_preserves_only": {
@@ -173,37 +183,37 @@
         {
           "profile": "debug",
           "run": 1,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 2,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "debug",
           "run": 3,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 1,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 2,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         },
         {
           "profile": "release",
           "run": 3,
-          "rows_sha256": "06cf6bc5f318f926b9b81ce1454d37589116f27a8cc21a7f80c8c7f4f3bc2fde",
+          "rows_sha256": "8d922157a09c16c114295e08be38b013515c79674c2a4312cf789b9fbfec1586",
           "nox_append_lengths": "OH:287,ozone:287"
         }
       ],
@@ -213,10 +223,10 @@
       "cross_profile": {},
       "nox_sections_equal": true,
       "web_replay": {
-        "open_loop_tgav_minus_native_min_c": -0.0021634284351490507,
-        "open_loop_tgav_minus_native_max_c": 0.014341083110039676,
-        "open_loop_tgav_minus_native_max_abs_year": 2052,
-        "open_loop_tgav_minus_native_2052_c": 0.014341083110039676
+        "open_loop_tgav_minus_native_min_c": -0.0021634255565619043,
+        "open_loop_tgav_minus_native_max_c": 0.008715599226556847,
+        "open_loop_tgav_minus_native_max_abs_year": 2042,
+        "open_loop_tgav_minus_native_2052_c": 0.0016993955173640884
       }
     }
   }

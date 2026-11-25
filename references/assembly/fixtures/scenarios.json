@@ -1,6 +1,6 @@
 {
   "schema": "assembly-parity-scenarios/v1",
-  "reference_revision": "b9b11964b668c432fe991931582bc262442205c0 (base); fixtures regenerated on a10e47f6 + native climate fix in game/src/climate.rs",
+  "reference_revision": "b9b11964b668c432fe991931582bc262442205c0 (base); fixtures regenerated on cb487502 (native climate fix) + production-allocator fix in engine/src/production/planner.rs",
   "world": {
     "path": "engine/assets/WORKSHOP.world",
     "sha256": "e42723ddae162eb841020610e34d36eabab9d374d797ad5057c17973f105ea5d",

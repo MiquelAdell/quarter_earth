@@ -285,8 +285,8 @@
           "fuel_kwh": 88491828445184.0,
           "plant_calories_kcal": 6836503455989760.0
         },
-        "emissions_ch4_g": 298705412423680.0,
-        "emissions_co2_g": 3.853817031635763e16,
+        "emissions_ch4_g": 298705378869248.0,
+        "emissions_co2_g": 3.853817461132493e16,
         "emissions_gtco2eq": 51.57917404174805,
         "emissions_n2o_g": 7676531572736.0,
         "extinction_rate": 90.18851470947266,
@@ -679,13 +679,13 @@
           "fuel_kwh": 88491828445184.0,
           "plant_calories_kcal": 6836503455989760.0
         },
-        "emissions_ch4_g": 298705412423680.0,
-        "emissions_co2_g": 3.853817031635763e16,
+        "emissions_ch4_g": 298705378869248.0,
+        "emissions_co2_g": 3.853817461132493e16,
         "emissions_gtco2eq": 51.57917404174805,
         "emissions_n2o_g": 7676531572736.0,
         "extinction_rate": 90.18904113769531,
-        "hector_ch4_tg": 298.7054138183594,
-        "hector_ffi_pgc": 10.51041030883789,
+        "hector_ch4_tg": 298.70538330078125,
+        "hector_ffi_pgc": 10.510411262512207,
         "hector_n2o_tg": 7.6765313148498535,
         "land_demand_fraction": 0.4866063892841339,
         "land_use_fraction": 0.5866063833236694,
@@ -1078,8 +1078,8 @@
         "emissions_gtco2eq": 52.92057800292969,
         "emissions_n2o_g": 7834584481792.0,
         "extinction_rate": 92.505615234375,
-        "hector_ch4_tg": 298.7054138183594,
-        "hector_ffi_pgc": 10.51041030883789,
+        "hector_ch4_tg": 298.70538330078125,
+        "hector_ffi_pgc": 10.510411262512207,
         "hector_n2o_tg": 7.6765313148498535,
         "land_demand_fraction": 0.49658796191215515,
         "land_use_fraction": 0.5965879559516907,
@@ -1468,8 +1468,8 @@
           "plant_calories_kcal": 7018202584317952.0
         },
         "emissions_ch4_g": 314570988060672.0,
-        "emissions_co2_g": 4.056899835763098e16,
-        "emissions_gtco2eq": 54.27570724487305,
+        "emissions_co2_g": 4.056899406266368e16,
+        "emissions_gtco2eq": 54.275699615478516,
         "emissions_n2o_g": 7993793970176.0,
         "extinction_rate": 94.2830810546875,
         "hector_ch4_tg": 306.596923828125,
@@ -1858,13 +1858,13 @@
           "fuel_kwh": 98200736235520.0,
           "plant_calories_kcal": 7198465582956544.0
         },
-        "emissions_ch4_g": 319180796592128.0,
+        "emissions_ch4_g": 319180830146560.0,
         "emissions_co2_g": 3.732142755623731e16,
-        "emissions_gtco2eq": 51.28982162475586,
+        "emissions_gtco2eq": 51.289825439453125,
         "emissions_n2o_g": 8315054587904.0,
         "extinction_rate": 96.0620346069336,
         "hector_ch4_tg": 314.57098388671875,
-        "hector_ffi_pgc": 11.0642728805542,
+        "hector_ffi_pgc": 11.064271926879883,
         "hector_n2o_tg": 7.993793964385986,
         "land_demand_fraction": 0.5278612971305847,
         "land_use_fraction": 0.6278613209724426,
@@ -2249,12 +2249,12 @@
           "fuel_kwh": 98200736235520.0,
           "plant_calories_kcal": 7198465582956544.0
         },
-        "emissions_ch4_g": 319180796592128.0,
+        "emissions_ch4_g": 319180830146560.0,
         "emissions_co2_g": 3.732142755623731e16,
-        "emissions_gtco2eq": 51.28982162475586,
+        "emissions_gtco2eq": 51.289825439453125,
         "emissions_n2o_g": 8315054587904.0,
         "extinction_rate": 97.92163848876953,
-        "hector_ch4_tg": 319.1807861328125,
+        "hector_ch4_tg": 319.1808166503906,
         "hector_ffi_pgc": 10.178570747375488,
         "hector_n2o_tg": 8.315054893493652,
         "land_demand_fraction": 0.5278612971305847,
@@ -2649,7 +2649,7 @@
         "emissions_gtco2eq": 52.53266525268555,
         "emissions_n2o_g": 8476574613504.0,
         "extinction_rate": 99.7067642211914,
-        "hector_ch4_tg": 319.1807861328125,
+        "hector_ch4_tg": 319.1808166503906,
         "hector_ffi_pgc": 10.178570747375488,
         "hector_n2o_tg": 8.315054893493652,
         "land_demand_fraction": 0.538085401058197,
@@ -3039,7 +3039,7 @@
           "fuel_kwh": 103219774619648.0,
           "plant_calories_kcal": 7375260395503616.0
         },
-        "emissions_ch4_g": 335135023038464.0,
+        "emissions_ch4_g": 335134989484032.0,
         "emissions_co2_g": 3.916616754947686e16,
         "emissions_gtco2eq": 53.805870056152344,
         "emissions_n2o_g": 8640405176320.0,
@@ -3439,7 +3439,7 @@
         "emissions_gtco2eq": 55.08928680419922,
         "emissions_n2o_g": 8805091901440.0,
         "extinction_rate": 103.30677795410156,
-        "hector_ch4_tg": 335.135009765625,
+        "hector_ch4_tg": 335.1349792480469,
         "hector_ffi_pgc": 10.681682586669922,
         "hector_n2o_tg": 8.64040470123291,
         "land_demand_fraction": 0.5588824152946472,
@@ -3825,9 +3825,9 @@
           "fuel_kwh": 111043955130368.0,
           "plant_calories_kcal": 7634075124760576.0
         },
-        "emissions_ch4_g": 359966812667904.0,
-        "emissions_co2_g": 4.220332790303949e16,
-        "emissions_gtco2eq": 57.7014045715332,
+        "emissions_ch4_g": 359966846222336.0,
+        "emissions_co2_g": 4.220333219800678e16,
+        "emissions_gtco2eq": 57.70140838623047,
         "emissions_n2o_g": 8521047343104.0,
         "extinction_rate": 105.11402130126953,
         "hector_ch4_tg": 343.2788391113281,
@@ -4216,13 +4216,13 @@
           "fuel_kwh": 111043955130368.0,
           "plant_calories_kcal": 7634075124760576.0
         },
-        "emissions_ch4_g": 359966812667904.0,
-        "emissions_co2_g": 4.220332790303949e16,
-        "emissions_gtco2eq": 57.7014045715332,
+        "emissions_ch4_g": 359966846222336.0,
+        "emissions_co2_g": 4.220333219800678e16,
+        "emissions_gtco2eq": 57.70140838623047,
         "emissions_n2o_g": 8521047343104.0,
         "extinction_rate": 100.67240905761719,
-        "hector_ch4_tg": 359.966796875,
-        "hector_ffi_pgc": 11.509998321533203,
+        "hector_ch4_tg": 359.96685791015625,
+        "hector_ffi_pgc": 11.510000228881836,
         "hector_n2o_tg": 8.521047592163086,
         "land_demand_fraction": 0.5936263203620911,
         "land_use_fraction": 0.9936262965202332,
@@ -4608,12 +4608,12 @@
           "plant_calories_kcal": 7719043536519168.0
         },
         "emissions_ch4_g": 368286734745600.0,
-        "emissions_co2_g": 4.3149388939264e16,
-        "emissions_gtco2eq": 58.994606018066406,
+        "emissions_co2_g": 4.314938034932941e16,
+        "emissions_gtco2eq": 58.994598388671875,
         "emissions_n2o_g": 8680852422656.0,
         "extinction_rate": 101.87869262695312,
-        "hector_ch4_tg": 359.966796875,
-        "hector_ffi_pgc": 11.509998321533203,
+        "hector_ch4_tg": 359.96685791015625,
+        "hector_ffi_pgc": 11.510000228881836,
         "hector_n2o_tg": 8.521047592163086,
         "land_demand_fraction": 0.6043309569358826,
         "land_use_fraction": 1.0043309926986694,
@@ -4622,7 +4622,7 @@
         "population": 9000867840.0,
         "produced": {
           "animal_calories_kcal": 1796738230779904.0,
-          "electricity_kwh": 31574215098368.0,
+          "electricity_kwh": 31574217195520.0,
           "fuel_kwh": 113664061341696.0,
           "plant_calories_kcal": 7719044073390080.0
         },
@@ -4998,29 +4998,29 @@
           "fuel_kwh": 116302781874176.0,
           "plant_calories_kcal": 7803401526050816.0
         },
-        "emissions_ch4_g": 350240221691904.0,
-        "emissions_co2_g": 3.751597668984422e16,
-        "emissions_gtco2eq": 52.754913330078125,
-        "emissions_n2o_g": 8826462928896.0,
-        "extinction_rate": 102.47830200195312,
+        "emissions_ch4_g": 373180917088256.0,
+        "emissions_co2_g": 4.18410388216873e16,
+        "emissions_gtco2eq": 57.905540466308594,
+        "emissions_n2o_g": 8825461538816.0,
+        "extinction_rate": 102.48954772949219,
         "hector_ch4_tg": 368.2867431640625,
-        "hector_ffi_pgc": 11.768014907836914,
+        "hector_ffi_pgc": 11.768013000488281,
         "hector_n2o_tg": 8.680851936340332,
         "land_demand_fraction": 0.6150779128074646,
         "land_use_fraction": 1.015077829360962,
         "mean_habitability": 10.0,
-        "outlook": 28.47201919555664,
+        "outlook": 33.71998596191406,
         "population": 9089863680.0,
         "produced": {
           "animal_calories_kcal": 1831950654373888.0,
-          "electricity_kwh": 5131808538624.0,
-          "fuel_kwh": 116067330424832.0,
+          "electricity_kwh": 17106028462080.0,
+          "fuel_kwh": 116051543064576.0,
           "plant_calories_kcal": 7803401526050816.0
         },
         "protected_land_fraction": 0.4000000059604645,
         "region_mean_outlook": 8.357824325561523,
         "sea_level_rise_m": 0.14901483058929443,
-        "shortages_outlook": 12.78036880493164,
+        "shortages_outlook": 7.532402038574219,
         "temperature_c": 1.661532998085022,
         "tgav_input_c": 1.661532998085022,
         "water_use_fraction": 0.6066770553588867,
@@ -5382,40 +5382,40 @@
         "year": 2035
       },
       "numeric": {
-        "base_outlook": 32.470314025878906,
+        "base_outlook": 32.44807434082031,
         "demand": {
           "animal_calories_kcal": 1867306556719104.0,
           "electricity_kwh": 34991681568768.0,
           "fuel_kwh": 118956325076992.0,
           "plant_calories_kcal": 7886948303634432.0
         },
-        "emissions_ch4_g": 275573121220608.0,
-        "emissions_co2_g": 3.684478067566182e16,
-        "emissions_gtco2eq": 49.28215026855469,
-        "emissions_n2o_g": 8445427712000.0,
-        "extinction_rate": 103.07168579101562,
-        "hector_ch4_tg": 350.240234375,
-        "hector_ffi_pgc": 10.231630325317383,
-        "hector_n2o_tg": 8.826462745666504,
+        "emissions_ch4_g": 299036527558656.0,
+        "emissions_co2_g": 4.12684037170135e16,
+        "emissions_gtco2eq": 54.55015182495117,
+        "emissions_n2o_g": 8444403253248.0,
+        "extinction_rate": 103.08319091796875,
+        "hector_ch4_tg": 373.180908203125,
+        "hector_ffi_pgc": 11.411191940307617,
+        "hector_n2o_tg": 8.825461387634277,
         "land_demand_fraction": 0.6258487105369568,
         "land_use_fraction": 1.0258487462997437,
         "mean_habitability": 10.0,
-        "outlook": 26.900196075439453,
+        "outlook": 32.11702346801758,
         "population": 9177851904.0,
         "produced": {
           "animal_calories_kcal": 1867306556719104.0,
-          "electricity_kwh": 5248752549888.0,
-          "fuel_kwh": 110167504977920.0,
+          "electricity_kwh": 17495840784384.0,
+          "fuel_kwh": 110151331741696.0,
           "plant_calories_kcal": 7886948303634432.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.288125991821289,
-        "sea_level_rise_m": 0.15448977053165436,
-        "shortages_outlook": 13.85824203491211,
-        "temperature_c": 1.6863958835601807,
-        "tgav_input_c": 1.6863958835601807,
+        "region_mean_outlook": 8.279230117797852,
+        "sea_level_rise_m": 0.15449592471122742,
+        "shortages_outlook": 8.610279083251953,
+        "temperature_c": 1.6876600980758667,
+        "tgav_input_c": 1.6876600980758667,
         "water_use_fraction": 0.617129385471344,
-        "world_outlook": 40.75843811035156
+        "world_outlook": 40.72730255126953
       },
       "regions": [
         {
@@ -5423,7 +5423,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Africa",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 82547168.0
         },
         {
@@ -5431,7 +5431,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 158222896.0
         },
         {
@@ -5439,7 +5439,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 313926112.0
         },
         {
@@ -5447,7 +5447,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 310158304.0
         },
         {
@@ -5455,7 +5455,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 304202880.0
         },
         {
@@ -5463,7 +5463,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 111590776.0
         },
         {
@@ -5471,7 +5471,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 91236112.0
         },
         {
@@ -5479,7 +5479,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 813034176.0
         },
         {
@@ -5487,7 +5487,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 2366852352.0
         },
         {
@@ -5495,7 +5495,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 470781632.0
         },
         {
@@ -5503,7 +5503,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 13754916.0
         },
         {
@@ -5511,7 +5511,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 628750976.0
         },
         {
@@ -5519,7 +5519,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 32310358.0
         },
         {
@@ -5527,7 +5527,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 205450688.0
         },
         {
@@ -5535,7 +5535,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 219204736.0
         },
         {
@@ -5543,7 +5543,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 237708128.0
         },
         {
@@ -5551,7 +5551,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 47302012.0
         },
         {
@@ -5559,7 +5559,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 1813718528.0
         },
         {
@@ -5567,7 +5567,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 389513120.0
         },
         {
@@ -5575,7 +5575,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.288125991821289,
+          "outlook": 8.279229164123535,
           "population": 567585408.0
         }
       ],
@@ -5773,40 +5773,40 @@
         "year": 2036
       },
       "numeric": {
-        "base_outlook": 32.10275650024414,
+        "base_outlook": 32.050777435302734,
         "demand": {
           "animal_calories_kcal": 1938478996652032.0,
           "electricity_kwh": 36564285521920.0,
           "fuel_kwh": 124308953235456.0,
           "plant_calories_kcal": 8051804717711360.0
         },
-        "emissions_ch4_g": 196325270355968.0,
-        "emissions_co2_g": 3.667544300008243e16,
-        "emissions_gtco2eq": 46.170143127441406,
+        "emissions_ch4_g": 221006165704704.0,
+        "emissions_co2_g": 4.130058590696243e16,
+        "emissions_gtco2eq": 51.683799743652344,
         "emissions_n2o_g": 8144268820480.0,
-        "extinction_rate": 103.6620101928711,
-        "hector_ch4_tg": 275.5731201171875,
-        "hector_ffi_pgc": 10.048576354980469,
-        "hector_n2o_tg": 8.445427894592285,
+        "extinction_rate": 103.67803192138672,
+        "hector_ch4_tg": 299.0365295410156,
+        "hector_ffi_pgc": 11.255020141601562,
+        "hector_n2o_tg": 8.444403648376465,
         "land_demand_fraction": 0.6474730372428894,
         "land_use_fraction": 1.0474730730056763,
         "mean_habitability": 10.0,
-        "outlook": 25.452152252197266,
+        "outlook": 30.627334594726562,
         "population": 9264678912.0,
         "produced": {
           "animal_calories_kcal": 1938478996652032.0,
-          "electricity_kwh": 5484642828288.0,
+          "electricity_kwh": 18282142760960.0,
           "fuel_kwh": 105662621155328.0,
-          "plant_calories_kcal": 7435269678563328.0
+          "plant_calories_kcal": 7433846970646528.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.241103172302246,
-        "sea_level_rise_m": 0.1600673645734787,
-        "shortages_outlook": 14.891708374023438,
-        "temperature_c": 1.7074095010757446,
-        "tgav_input_c": 1.7074095010757446,
+        "region_mean_outlook": 8.220308303833008,
+        "sea_level_rise_m": 0.1600876748561859,
+        "shortages_outlook": 9.643753051757812,
+        "temperature_c": 1.7102972269058228,
+        "tgav_input_c": 1.7102972269058228,
         "water_use_fraction": 0.6380893588066101,
-        "world_outlook": 40.3438606262207
+        "world_outlook": 40.271087646484375
       },
       "regions": [
         {
@@ -5814,7 +5814,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Africa",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 83515144.0
         },
         {
@@ -5822,7 +5822,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 158478816.0
         },
         {
@@ -5830,7 +5830,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 315224224.0
         },
         {
@@ -5838,7 +5838,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 311440864.0
         },
         {
@@ -5846,7 +5846,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 307770080.0
         },
         {
@@ -5854,7 +5854,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 111771264.0
         },
         {
@@ -5862,7 +5862,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 92305984.0
         },
         {
@@ -5870,7 +5870,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 822568128.0
         },
         {
@@ -5878,7 +5878,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 2394606848.0
         },
         {
@@ -5886,7 +5886,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 472728384.0
         },
         {
@@ -5894,7 +5894,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 13811794.0
         },
         {
@@ -5902,7 +5902,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 641808384.0
         },
         {
@@ -5910,7 +5910,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 32362618.0
         },
         {
@@ -5918,7 +5918,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 205782992.0
         },
         {
@@ -5926,7 +5926,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 221775216.0
         },
         {
@@ -5934,7 +5934,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 240495584.0
         },
         {
@@ -5942,7 +5942,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 47497612.0
         },
         {
@@ -5950,7 +5950,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 1821218432.0
         },
         {
@@ -5958,7 +5958,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 390143136.0
         },
         {
@@ -5966,7 +5966,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.24110221862793,
+          "outlook": 8.22031021118164,
           "population": 579372544.0
         }
       ],
@@ -6164,40 +6164,40 @@
         "year": 2037
       },
       "numeric": {
-        "base_outlook": 31.79230308532715,
+        "base_outlook": 31.699167251586914,
         "demand": {
           "animal_calories_kcal": 1938478996652032.0,
           "electricity_kwh": 36564285521920.0,
           "fuel_kwh": 124308953235456.0,
           "plant_calories_kcal": 8051804717711360.0
         },
-        "emissions_ch4_g": 196325270355968.0,
-        "emissions_co2_g": 3.667544300008243e16,
-        "emissions_gtco2eq": 46.170143127441406,
+        "emissions_ch4_g": 221006165704704.0,
+        "emissions_co2_g": 4.130058590696243e16,
+        "emissions_gtco2eq": 51.683799743652344,
         "emissions_n2o_g": 8144268820480.0,
-        "extinction_rate": 106.3677749633789,
-        "hector_ch4_tg": 196.3252716064453,
-        "hector_ffi_pgc": 10.00239372253418,
+        "extinction_rate": 106.39457702636719,
+        "hector_ch4_tg": 221.00616455078125,
+        "hector_ffi_pgc": 11.26379680633545,
         "hector_n2o_tg": 8.144268989562988,
         "land_demand_fraction": 0.6474730372428894,
         "land_use_fraction": 1.0474730730056763,
         "mean_habitability": 10.0,
-        "outlook": 23.860660552978516,
+        "outlook": 28.977619171142578,
         "population": 9350381568.0,
         "produced": {
           "animal_calories_kcal": 1938478996652032.0,
-          "electricity_kwh": 5484642828288.0,
+          "electricity_kwh": 18282142760960.0,
           "fuel_kwh": 105662621155328.0,
-          "plant_calories_kcal": 7435269678563328.0
+          "plant_calories_kcal": 7433846970646528.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.216920852661133,
-        "sea_level_rise_m": 0.16573040187358856,
-        "shortages_outlook": 16.148563385009766,
-        "temperature_c": 1.7248021364212036,
-        "tgav_input_c": 1.7248021364212036,
+        "region_mean_outlook": 8.179666519165039,
+        "sea_level_rise_m": 0.16577573120594025,
+        "shortages_outlook": 10.901214599609375,
+        "temperature_c": 1.7298802137374878,
+        "tgav_input_c": 1.7298802137374878,
         "water_use_fraction": 0.6380893588066101,
-        "world_outlook": 40.00922393798828
+        "world_outlook": 39.87883377075195
       },
       "regions": [
         {
@@ -6205,7 +6205,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Africa",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 84472176.0
         },
         {
@@ -6213,7 +6213,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 158703712.0
         },
         {
@@ -6221,7 +6221,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 316462784.0
         },
         {
@@ -6229,7 +6229,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 312664544.0
         },
         {
@@ -6237,7 +6237,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 311296928.0
         },
         {
@@ -6245,7 +6245,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 111929872.0
         },
         {
@@ -6253,7 +6253,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 93363752.0
         },
         {
@@ -6261,7 +6261,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 831994240.0
         },
         {
@@ -6269,7 +6269,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 2422047488.0
         },
         {
@@ -6277,7 +6277,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 474585792.0
         },
         {
@@ -6285,7 +6285,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 13866062.0
         },
         {
@@ -6293,7 +6293,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 654950912.0
         },
         {
@@ -6301,7 +6301,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 32408542.0
         },
         {
@@ -6309,7 +6309,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 206075008.0
         },
         {
@@ -6317,7 +6317,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 224316608.0
         },
         {
@@ -6325,7 +6325,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 243251504.0
         },
         {
@@ -6333,7 +6333,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 47684236.0
         },
         {
@@ -6341,7 +6341,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 1828374272.0
         },
         {
@@ -6349,7 +6349,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 390696768.0
         },
         {
@@ -6357,7 +6357,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.21692180633545,
+          "outlook": 8.179666519165039,
           "population": 591236544.0
         }
       ],
@@ -6555,40 +6555,40 @@
         "year": 2038
       },
       "numeric": {
-        "base_outlook": 31.48070526123047,
+        "base_outlook": 31.338523864746094,
         "demand": {
           "animal_calories_kcal": 1974262650896384.0,
           "electricity_kwh": 37356555993088.0,
           "fuel_kwh": 127005613883392.0,
           "plant_calories_kcal": 8133011811860480.0
         },
-        "emissions_ch4_g": 200418877505536.0,
-        "emissions_co2_g": 3.732074465643725e16,
-        "emissions_gtco2eq": 47.003562927246094,
+        "emissions_ch4_g": 225634546614272.0,
+        "emissions_co2_g": 4.204609344530022e16,
+        "emissions_gtco2eq": 52.63667678833008,
         "emissions_n2o_g": 8281003130880.0,
-        "extinction_rate": 109.32052612304688,
-        "hector_ch4_tg": 196.3252716064453,
-        "hector_ffi_pgc": 10.00239372253418,
+        "extinction_rate": 109.35538482666016,
+        "hector_ch4_tg": 221.00616455078125,
+        "hector_ffi_pgc": 11.26379680633545,
         "hector_n2o_tg": 8.144268989562988,
         "land_demand_fraction": 0.6583160161972046,
         "land_use_fraction": 1.0583159923553467,
         "mean_habitability": 10.0,
-        "outlook": 22.260177612304688,
+        "outlook": 27.30843734741211,
         "population": 9434817536.0,
         "produced": {
           "animal_calories_kcal": 1974262650896384.0,
-          "electricity_kwh": 5603483713536.0,
+          "electricity_kwh": 18678277996544.0,
           "fuel_kwh": 107954774736896.0,
-          "plant_calories_kcal": 6824784100851712.0
+          "plant_calories_kcal": 6823330254422016.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.192281723022461,
-        "sea_level_rise_m": 0.17147792875766754,
-        "shortages_outlook": 17.412811279296875,
-        "temperature_c": 1.741917610168457,
-        "tgav_input_c": 1.741917610168457,
+        "region_mean_outlook": 8.135408401489258,
+        "sea_level_rise_m": 0.17156091332435608,
+        "shortages_outlook": 12.16549301147461,
+        "temperature_c": 1.7495179176330566,
+        "tgav_input_c": 1.7495179176330566,
         "water_use_fraction": 0.6485867500305176,
-        "world_outlook": 39.67298889160156
+        "world_outlook": 39.47393035888672
       },
       "regions": [
         {
@@ -6596,7 +6596,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Africa",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 85417616.0
         },
         {
@@ -6604,7 +6604,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 158895024.0
         },
         {
@@ -6612,7 +6612,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 317638592.0
         },
         {
@@ -6620,7 +6620,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 313826240.0
         },
         {
@@ -6628,7 +6628,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 314781056.0
         },
         {
@@ -6636,7 +6636,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 112064800.0
         },
         {
@@ -6644,7 +6644,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 94408712.0
         },
         {
@@ -6652,7 +6652,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 841306176.0
         },
         {
@@ -6660,7 +6660,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 2449155840.0
         },
         {
@@ -6668,7 +6668,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 476349120.0
         },
         {
@@ -6676,7 +6676,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 13917582.0
         },
         {
@@ -6684,7 +6684,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 668142656.0
         },
         {
@@ -6692,7 +6692,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 32447608.0
         },
         {
@@ -6700,7 +6700,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 206323424.0
         },
         {
@@ -6708,7 +6708,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 226827232.0
         },
         {
@@ -6716,7 +6716,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 245974048.0
         },
         {
@@ -6724,7 +6724,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 47861408.0
         },
         {
@@ -6732,7 +6732,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 1835167616.0
         },
         {
@@ -6740,7 +6740,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 391167744.0
         },
         {
@@ -6748,7 +6748,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.192282676696777,
+          "outlook": 8.135409355163574,
           "population": 603145024.0
         }
       ],
@@ -6946,40 +6946,40 @@
         "year": 2039
       },
       "numeric": {
-        "base_outlook": 31.178430557250977,
+        "base_outlook": 30.98018455505371,
         "demand": {
           "animal_calories_kcal": 2010142136598528.0,
           "electricity_kwh": 38152047689728.0,
           "fuel_kwh": 129713288773632.0,
           "plant_calories_kcal": 8213288508719104.0
         },
-        "emissions_ch4_g": 204527869362176.0,
-        "emissions_co2_g": 3.796873496231936e16,
-        "emissions_gtco2eq": 47.840267181396484,
+        "emissions_ch4_g": 230280510046208.0,
+        "emissions_co2_g": 4.279470624499302e16,
+        "emissions_gtco2eq": 53.59333038330078,
         "emissions_n2o_g": 8417871659008.0,
-        "extinction_rate": 112.2728500366211,
-        "hector_ch4_tg": 200.41888427734375,
-        "hector_ffi_pgc": 10.178385734558105,
+        "extinction_rate": 112.31707763671875,
+        "hector_ch4_tg": 225.63455200195312,
+        "hector_ffi_pgc": 11.467116355895996,
         "hector_n2o_tg": 8.28100299835205,
         "land_demand_fraction": 0.6691683530807495,
         "land_use_fraction": 1.0691684484481812,
         "mean_habitability": 9.975000381469727,
-        "outlook": 20.696613311767578,
+        "outlook": 25.666351318359375,
         "population": 9518072832.0,
         "produced": {
           "animal_calories_kcal": 2010142136598528.0,
-          "electricity_kwh": 5722807468032.0,
+          "electricity_kwh": 19076023844864.0,
           "fuel_kwh": 110256290004992.0,
-          "plant_calories_kcal": 6212974062600192.0
+          "plant_calories_kcal": 6211489077657600.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.171372413635254,
-        "sea_level_rise_m": 0.17730630934238434,
-        "shortages_outlook": 18.65319061279297,
-        "temperature_c": 1.7582145929336548,
-        "tgav_input_c": 1.7582145929336548,
+        "region_mean_outlook": 8.092073440551758,
+        "sea_level_rise_m": 0.1774410605430603,
+        "shortages_outlook": 13.405906677246094,
+        "temperature_c": 1.7686110734939575,
+        "tgav_input_c": 1.7686110734939575,
         "water_use_fraction": 0.6590843200683594,
-        "world_outlook": 39.34980392456055
+        "world_outlook": 39.07225799560547
       },
       "regions": [
         {
@@ -6987,7 +6987,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 86351480.0
         },
         {
@@ -6995,7 +6995,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 159050192.0
         },
         {
@@ -7003,7 +7003,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 318755776.0
         },
         {
@@ -7011,7 +7011,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 314930016.0
         },
         {
@@ -7019,7 +7019,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 318222528.0
         },
         {
@@ -7027,7 +7027,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 112174240.0
         },
         {
@@ -7035,7 +7035,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 95440872.0
         },
         {
@@ -7043,7 +7043,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 850504128.0
         },
         {
@@ -7051,7 +7051,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 2475932160.0
         },
         {
@@ -7059,7 +7059,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 478024512.0
         },
         {
@@ -7067,7 +7067,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 13966532.0
         },
         {
@@ -7075,7 +7075,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 681416640.0
         },
         {
@@ -7083,7 +7083,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 32479296.0
         },
         {
@@ -7091,7 +7091,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 206524912.0
         },
         {
@@ -7099,7 +7099,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 229307120.0
         },
         {
@@ -7107,7 +7107,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 248663264.0
         },
         {
@@ -7115,7 +7115,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 48029744.0
         },
         {
@@ -7123,7 +7123,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 1841622144.0
         },
         {
@@ -7131,7 +7131,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 391549728.0
         },
         {
@@ -7139,7 +7139,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.17137336730957,
+          "outlook": 8.092074394226074,
           "population": 615127680.0
         }
       ],
@@ -7337,40 +7337,40 @@
         "year": 2040
       },
       "numeric": {
-        "base_outlook": 30.879459381103516,
+        "base_outlook": 30.61919593811035,
         "demand": {
           "animal_calories_kcal": 2045831301562368.0,
           "electricity_kwh": 38944142000128.0,
           "fuel_kwh": 132409420939264.0,
           "plant_calories_kcal": 8292603132903424.0
         },
-        "emissions_ch4_g": 151849072066560.0,
-        "emissions_co2_g": 1.496269432291328e16,
-        "emissions_gtco2eq": 22.961307525634766,
-        "emissions_n2o_g": 8496804265984.0,
-        "extinction_rate": 113.0881576538086,
-        "hector_ch4_tg": 204.52786254882812,
-        "hector_ffi_pgc": 10.355110168457031,
+        "emissions_ch4_g": 163532305858560.0,
+        "emissions_co2_g": 2.107667368430797e16,
+        "emissions_gtco2eq": 29.49574089050293,
+        "emissions_n2o_g": 8496324542464.0,
+        "extinction_rate": 113.14939880371094,
+        "hector_ch4_tg": 230.28050231933594,
+        "hector_ffi_pgc": 11.671282768249512,
         "hector_n2o_tg": 8.417871475219727,
         "land_demand_fraction": 0.6799541711807251,
         "land_use_fraction": 1.0799542665481567,
         "mean_habitability": 9.975000381469727,
-        "outlook": 8.775312423706055,
+        "outlook": 12.158794403076172,
         "population": 9599481856.0,
         "produced": {
           "animal_calories_kcal": 2045831301562368.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 9736035500032.0,
           "fuel_kwh": 39722827120640.0,
-          "plant_calories_kcal": 5663334212829184.0
+          "plant_calories_kcal": 5662145580630016.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.151784896850586,
-        "sea_level_rise_m": 0.18321359157562256,
-        "shortages_outlook": 30.255929946899414,
-        "temperature_c": 1.7740470170974731,
-        "tgav_input_c": 1.7740470170974731,
+        "region_mean_outlook": 8.04767894744873,
+        "sea_level_rise_m": 0.18341536819934845,
+        "shortages_outlook": 26.508079528808594,
+        "temperature_c": 1.7874423265457153,
+        "tgav_input_c": 1.7874423265457153,
         "water_use_fraction": 0.6695153713226318,
-        "world_outlook": 39.03124237060547
+        "world_outlook": 38.666873931884766
       },
       "regions": [
         {
@@ -7378,7 +7378,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 86636744.0
         },
         {
@@ -7386,7 +7386,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 159186096.0
         },
         {
@@ -7394,7 +7394,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 319808800.0
         },
         {
@@ -7402,7 +7402,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 315970400.0
         },
         {
@@ -7410,7 +7410,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 321616640.0
         },
         {
@@ -7418,7 +7418,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 112270096.0
         },
         {
@@ -7426,7 +7426,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 96458832.0
         },
         {
@@ -7434,7 +7434,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 859575488.0
         },
         {
@@ -7442,7 +7442,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 2502340096.0
         },
         {
@@ -7450,7 +7450,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 479603680.0
         },
         {
@@ -7458,7 +7458,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 14012671.0
         },
         {
@@ -7466,7 +7466,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 694767168.0
         },
         {
@@ -7474,7 +7474,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 32507050.0
         },
         {
@@ -7482,7 +7482,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 206701392.0
         },
         {
@@ -7490,7 +7490,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 231752880.0
         },
         {
@@ -7498,7 +7498,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 251315472.0
         },
         {
@@ -7506,7 +7506,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 48188412.0
         },
         {
@@ -7514,7 +7514,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 1847705984.0
         },
         {
@@ -7522,7 +7522,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 391884320.0
         },
         {
@@ -7530,7 +7530,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.151785850524902,
+          "outlook": 8.04767894744873,
           "population": 627179456.0
         }
       ],
@@ -7728,40 +7728,40 @@
         "year": 2041
       },
       "numeric": {
-        "base_outlook": 30.65996551513672,
+        "base_outlook": 30.34453582763672,
         "demand": {
           "animal_calories_kcal": 2114638422474752.0,
           "electricity_kwh": 40478300962816.0,
           "fuel_kwh": 137631430082560.0,
           "plant_calories_kcal": 8446484831797248.0
         },
-        "emissions_ch4_g": 157525005565952.0,
-        "emissions_co2_g": 1.5280313596903424e16,
-        "emissions_gtco2eq": 23.434267044067383,
-        "emissions_n2o_g": 8332389646336.0,
-        "extinction_rate": 8.400671005249023,
-        "hector_ch4_tg": 151.8490753173828,
-        "hector_ffi_pgc": 4.080734729766846,
-        "hector_n2o_tg": 8.496804237365723,
+        "emissions_ch4_g": 169668505501696.0,
+        "emissions_co2_g": 2.163514828180685e16,
+        "emissions_gtco2eq": 30.226118087768555,
+        "emissions_n2o_g": 8331891572736.0,
+        "extinction_rate": 110.20541381835938,
+        "hector_ch4_tg": 163.5323028564453,
+        "hector_ffi_pgc": 5.748183250427246,
+        "hector_n2o_tg": 8.49632453918457,
         "land_demand_fraction": 0.700774073600769,
         "land_use_fraction": 1.1007741689682007,
         "mean_habitability": 9.975000381469727,
-        "outlook": 8.823951721191406,
+        "outlook": 10.89327621459961,
         "population": 9679686656.0,
         "produced": {
           "animal_calories_kcal": 2114638422474752.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 10119575240704.0,
           "fuel_kwh": 41289429024768.0,
-          "plant_calories_kcal": 4713330396626944.0
+          "plant_calories_kcal": 4712096130400256.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.163987159729004,
-        "sea_level_rise_m": 0.18917827308177948,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.7855217456817627,
-        "tgav_input_c": 1.7855217456817627,
+        "region_mean_outlook": 8.037813186645508,
+        "sea_level_rise_m": 0.18946053087711334,
+        "shortages_outlook": 27.489070892333984,
+        "temperature_c": 1.8015466928482056,
+        "tgav_input_c": 1.8015466928482056,
         "water_use_fraction": 0.6897030472755432,
-        "world_outlook": 38.823951721191406
+        "world_outlook": 38.382347106933594
       },
       "regions": [
         {
@@ -7769,7 +7769,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 86906424.0
         },
         {
@@ -7777,7 +7777,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 159302688.0
         },
         {
@@ -7785,7 +7785,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 320804288.0
         },
         {
@@ -7793,7 +7793,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 316953952.0
         },
         {
@@ -7801,7 +7801,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 324964768.0
         },
         {
@@ -7809,7 +7809,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 112352328.0
         },
         {
@@ -7817,7 +7817,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 97463000.0
         },
         {
@@ -7825,7 +7825,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 868523904.0
         },
         {
@@ -7833,7 +7833,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 2528390144.0
         },
         {
@@ -7841,7 +7841,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 481096576.0
         },
         {
@@ -7849,7 +7849,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 14056290.0
         },
         {
@@ -7857,7 +7857,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 708156608.0
         },
         {
@@ -7865,7 +7865,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 32530858.0
         },
         {
@@ -7873,7 +7873,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 206852784.0
         },
         {
@@ -7881,7 +7881,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 234165504.0
         },
         {
@@ -7889,7 +7889,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 253931744.0
         },
         {
@@ -7897,7 +7897,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 48338412.0
         },
         {
@@ -7905,7 +7905,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 1853457536.0
         },
         {
@@ -7913,7 +7913,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 392171360.0
         },
         {
@@ -7921,7 +7921,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.16398811340332,
+          "outlook": 8.03781509399414,
           "population": 639266368.0
         }
       ],
@@ -8119,40 +8119,40 @@
         "year": 2042
       },
       "numeric": {
-        "base_outlook": 30.48052978515625,
+        "base_outlook": 30.101253509521484,
         "demand": {
           "animal_calories_kcal": 2114638422474752.0,
           "electricity_kwh": 40478300962816.0,
           "fuel_kwh": 137631430082560.0,
           "plant_calories_kcal": 8446484831797248.0
         },
-        "emissions_ch4_g": 388652261703680.0,
-        "emissions_co2_g": 4.636144895105434e16,
-        "emissions_gtco2eq": 60.7427864074707,
-        "emissions_n2o_g": 1308255453184.0,
-        "extinction_rate": 8.540419578552246,
-        "hector_ch4_tg": 157.52500915527344,
-        "hector_ffi_pgc": 4.1673583984375,
-        "hector_n2o_tg": 8.332389831542969,
+        "emissions_ch4_g": 169668505501696.0,
+        "emissions_co2_g": 2.163514828180685e16,
+        "emissions_gtco2eq": 30.226118087768555,
+        "emissions_n2o_g": 8331891572736.0,
+        "extinction_rate": 107.47493743896484,
+        "hector_ch4_tg": 169.6685028076172,
+        "hector_ffi_pgc": 5.900494575500488,
+        "hector_n2o_tg": 8.331892013549805,
         "land_demand_fraction": 0.700774073600769,
         "land_use_fraction": 1.1007741689682007,
         "mean_habitability": 9.975000381469727,
-        "outlook": 8.672744750976562,
+        "outlook": 9.759902954101562,
         "population": 9752204288.0,
         "produced": {
-          "animal_calories_kcal": 0.0,
-          "electricity_kwh": 40478300962816.0,
-          "fuel_kwh": 137631430082560.0,
-          "plant_calories_kcal": 0.0
+          "animal_calories_kcal": 2114638422474752.0,
+          "electricity_kwh": 10119575240704.0,
+          "fuel_kwh": 41289429024768.0,
+          "plant_calories_kcal": 4712096130400256.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.192214012145996,
-        "sea_level_rise_m": 0.19518953561782837,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.7948055267333984,
-        "tgav_input_c": 1.7948055267333984,
+        "region_mean_outlook": 8.040502548217773,
+        "sea_level_rise_m": 0.19556783139705658,
+        "shortages_outlook": 28.381851196289062,
+        "temperature_c": 1.8138705492019653,
+        "tgav_input_c": 1.8138705492019653,
         "water_use_fraction": 0.6897030472755432,
-        "world_outlook": 38.67274475097656
+        "world_outlook": 38.141754150390625
       },
       "regions": [
         {
@@ -8160,7 +8160,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 87159040.0
         },
         {
@@ -8168,7 +8168,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 159385328.0
         },
         {
@@ -8176,7 +8176,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 321736800.0
         },
         {
@@ -8184,7 +8184,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 317875264.0
         },
         {
@@ -8192,7 +8192,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 328262208.0
         },
         {
@@ -8200,7 +8200,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 112410616.0
         },
         {
@@ -8208,7 +8208,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 98451968.0
         },
         {
@@ -8216,7 +8216,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 871048512.0
         },
         {
@@ -8224,7 +8224,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 2554045952.0
         },
         {
@@ -8232,7 +8232,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 482495040.0
         },
         {
@@ -8240,7 +8240,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 14097149.0
         },
         {
@@ -8248,7 +8248,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 721587968.0
         },
         {
@@ -8256,7 +8256,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 32547734.0
         },
         {
@@ -8264,7 +8264,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 206960096.0
         },
         {
@@ -8272,7 +8272,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 236541600.0
         },
         {
@@ -8280,7 +8280,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 256508416.0
         },
         {
@@ -8288,7 +8288,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 48478924.0
         },
         {
@@ -8296,7 +8296,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 1858845184.0
         },
         {
@@ -8304,7 +8304,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 392374816.0
         },
         {
@@ -8312,7 +8312,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.192214012145996,
+          "outlook": 8.040502548217773,
           "population": 651391104.0
         }
       ],
@@ -8510,40 +8510,40 @@
         "year": 2043
       },
       "numeric": {
-        "base_outlook": 30.113162994384766,
+        "base_outlook": 29.900012969970703,
         "demand": {
           "animal_calories_kcal": 2147977032368128.0,
           "electricity_kwh": 41250006761472.0,
           "fuel_kwh": 140258607890432.0,
           "plant_calories_kcal": 8516220068298752.0
         },
-        "emissions_ch4_g": 160346933297152.0,
-        "emissions_co2_g": 1.544151875190784e16,
-        "emissions_gtco2eq": 23.67349624633789,
-        "emissions_n2o_g": 8253315481600.0,
-        "extinction_rate": 104.6265640258789,
-        "hector_ch4_tg": 388.6522521972656,
-        "hector_ffi_pgc": 12.644031524658203,
-        "hector_n2o_tg": 1.3082554340362549,
+        "emissions_ch4_g": 172721925259264.0,
+        "emissions_co2_g": 2.191750587429683e16,
+        "emissions_gtco2eq": 30.594833374023438,
+        "emissions_n2o_g": 8252807970816.0,
+        "extinction_rate": 104.72150421142578,
+        "hector_ch4_tg": 169.6685028076172,
+        "hector_ffi_pgc": 5.900494575500488,
+        "hector_n2o_tg": 8.331892013549805,
         "land_demand_fraction": 0.710804283618927,
         "land_use_fraction": 1.1108043193817139,
         "mean_habitability": 9.975000381469727,
-        "outlook": 5.250358581542969,
+        "outlook": 8.699731826782227,
         "population": 9823460352.0,
         "produced": {
           "animal_calories_kcal": 2147977032368128.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 10312501690368.0,
           "fuel_kwh": 42077580689408.0,
-          "plant_calories_kcal": 4253526230302720.0
+          "plant_calories_kcal": 4252267804884992.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.145265579223633,
-        "sea_level_rise_m": 0.20129458606243134,
-        "shortages_outlook": 33.00807189941406,
-        "temperature_c": 1.8134242296218872,
-        "tgav_input_c": 1.8134242296218872,
+        "region_mean_outlook": 8.060007095336914,
+        "sea_level_rise_m": 0.20172612369060516,
+        "shortages_outlook": 29.260290145874023,
+        "temperature_c": 1.823952317237854,
+        "tgav_input_c": 1.823952317237854,
         "water_use_fraction": 0.6995270848274231,
-        "world_outlook": 38.25843048095703
+        "world_outlook": 37.96002197265625
       },
       "regions": [
         {
@@ -8551,7 +8551,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 87395104.0
         },
         {
@@ -8559,7 +8559,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 159450992.0
         },
         {
@@ -8567,7 +8567,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 322608192.0
         },
         {
@@ -8575,7 +8575,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 318736224.0
         },
         {
@@ -8583,7 +8583,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 331509216.0
         },
         {
@@ -8591,7 +8591,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 112456928.0
         },
         {
@@ -8599,7 +8599,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 99425808.0
         },
         {
@@ -8607,7 +8607,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 873407680.0
         },
         {
@@ -8615,7 +8615,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 2579309312.0
         },
         {
@@ -8623,7 +8623,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 483801856.0
         },
         {
@@ -8631,7 +8631,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 14135330.0
         },
         {
@@ -8639,7 +8639,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 735086912.0
         },
         {
@@ -8647,7 +8647,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 32561144.0
         },
         {
@@ -8655,7 +8655,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 207045360.0
         },
         {
@@ -8663,7 +8663,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 238881360.0
         },
         {
@@ -8671,7 +8671,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 259045664.0
         },
         {
@@ -8679,7 +8679,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 48610228.0
         },
         {
@@ -8687,7 +8687,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 1863879808.0
         },
         {
@@ -8695,7 +8695,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 392536480.0
         },
         {
@@ -8703,7 +8703,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.145267486572266,
+          "outlook": 8.060006141662598,
           "population": 663576832.0
         }
       ],
@@ -8901,40 +8901,40 @@
         "year": 2044
       },
       "numeric": {
-        "base_outlook": 29.9700927734375,
+        "base_outlook": 29.722875595092773,
         "demand": {
           "animal_calories_kcal": 2180418799403008.0,
           "electricity_kwh": 42001248550912.0,
           "fuel_kwh": 142816067977216.0,
           "plant_calories_kcal": 8584688826318848.0
         },
-        "emissions_ch4_g": 403291120861184.0,
-        "emissions_co2_g": 4.810727155249971e16,
-        "emissions_gtco2eq": 63.03030014038086,
-        "emissions_n2o_g": 1357538131968.0,
-        "extinction_rate": 8.84575366973877,
-        "hector_ch4_tg": 160.34693908691406,
-        "hector_ffi_pgc": 4.211323261260986,
-        "hector_n2o_tg": 8.253314971923828,
+        "emissions_ch4_g": 175694009073664.0,
+        "emissions_co2_g": 2.219238807620813e16,
+        "emissions_gtco2eq": 30.953754425048828,
+        "emissions_n2o_g": 8175778004992.0,
+        "extinction_rate": 102.03459167480469,
+        "hector_ch4_tg": 172.721923828125,
+        "hector_ffi_pgc": 5.977501392364502,
+        "hector_n2o_tg": 8.2528076171875,
         "land_demand_fraction": 0.7205761671066284,
         "land_use_fraction": 1.12057626247406,
         "mean_habitability": 9.975000381469727,
-        "outlook": 8.158134460449219,
+        "outlook": 7.710052490234375,
         "population": 9891332096.0,
         "produced": {
-          "animal_calories_kcal": 0.0,
-          "electricity_kwh": 42001248550912.0,
-          "fuel_kwh": 142816067977216.0,
-          "plant_calories_kcal": 0.0
+          "animal_calories_kcal": 2180418799403008.0,
+          "electricity_kwh": 10500312137728.0,
+          "fuel_kwh": 42844823748608.0,
+          "plant_calories_kcal": 3804749124075520.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.188039779663086,
-        "sea_level_rise_m": 0.2074359953403473,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.8206180334091187,
-        "tgav_input_c": 1.8206180334091187,
+        "region_mean_outlook": 8.089151382446289,
+        "sea_level_rise_m": 0.20792898535728455,
+        "shortages_outlook": 30.101974487304688,
+        "temperature_c": 1.832741618156433,
+        "tgav_input_c": 1.832741618156433,
         "water_use_fraction": 0.7091074585914612,
-        "world_outlook": 38.15813446044922
+        "world_outlook": 37.81202697753906
       },
       "regions": [
         {
@@ -8942,7 +8942,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 87612472.0
         },
         {
@@ -8950,7 +8950,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 159489920.0
         },
         {
@@ -8958,7 +8958,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 323410592.0
         },
         {
@@ -8966,7 +8966,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 319528992.0
         },
         {
@@ -8974,7 +8974,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 334702336.0
         },
         {
@@ -8982,7 +8982,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 112484384.0
         },
         {
@@ -8990,7 +8990,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 100383488.0
         },
         {
@@ -8998,7 +8998,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 875580032.0
         },
         {
@@ -9006,7 +9006,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 2604153600.0
         },
         {
@@ -9014,7 +9014,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 485005152.0
         },
         {
@@ -9022,7 +9022,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 14170487.0
         },
         {
@@ -9030,7 +9030,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 748591616.0
         },
         {
@@ -9038,7 +9038,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 32569094.0
         },
         {
@@ -9046,7 +9046,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 207095904.0
         },
         {
@@ -9054,7 +9054,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 239475504.0
         },
         {
@@ -9062,7 +9062,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 261540816.0
         },
         {
@@ -9070,7 +9070,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 48622096.0
         },
         {
@@ -9078,7 +9078,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 1868515584.0
         },
         {
@@ -9086,7 +9086,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 392632320.0
         },
         {
@@ -9094,7 +9094,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.188039779663086,
+          "outlook": 8.089151382446289,
           "population": 675767808.0
         }
       ],
@@ -9292,40 +9292,40 @@
         "year": 2045
       },
       "numeric": {
-        "base_outlook": 29.557151794433594,
+        "base_outlook": 29.56159210205078,
         "demand": {
           "animal_calories_kcal": 2212849023713280.0,
           "electricity_kwh": 42760929280000.0,
           "fuel_kwh": 145402410041344.0,
           "plant_calories_kcal": 8650426522009600.0
         },
-        "emissions_ch4_g": 165861402869760.0,
-        "emissions_co2_g": 1.575759613263872e16,
-        "emissions_gtco2eq": 24.14229965209961,
-        "emissions_n2o_g": 8099631464448.0,
-        "extinction_rate": 99.27732849121094,
-        "hector_ch4_tg": 403.2911071777344,
-        "hector_ffi_pgc": 13.120163917541504,
-        "hector_n2o_tg": 1.357538104057312,
+        "emissions_ch4_g": 178689681653760.0,
+        "emissions_co2_g": 2.247078785633485e16,
+        "emissions_gtco2eq": 31.317150115966797,
+        "emissions_n2o_g": 8099105079296.0,
+        "extinction_rate": 99.34876251220703,
+        "hector_ch4_tg": 175.6940155029297,
+        "hector_ffi_pgc": 6.052469730377197,
+        "hector_n2o_tg": 8.17577838897705,
         "land_demand_fraction": 0.7303044199943542,
         "land_use_fraction": 1.1303044557571411,
         "mean_habitability": 9.975000381469727,
-        "outlook": 3.004528045654297,
+        "outlook": 6.758480072021484,
         "population": 9957829632.0,
         "produced": {
           "animal_calories_kcal": 2212849023713280.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 10690232320000.0,
           "fuel_kwh": 43620723851264.0,
-          "plant_calories_kcal": 3358968025972736.0
+          "plant_calories_kcal": 3357663698092032.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.12286376953125,
-        "sea_level_rise_m": 0.2136804461479187,
-        "shortages_outlook": 34.67548751831055,
-        "temperature_c": 1.840925931930542,
-        "tgav_input_c": 1.840925931930542,
+        "region_mean_outlook": 8.124638557434082,
+        "sea_level_rise_m": 0.21417216956615448,
+        "shortages_outlook": 30.927749633789062,
+        "temperature_c": 1.8406754732131958,
+        "tgav_input_c": 1.8406754732131958,
         "water_use_fraction": 0.7186601161956787,
-        "world_outlook": 37.680015563964844
+        "world_outlook": 37.68622970581055
       },
       "regions": [
         {
@@ -9333,7 +9333,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 87813672.0
         },
         {
@@ -9341,7 +9341,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 159506960.0
         },
         {
@@ -9349,7 +9349,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 324153280.0
         },
         {
@@ -9357,7 +9357,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 320262784.0
         },
         {
@@ -9365,7 +9365,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 337844512.0
         },
         {
@@ -9373,7 +9373,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 112496400.0
         },
         {
@@ -9381,7 +9381,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 101325888.0
         },
         {
@@ -9389,7 +9389,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 877590784.0
         },
         {
@@ -9397,7 +9397,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 2628601344.0
         },
         {
@@ -9405,7 +9405,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 486118944.0
         },
         {
@@ -9413,7 +9413,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 14203029.0
         },
         {
@@ -9421,7 +9421,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 762115968.0
         },
         {
@@ -9429,7 +9429,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 32572572.0
         },
         {
@@ -9437,7 +9437,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 207118032.0
         },
         {
@@ -9445,7 +9445,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 240025440.0
         },
         {
@@ -9453,7 +9453,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 263996160.0
         },
         {
@@ -9461,7 +9461,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 48627288.0
         },
         {
@@ -9469,7 +9469,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 1872806528.0
         },
         {
@@ -9477,7 +9477,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 392674272.0
         },
         {
@@ -9485,7 +9485,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.12286376953125,
+          "outlook": 8.124638557434082,
           "population": 687976512.0
         }
       ],
@@ -9683,40 +9683,40 @@
         "year": 2046
       },
       "numeric": {
-        "base_outlook": 29.392797470092773,
+        "base_outlook": 29.40974235534668,
         "demand": {
           "animal_calories_kcal": 2278225405280256.0,
           "electricity_kwh": 44311462805504.0,
           "fuel_kwh": 150681663045632.0,
           "plant_calories_kcal": 8772319304482816.0
         },
-        "emissions_ch4_g": 171489387085824.0,
-        "emissions_co2_g": 1.6083327526109184e16,
-        "emissions_gtco2eq": 24.624967575073242,
-        "emissions_n2o_g": 7946383654912.0,
-        "extinction_rate": 9.150236129760742,
-        "hector_ch4_tg": 165.8614044189453,
-        "hector_ffi_pgc": 4.2975263595581055,
-        "hector_n2o_tg": 8.099631309509277,
+        "emissions_ch4_g": 214693050318848.0,
+        "emissions_co2_g": 2.762618742557901e16,
+        "emissions_gtco2eq": 37.72300338745117,
+        "emissions_n2o_g": 7945853075456.0,
+        "extinction_rate": 96.68804931640625,
+        "hector_ch4_tg": 178.68968200683594,
+        "hector_ffi_pgc": 6.128396511077881,
+        "hector_n2o_tg": 8.099104881286621,
         "land_demand_fraction": 0.7497416734695435,
         "land_use_fraction": 1.1497416496276855,
         "mean_habitability": 9.975000381469727,
-        "outlook": 7.549919128417969,
+        "outlook": 8.09535026550293,
         "population": 10016198656.0,
         "produced": {
           "animal_calories_kcal": 2278225405280256.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 17724585541632.0,
           "fuel_kwh": 45204497235968.0,
-          "plant_calories_kcal": 2458826632593408.0
+          "plant_calories_kcal": 2457511567294464.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.157121658325195,
-        "sea_level_rise_m": 0.21996571123600006,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.8489387035369873,
-        "tgav_input_c": 1.8489387035369873,
+        "region_mean_outlook": 8.163896560668945,
+        "sea_level_rise_m": 0.22045308351516724,
+        "shortages_outlook": 29.478288650512695,
+        "temperature_c": 1.8480855226516724,
+        "tgav_input_c": 1.8480855226516724,
         "water_use_fraction": 0.7377190589904785,
-        "world_outlook": 37.54991912841797
+        "world_outlook": 37.573638916015625
       },
       "regions": [
         {
@@ -9724,7 +9724,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 87997240.0
         },
         {
@@ -9732,7 +9732,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 159502096.0
         },
         {
@@ -9740,7 +9740,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 324830912.0
         },
         {
@@ -9748,7 +9748,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 320932288.0
         },
         {
@@ -9756,7 +9756,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 340928544.0
         },
         {
@@ -9764,7 +9764,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 112492968.0
         },
         {
@@ -9772,7 +9772,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 102250848.0
         },
         {
@@ -9780,7 +9780,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 879425344.0
         },
         {
@@ -9788,7 +9788,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 2652596736.0
         },
         {
@@ -9796,7 +9796,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 487135168.0
         },
         {
@@ -9804,7 +9804,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 14232720.0
         },
         {
@@ -9812,7 +9812,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 769073024.0
         },
         {
@@ -9820,7 +9820,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 32571578.0
         },
         {
@@ -9828,7 +9828,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 207111712.0
         },
         {
@@ -9836,7 +9836,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 240527200.0
         },
         {
@@ -9844,7 +9844,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 266406064.0
         },
         {
@@ -9852,7 +9852,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 48625804.0
         },
         {
@@ -9860,7 +9860,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 1876721536.0
         },
         {
@@ -9868,7 +9868,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 392662304.0
         },
         {
@@ -9876,7 +9876,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.157122611999512,
+          "outlook": 8.163898468017578,
           "population": 700174848.0
         }
       ],
@@ -10074,40 +10074,40 @@
         "year": 2047
       },
       "numeric": {
-        "base_outlook": 29.20787811279297,
+        "base_outlook": 29.222877502441406,
         "demand": {
           "animal_calories_kcal": 2278225405280256.0,
           "electricity_kwh": 44311462805504.0,
           "fuel_kwh": 150681663045632.0,
           "plant_calories_kcal": 8772319304482816.0
         },
-        "emissions_ch4_g": 425499390115840.0,
-        "emissions_co2_g": 5.075576313557811e16,
-        "emissions_gtco2eq": 66.50056457519531,
-        "emissions_n2o_g": 1432304615424.0,
-        "extinction_rate": 9.287371635437012,
-        "hector_ch4_tg": 171.4893798828125,
-        "hector_ffi_pgc": 4.386361598968506,
-        "hector_n2o_tg": 7.946383476257324,
+        "emissions_ch4_g": 214693050318848.0,
+        "emissions_co2_g": 2.762618742557901e16,
+        "emissions_gtco2eq": 37.72300338745117,
+        "emissions_n2o_g": 7945853075456.0,
+        "extinction_rate": 93.92974853515625,
+        "hector_ch4_tg": 214.69305419921875,
+        "hector_ffi_pgc": 7.534414291381836,
+        "hector_n2o_tg": 7.945853233337402,
         "land_demand_fraction": 0.7497416734695435,
         "land_use_fraction": 1.1497416496276855,
         "mean_habitability": 9.934999465942383,
-        "outlook": 7.391029357910156,
+        "outlook": 7.114187240600586,
         "population": 10072964096.0,
         "produced": {
-          "animal_calories_kcal": 0.0,
-          "electricity_kwh": 44311462805504.0,
-          "fuel_kwh": 150681663045632.0,
-          "plant_calories_kcal": 0.0
+          "animal_calories_kcal": 2278225405280256.0,
+          "electricity_kwh": 17724585541632.0,
+          "fuel_kwh": 45204497235968.0,
+          "plant_calories_kcal": 2457511567294464.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.18315315246582,
-        "sea_level_rise_m": 0.2262965589761734,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.85786771774292,
-        "tgav_input_c": 1.85786771774292,
+        "region_mean_outlook": 8.189152717590332,
+        "sea_level_rise_m": 0.22678008675575256,
+        "shortages_outlook": 30.297842025756836,
+        "temperature_c": 1.8571157455444336,
+        "tgav_input_c": 1.8571157455444336,
         "water_use_fraction": 0.7377190589904785,
-        "world_outlook": 37.391029357910156
+        "world_outlook": 37.41202926635742
       },
       "regions": [
         {
@@ -10115,7 +10115,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 88164408.0
         },
         {
@@ -10123,7 +10123,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 159470464.0
         },
         {
@@ -10131,7 +10131,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 325448000.0
         },
         {
@@ -10139,7 +10139,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 321541984.0
         },
         {
@@ -10147,7 +10147,7 @@
           "habitability": 9.100004196166992,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 343957504.0
         },
         {
@@ -10155,7 +10155,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 112470656.0
         },
         {
@@ -10163,7 +10163,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 103159288.0
         },
         {
@@ -10171,7 +10171,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 881096000.0
         },
         {
@@ -10179,7 +10179,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 2676163584.0
         },
         {
@@ -10187,7 +10187,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 488060576.0
         },
         {
@@ -10195,7 +10195,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 14259758.0
         },
         {
@@ -10203,7 +10203,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 775905792.0
         },
         {
@@ -10211,7 +10211,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 32565116.0
         },
         {
@@ -10219,7 +10219,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 207070624.0
         },
         {
@@ -10227,7 +10227,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 240984128.0
         },
         {
@@ -10235,7 +10235,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 268772928.0
         },
         {
@@ -10243,7 +10243,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 48616160.0
         },
         {
@@ -10251,7 +10251,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 1880286720.0
         },
         {
@@ -10259,7 +10259,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 392584416.0
         },
         {
@@ -10267,7 +10267,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.183155059814453,
+          "outlook": 8.189152717590332,
           "population": 712386432.0
         }
       ],
@@ -10465,40 +10465,40 @@
         "year": 2048
       },
       "numeric": {
-        "base_outlook": 28.788034439086914,
+        "base_outlook": 29.034931182861328,
         "demand": {
           "animal_calories_kcal": 2311237597659136.0,
           "electricity_kwh": 45100684017664.0,
           "fuel_kwh": 153368936841216.0,
           "plant_calories_kcal": 8828745511075840.0
         },
-        "emissions_ch4_g": 174347184504832.0,
-        "emissions_co2_g": 1.624942894383104e16,
-        "emissions_gtco2eq": 24.871078491210938,
-        "emissions_n2o_g": 7869627891712.0,
-        "extinction_rate": 91.203125,
-        "hector_ch4_tg": 425.4993896484375,
-        "hector_ffi_pgc": 13.842480659484863,
-        "hector_n2o_tg": 1.4323046207427979,
+        "emissions_ch4_g": 218320351526912.0,
+        "emissions_co2_g": 2.7997876042858496e16,
+        "emissions_gtco2eq": 38.202392578125,
+        "emissions_n2o_g": 7869087875072.0,
+        "extinction_rate": 91.21416473388672,
+        "hector_ch4_tg": 214.69305419921875,
+        "hector_ffi_pgc": 7.534414291381836,
+        "hector_n2o_tg": 7.945853233337402,
         "land_demand_fraction": 0.7594692707061768,
         "land_use_fraction": 1.1594692468643188,
         "mean_habitability": 9.934999465942383,
-        "outlook": -0.19055938720703125,
+        "outlook": 6.15281867980957,
         "population": 10127385600.0,
         "produced": {
           "animal_calories_kcal": 2311237597659136.0,
-          "electricity_kwh": 0.0,
+          "electricity_kwh": 18040274026496.0,
           "fuel_kwh": 46010684407808.0,
-          "plant_calories_kcal": 2004823624908800.0
+          "plant_calories_kcal": 2003484803072000.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.115218162536621,
-        "sea_level_rise_m": 0.23272912204265594,
-        "shortages_outlook": 37.09381103515625,
-        "temperature_c": 1.877713918685913,
-        "tgav_input_c": 1.877713918685913,
+        "region_mean_outlook": 8.213973999023438,
+        "sea_level_rise_m": 0.23315311968326569,
+        "shortages_outlook": 31.096086502075195,
+        "temperature_c": 1.866110920906067,
+        "tgav_input_c": 1.866110920906067,
         "water_use_fraction": 0.7472277879714966,
-        "world_outlook": 36.90325164794922
+        "world_outlook": 37.248905181884766
       },
       "regions": [
         {
@@ -10506,7 +10506,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 88314408.0
         },
         {
@@ -10514,7 +10514,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 159421792.0
         },
         {
@@ -10522,7 +10522,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 326001696.0
         },
         {
@@ -10530,7 +10530,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 322089056.0
         },
         {
@@ -10538,7 +10538,7 @@
           "habitability": 9.100004196166992,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 346928096.0
         },
         {
@@ -10546,7 +10546,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 112436336.0
         },
         {
@@ -10554,7 +10554,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 103334800.0
         },
         {
@@ -10562,7 +10562,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 882595072.0
         },
         {
@@ -10570,7 +10570,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 2699276288.0
         },
         {
@@ -10578,7 +10578,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 488890944.0
         },
         {
@@ -10586,7 +10586,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 14284019.0
         },
         {
@@ -10594,7 +10594,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 782606912.0
         },
         {
@@ -10602,7 +10602,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 32555178.0
         },
         {
@@ -10610,7 +10610,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 207007424.0
         },
         {
@@ -10618,7 +10618,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 241394128.0
         },
         {
@@ -10626,7 +10626,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 271094176.0
         },
         {
@@ -10634,7 +10634,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 48601324.0
         },
         {
@@ -10642,7 +10642,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 1883485696.0
         },
         {
@@ -10650,7 +10650,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 392464608.0
         },
         {
@@ -10658,7 +10658,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.115218162536621,
+          "outlook": 8.213973999023438,
           "population": 724604480.0
         }
       ],
@@ -10856,40 +10856,40 @@
         "year": 2049
       },
       "numeric": {
-        "base_outlook": 28.629669189453125,
+        "base_outlook": 28.832490921020508,
         "demand": {
           "animal_calories_kcal": 2344204424445952.0,
           "electricity_kwh": 45893420056576.0,
           "fuel_kwh": 156068307009536.0,
           "plant_calories_kcal": 8883276563349504.0
         },
-        "emissions_ch4_g": 440708171300864.0,
-        "emissions_co2_g": 5.256948916997325e16,
-        "emissions_gtco2eq": 68.87706756591797,
-        "emissions_n2o_g": 1483507367936.0,
-        "extinction_rate": 9.60835075378418,
-        "hector_ch4_tg": 174.34718322753906,
-        "hector_ffi_pgc": 4.431662559509277,
-        "hector_n2o_tg": 7.869627952575684,
+        "emissions_ch4_g": 106269939597312.0,
+        "emissions_co2_g": 1.68697725452288e16,
+        "emissions_gtco2eq": 23.028409957885742,
+        "emissions_n2o_g": 7828590297088.0,
+        "extinction_rate": 89.85003662109375,
+        "hector_ch4_tg": 218.3203582763672,
+        "hector_ffi_pgc": 7.635784149169922,
+        "hector_n2o_tg": 7.8690876960754395,
         "land_demand_fraction": 0.7691552639007568,
         "land_use_fraction": 1.1691553592681885,
         "mean_habitability": 9.934999465942383,
-        "outlook": 6.7815399169921875,
+        "outlook": -1.2899589538574219,
         "population": 10180155392.0,
         "produced": {
-          "animal_calories_kcal": 0.0,
-          "electricity_kwh": 45893420056576.0,
-          "fuel_kwh": 156068307009536.0,
-          "plant_calories_kcal": 0.0
+          "animal_calories_kcal": 2327724634931200.0,
+          "electricity_kwh": 6884013113344.0,
+          "fuel_kwh": 15606831120384.0,
+          "plant_calories_kcal": 1776655366356992.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.151871681213379,
-        "sea_level_rise_m": 0.23919989168643951,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.8851410150527954,
-        "tgav_input_c": 1.8851410150527954,
+        "region_mean_outlook": 8.232999801635742,
+        "sea_level_rise_m": 0.2395753413438797,
+        "shortages_outlook": 38.35544967651367,
+        "temperature_c": 1.8757009506225586,
+        "tgav_input_c": 1.8757009506225586,
         "water_use_fraction": 0.756698727607727,
-        "world_outlook": 36.78153991699219
+        "world_outlook": 37.06549072265625
       },
       "regions": [
         {
@@ -10897,7 +10897,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 88447816.0
         },
         {
@@ -10905,7 +10905,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 159351248.0
         },
         {
@@ -10913,7 +10913,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 326494176.0
         },
         {
@@ -10921,7 +10921,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 322575616.0
         },
         {
@@ -10929,7 +10929,7 @@
           "habitability": 9.100004196166992,
           "income": "UpperMiddle",
           "name": "Northern Africa",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 349840960.0
         },
         {
@@ -10937,7 +10937,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 112386584.0
         },
         {
@@ -10945,7 +10945,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 103490896.0
         },
         {
@@ -10953,7 +10953,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 883928320.0
         },
         {
@@ -10961,7 +10961,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 2721939712.0
         },
         {
@@ -10969,7 +10969,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 489629472.0
         },
         {
@@ -10977,7 +10977,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 14305597.0
         },
         {
@@ -10985,7 +10985,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 789177792.0
         },
         {
@@ -10993,7 +10993,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 32540772.0
         },
         {
@@ -11001,7 +11001,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 206915824.0
         },
         {
@@ -11009,7 +11009,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 241758784.0
         },
         {
@@ -11017,7 +11017,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 273370336.0
         },
         {
@@ -11025,7 +11025,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 48579816.0
         },
         {
@@ -11033,7 +11033,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 1886330880.0
         },
         {
@@ -11041,7 +11041,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 392290944.0
         },
         {
@@ -11049,7 +11049,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 8.151872634887695,
+          "outlook": 8.23299789428711,
           "population": 736799872.0
         }
       ],
@@ -11247,40 +11247,40 @@
         "year": 2050
       },
       "numeric": {
-        "base_outlook": 28.14463996887207,
+        "base_outlook": 28.75656509399414,
         "demand": {
           "animal_calories_kcal": 2376824164188160.0,
           "electricity_kwh": 46679621369856.0,
           "fuel_kwh": 158745430589440.0,
           "plant_calories_kcal": 8936391887028224.0
         },
-        "emissions_ch4_g": 93007315468288.0,
-        "emissions_co2_g": 1.0288478193451008e16,
-        "emissions_gtco2eq": 15.96851921081543,
-        "emissions_n2o_g": 7824756178944.0,
-        "extinction_rate": 89.90852355957031,
-        "hector_ch4_tg": 440.7081604003906,
-        "hector_ffi_pgc": 14.337133407592773,
-        "hector_n2o_tg": 1.4835073947906494,
+        "emissions_ch4_g": 107009932263424.0,
+        "emissions_co2_g": 1.7080278556082176e16,
+        "emissions_gtco2eq": 23.26436424255371,
+        "emissions_n2o_g": 7824593649664.0,
+        "extinction_rate": 89.89605712890625,
+        "hector_ch4_tg": 106.26993560791016,
+        "hector_ffi_pgc": 4.600846767425537,
+        "hector_n2o_tg": 7.828590393066406,
         "land_demand_fraction": 0.7787259221076965,
         "land_use_fraction": 1.1787259578704834,
         "mean_habitability": 9.934999465942383,
-        "outlook": -4.614559173583984,
+        "outlook": -1.5081710815429688,
         "population": 10228865024.0,
         "produced": {
-          "animal_calories_kcal": 2326584589549568.0,
-          "electricity_kwh": 0.0,
+          "animal_calories_kcal": 2326536271167488.0,
+          "electricity_kwh": 7001943310336.0,
           "fuel_kwh": 15874543058944.0,
           "plant_calories_kcal": 1787278431092736.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.057860374450684,
-        "sea_level_rise_m": 0.2457854002714157,
-        "shortages_outlook": 40.81705856323242,
-        "temperature_c": 1.907361388206482,
-        "tgav_input_c": 1.907361388206482,
+        "region_mean_outlook": 8.302627563476562,
+        "sea_level_rise_m": 0.2460159808397293,
+        "shortages_outlook": 38.56736373901367,
+        "temperature_c": 1.8792840242385864,
+        "tgav_input_c": 1.8792840242385864,
         "water_use_fraction": 0.7660561203956604,
-        "world_outlook": 36.20249938964844
+        "world_outlook": 37.0591926574707
       },
       "regions": [
         {
@@ -11288,7 +11288,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 88564560.0
         },
         {
@@ -11296,7 +11296,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 159256416.0
         },
         {
@@ -11304,7 +11304,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 326925120.0
         },
         {
@@ -11312,7 +11312,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 323001376.0
         },
         {
@@ -11320,7 +11320,7 @@
           "habitability": 9.100004196166992,
           "income": "UpperMiddle",
           "name": "Northern Africa",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 350302720.0
         },
         {
@@ -11328,7 +11328,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 112319704.0
         },
         {
@@ -11336,7 +11336,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 103627496.0
         },
         {
@@ -11344,7 +11344,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 885094976.0
         },
         {
@@ -11352,7 +11352,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 2744139264.0
         },
         {
@@ -11360,7 +11360,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 490275712.0
         },
         {
@@ -11368,7 +11368,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 14324479.0
         },
         {
@@ -11376,7 +11376,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 795614208.0
         },
         {
@@ -11384,7 +11384,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 32521408.0
         },
         {
@@ -11392,7 +11392,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 206792688.0
         },
         {
@@ -11400,7 +11400,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 242077872.0
         },
         {
@@ -11408,7 +11408,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 275599904.0
         },
         {
@@ -11416,7 +11416,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 48550908.0
         },
         {
@@ -11424,7 +11424,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 1888820608.0
         },
         {
@@ -11432,7 +11432,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 392057504.0
         },
         {
@@ -11440,7 +11440,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Western Africa",
-          "outlook": 8.057860374450684,
+          "outlook": 8.302627563476562,
           "population": 748998144.0
         }
       ],
@@ -11638,40 +11638,40 @@
         "year": 2051
       },
       "numeric": {
-        "base_outlook": 28.0494327545166,
+        "base_outlook": 28.678632736206055,
         "demand": {
           "animal_calories_kcal": 2440975943204864.0,
           "electricity_kwh": 48267316428800.0,
           "fuel_kwh": 164152408539136.0,
           "plant_calories_kcal": 9028239225782272.0
         },
-        "emissions_ch4_g": 94034634735616.0,
-        "emissions_co2_g": 1.0482223094431744e16,
-        "emissions_gtco2eq": 16.197189331054688,
-        "emissions_n2o_g": 7817848160256.0,
-        "extinction_rate": 9.931865692138672,
-        "hector_ch4_tg": 93.00731658935547,
-        "hector_ffi_pgc": 2.805948495864868,
-        "hector_n2o_tg": 7.824756145477295,
+        "emissions_ch4_g": 108612726816768.0,
+        "emissions_co2_g": 1.7512376962121728e16,
+        "emissions_gtco2eq": 23.752103805541992,
+        "emissions_n2o_g": 7817680388096.0,
+        "extinction_rate": 89.91929626464844,
+        "hector_ch4_tg": 107.00993347167969,
+        "hector_ffi_pgc": 4.658257484436035,
+        "hector_n2o_tg": 7.824593544006348,
         "land_demand_fraction": 0.7973618507385254,
         "land_use_fraction": 1.1973618268966675,
         "mean_habitability": 9.934999465942383,
-        "outlook": 6.169212341308594,
+        "outlook": -1.7157325744628906,
         "population": 10269680640.0,
         "produced": {
-          "animal_calories_kcal": 2324530521440256.0,
-          "electricity_kwh": 0.0,
-          "fuel_kwh": 16415241273344.0,
+          "animal_calories_kcal": 2324480592445440.0,
+          "electricity_kwh": 7240097988608.0,
+          "fuel_kwh": 16451982327808.0,
           "plant_calories_kcal": 1805647872000000.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.119779586791992,
-        "sea_level_rise_m": 0.2523934245109558,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.9117032289505005,
-        "tgav_input_c": 1.9117032289505005,
+        "region_mean_outlook": 8.371455192565918,
+        "sea_level_rise_m": 0.25247547030448914,
+        "shortages_outlook": 38.76581954956055,
+        "temperature_c": 1.8829474449157715,
+        "tgav_input_c": 1.8829474449157715,
         "water_use_fraction": 0.7843508124351501,
-        "world_outlook": 36.169212341308594
+        "world_outlook": 37.050086975097656
       },
       "regions": [
         {
@@ -11679,7 +11679,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 88665240.0
         },
         {
@@ -11687,7 +11687,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 159147056.0
         },
         {
@@ -11695,7 +11695,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 327296768.0
         },
         {
@@ -11703,7 +11703,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 323368544.0
         },
         {
@@ -11711,7 +11711,7 @@
           "habitability": 9.100004196166992,
           "income": "UpperMiddle",
           "name": "Northern Africa",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 350700928.0
         },
         {
@@ -11719,7 +11719,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 112242584.0
         },
         {
@@ -11727,7 +11727,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 103745296.0
         },
         {
@@ -11735,7 +11735,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 886101120.0
         },
         {
@@ -11743,7 +11743,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 2765850112.0
         },
         {
@@ -11751,7 +11751,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 490833056.0
         },
         {
@@ -11759,7 +11759,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 14340763.0
         },
         {
@@ -11767,7 +11767,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 801908864.0
         },
         {
@@ -11775,7 +11775,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 32499078.0
         },
         {
@@ -11783,7 +11783,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 206650688.0
         },
         {
@@ -11791,7 +11791,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 242353056.0
         },
         {
@@ -11799,7 +11799,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 277780352.0
         },
         {
@@ -11807,7 +11807,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 48517572.0
         },
         {
@@ -11815,7 +11815,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 1890967808.0
         },
         {
@@ -11823,7 +11823,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 391788288.0
         },
         {
@@ -11831,7 +11831,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Western Africa",
-          "outlook": 8.119778633117676,
+          "outlook": 8.371455192565918,
           "population": 754923968.0
         }
       ],
@@ -12029,40 +12029,40 @@
         "year": 2052
       },
       "numeric": {
-        "base_outlook": 27.93246078491211,
+        "base_outlook": 28.626379013061523,
         "demand": {
           "animal_calories_kcal": 2440975943204864.0,
           "electricity_kwh": 48267316428800.0,
           "fuel_kwh": 164152408539136.0,
           "plant_calories_kcal": 9028239225782272.0
         },
-        "emissions_ch4_g": 463532869025792.0,
-        "emissions_co2_g": 5.529139462904218e16,
-        "emissions_gtco2eq": 72.44356536865234,
-        "emissions_n2o_g": 1560350687232.0,
-        "extinction_rate": 10.058789253234863,
-        "hector_ch4_tg": 94.03463745117188,
-        "hector_ffi_pgc": 2.858788013458252,
-        "hector_n2o_tg": 7.817848205566406,
+        "emissions_ch4_g": 108612726816768.0,
+        "emissions_co2_g": 1.7512376962121728e16,
+        "emissions_gtco2eq": 23.752103805541992,
+        "emissions_n2o_g": 7817680388096.0,
+        "extinction_rate": 89.94230651855469,
+        "hector_ch4_tg": 108.61272430419922,
+        "hector_ffi_pgc": 4.7761030197143555,
+        "hector_n2o_tg": 7.817680358886719,
         "land_demand_fraction": 0.7973618507385254,
         "land_use_fraction": 1.1973618268966675,
         "mean_habitability": 9.934999465942383,
-        "outlook": 6.105449676513672,
+        "outlook": -1.8855819702148438,
         "population": 10308666368.0,
         "produced": {
-          "animal_calories_kcal": 0.0,
-          "electricity_kwh": 48267316428800.0,
-          "fuel_kwh": 164152408539136.0,
-          "plant_calories_kcal": 0.0
+          "animal_calories_kcal": 2324480592445440.0,
+          "electricity_kwh": 7240097988608.0,
+          "fuel_kwh": 16451982327808.0,
+          "plant_calories_kcal": 1805647872000000.0
         },
         "protected_land_fraction": 0.4000000059604645,
-        "region_mean_outlook": 8.172989845275879,
-        "sea_level_rise_m": 0.25902897119522095,
-        "shortages_outlook": 30.0,
-        "temperature_c": 1.9170081615447998,
-        "tgav_input_c": 1.9170081615447998,
+        "region_mean_outlook": 8.450555801391602,
+        "sea_level_rise_m": 0.25894755125045776,
+        "shortages_outlook": 38.96251678466797,
+        "temperature_c": 1.8853974342346191,
+        "tgav_input_c": 1.8853974342346191,
         "water_use_fraction": 0.7843508124351501,
-        "world_outlook": 36.10544967651367
+        "world_outlook": 37.076934814453125
       },
       "regions": [
         {
@@ -12070,7 +12070,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern Africa",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 88748448.0
         },
         {
@@ -12078,7 +12078,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 159018352.0
         },
         {
@@ -12086,7 +12086,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 327603904.0
         },
         {
@@ -12094,7 +12094,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 323672000.0
         },
         {
@@ -12102,7 +12102,7 @@
           "habitability": 9.100004196166992,
           "income": "UpperMiddle",
           "name": "Northern Africa",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 351030016.0
         },
         {
@@ -12110,7 +12110,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 112151808.0
         },
         {
@@ -12118,7 +12118,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central Asia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 103842656.0
         },
         {
@@ -12126,7 +12126,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "South-eastern Asia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 886932672.0
         },
         {
@@ -12134,7 +12134,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 2787089152.0
         },
         {
@@ -12142,7 +12142,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 491293664.0
         },
         {
@@ -12150,7 +12150,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 14354221.0
         },
         {
@@ -12158,7 +12158,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Eastern Africa",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 808066688.0
         },
         {
@@ -12166,7 +12166,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 32472796.0
         },
         {
@@ -12174,7 +12174,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 206483568.0
         },
         {
@@ -12182,7 +12182,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Central America",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 242580480.0
         },
         {
@@ -12190,7 +12190,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 279913408.0
         },
         {
@@ -12198,7 +12198,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Caribbean",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 48478336.0
         },
         {
@@ -12206,7 +12206,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 1892742272.0
         },
         {
@@ -12214,7 +12214,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 391471456.0
         },
         {
@@ -12222,7 +12222,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Western Africa",
-          "outlook": 8.172990798950195,
+          "outlook": 8.450553894042969,
           "population": 760721024.0
         }
       ],

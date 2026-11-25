@@ -229,8 +229,8 @@
           "fuel_kwh": 88491828445184.0,
           "plant_calories_kcal": 6836503455989760.0
         },
-        "emissions_ch4_g": 298705412423680.0,
-        "emissions_co2_g": 3.853817031635763e16,
+        "emissions_ch4_g": 298705378869248.0,
+        "emissions_co2_g": 3.853817461132493e16,
         "emissions_gtco2eq": 51.57917404174805,
         "emissions_n2o_g": 7676531572736.0,
         "extinction_rate": 90.18851470947266,
@@ -620,13 +620,13 @@
           "fuel_kwh": 88491828445184.0,
           "plant_calories_kcal": 6836503455989760.0
         },
-        "emissions_ch4_g": 298705412423680.0,
-        "emissions_co2_g": 3.853817031635763e16,
+        "emissions_ch4_g": 298705378869248.0,
+        "emissions_co2_g": 3.853817461132493e16,
         "emissions_gtco2eq": 51.57917404174805,
         "emissions_n2o_g": 7676531572736.0,
         "extinction_rate": 90.18904113769531,
-        "hector_ch4_tg": 298.7054138183594,
-        "hector_ffi_pgc": 10.51041030883789,
+        "hector_ch4_tg": 298.70538330078125,
+        "hector_ffi_pgc": 10.510411262512207,
         "hector_n2o_tg": 7.6765313148498535,
         "land_demand_fraction": 0.4866063892841339,
         "land_use_fraction": 0.5866063833236694,
@@ -1016,8 +1016,8 @@
         "emissions_gtco2eq": 52.92057800292969,
         "emissions_n2o_g": 7834584481792.0,
         "extinction_rate": 92.505615234375,
-        "hector_ch4_tg": 298.7054138183594,
-        "hector_ffi_pgc": 10.51041030883789,
+        "hector_ch4_tg": 298.70538330078125,
+        "hector_ffi_pgc": 10.510411262512207,
         "hector_n2o_tg": 7.6765313148498535,
         "land_demand_fraction": 0.49658796191215515,
         "land_use_fraction": 0.5965879559516907,
@@ -1403,8 +1403,8 @@
           "plant_calories_kcal": 7018202584317952.0
         },
         "emissions_ch4_g": 314570988060672.0,
-        "emissions_co2_g": 4.056899835763098e16,
-        "emissions_gtco2eq": 54.27570724487305,
+        "emissions_co2_g": 4.056899406266368e16,
+        "emissions_gtco2eq": 54.275699615478516,
         "emissions_n2o_g": 7993793970176.0,
         "extinction_rate": 94.2830810546875,
         "hector_ch4_tg": 306.596923828125,
@@ -1793,13 +1793,13 @@
           "fuel_kwh": 98200736235520.0,
           "plant_calories_kcal": 7198465582956544.0
         },
-        "emissions_ch4_g": 330736271884288.0,
+        "emissions_ch4_g": 330736305438720.0,
         "emissions_co2_g": 4.263752332686131e16,
         "emissions_gtco2eq": 57.02191925048828,
         "emissions_n2o_g": 8315054587904.0,
         "extinction_rate": 96.0620346069336,
         "hector_ch4_tg": 314.57098388671875,
-        "hector_ffi_pgc": 11.0642728805542,
+        "hector_ffi_pgc": 11.064271926879883,
         "hector_n2o_tg": 7.993793964385986,
         "land_demand_fraction": 0.5269327759742737,
         "land_use_fraction": 0.6269327998161316,
@@ -2184,12 +2184,12 @@
           "fuel_kwh": 98200736235520.0,
           "plant_calories_kcal": 7198465582956544.0
         },
-        "emissions_ch4_g": 330736271884288.0,
+        "emissions_ch4_g": 330736305438720.0,
         "emissions_co2_g": 4.263752332686131e16,
         "emissions_gtco2eq": 57.02191925048828,
         "emissions_n2o_g": 8315054587904.0,
         "extinction_rate": 97.84573364257812,
-        "hector_ch4_tg": 330.73626708984375,
+        "hector_ch4_tg": 330.7362976074219,
         "hector_ffi_pgc": 11.628416061401367,
         "hector_n2o_tg": 8.315054893493652,
         "land_demand_fraction": 0.5269327759742737,
@@ -2580,7 +2580,7 @@
         "emissions_gtco2eq": 58.409183502197266,
         "emissions_n2o_g": 8476574613504.0,
         "extinction_rate": 99.63156127929688,
-        "hector_ch4_tg": 330.73626708984375,
+        "hector_ch4_tg": 330.7362976074219,
         "hector_ffi_pgc": 11.628416061401367,
         "hector_n2o_tg": 8.315054893493652,
         "land_demand_fraction": 0.5371333360671997,
@@ -3357,7 +3357,7 @@
           "fuel_kwh": 105783022845952.0,
           "plant_calories_kcal": 7462160468803584.0
         },
-        "emissions_ch4_g": 355725465354240.0,
+        "emissions_ch4_g": 355725431799808.0,
         "emissions_co2_g": 4.583339131194573e16,
         "emissions_gtco2eq": 61.263423919677734,
         "emissions_n2o_g": 8805091901440.0,
@@ -3748,12 +3748,12 @@
           "fuel_kwh": 110966654107648.0,
           "plant_calories_kcal": 7634075124760576.0
         },
-        "emissions_ch4_g": 372799470305280.0,
+        "emissions_ch4_g": 372799503859712.0,
         "emissions_co2_g": 4.801587464844083e16,
         "emissions_gtco2eq": 64.15933227539062,
         "emissions_n2o_g": 9136509026304.0,
         "extinction_rate": 105.05097961425781,
-        "hector_ch4_tg": 355.7254638671875,
+        "hector_ch4_tg": 355.7254333496094,
         "hector_ffi_pgc": 12.500016212463379,
         "hector_n2o_tg": 8.805091857910156,
         "land_demand_fraction": 0.5788145065307617,
@@ -4139,12 +4139,12 @@
           "fuel_kwh": 110966654107648.0,
           "plant_calories_kcal": 7634075124760576.0
         },
-        "emissions_ch4_g": 372799470305280.0,
+        "emissions_ch4_g": 372799503859712.0,
         "emissions_co2_g": 4.801587464844083e16,
         "emissions_gtco2eq": 64.15933227539062,
         "emissions_n2o_g": 9136509026304.0,
         "extinction_rate": 106.87068939208984,
-        "hector_ch4_tg": 372.7994689941406,
+        "hector_ch4_tg": 372.79949951171875,
         "hector_ffi_pgc": 13.09523868560791,
         "hector_n2o_tg": 9.13650894165039,
         "land_demand_fraction": 0.5788145065307617,
@@ -4535,7 +4535,7 @@
         "emissions_gtco2eq": 65.62176513671875,
         "emissions_n2o_g": 9303164452864.0,
         "extinction_rate": 108.6977767944336,
-        "hector_ch4_tg": 372.7994689941406,
+        "hector_ch4_tg": 372.79949951171875,
         "hector_ffi_pgc": 13.09523868560791,
         "hector_n2o_tg": 9.13650894165039,
         "land_demand_fraction": 0.5893410444259644,
@@ -5312,7 +5312,7 @@
           "fuel_kwh": 118876465528832.0,
           "plant_calories_kcal": 7886948303634432.0
         },
-        "emissions_ch4_g": 398842675593216.0,
+        "emissions_ch4_g": 398842709147648.0,
         "emissions_co2_g": 5.134355947480678e16,
         "emissions_gtco2eq": 68.57408905029297,
         "emissions_n2o_g": 9638224330752.0,
@@ -5708,7 +5708,7 @@
         "emissions_gtco2eq": 71.55789184570312,
         "emissions_n2o_g": 9975026941952.0,
         "extinction_rate": 114.2118911743164,
-        "hector_ch4_tg": 398.8426818847656,
+        "hector_ch4_tg": 398.84271240234375,
         "hector_ffi_pgc": 14.002789497375488,
         "hector_n2o_tg": 9.638224601745605,
         "land_demand_fraction": 0.6317819952964783,
@@ -6478,14 +6478,14 @@
         "year": 2038
       },
       "numeric": {
-        "base_outlook": 10.306633949279785,
+        "base_outlook": 10.306631088256836,
         "demand": {
           "animal_calories_kcal": 1974262650896384.0,
           "electricity_kwh": 37327254585344.0,
           "fuel_kwh": 126923262918656.0,
           "plant_calories_kcal": 8133011811860480.0
         },
-        "emissions_ch4_g": 425324806406144.0,
+        "emissions_ch4_g": 425324839960576.0,
         "emissions_co2_g": 5.472577750093005e16,
         "emissions_gtco2eq": 73.06036376953125,
         "emissions_n2o_g": 10143942049792.0,
@@ -6496,7 +6496,7 @@
         "land_demand_fraction": 0.6424528956413269,
         "land_use_fraction": 0.7424529790878296,
         "mean_habitability": 9.975000381469727,
-        "outlook": 18.02928924560547,
+        "outlook": 18.029285430908203,
         "population": 9434817536.0,
         "produced": {
           "animal_calories_kcal": 1974262650896384.0,
@@ -6505,13 +6505,13 @@
           "plant_calories_kcal": 8133011274989568.0
         },
         "protected_land_fraction": 0.10000000149011612,
-        "region_mean_outlook": 7.722655296325684,
+        "region_mean_outlook": 7.722654819488525,
         "sea_level_rise_m": 0.1726127713918686,
         "shortages_outlook": 0.0,
-        "temperature_c": 1.8025025129318237,
-        "tgav_input_c": 1.8025025129318237,
+        "temperature_c": 1.8025026321411133,
+        "tgav_input_c": 1.8025026321411133,
         "water_use_fraction": 0.6238309144973755,
-        "world_outlook": 18.02928924560547
+        "world_outlook": 18.029285430908203
       },
       "regions": [
         {
@@ -6519,7 +6519,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Africa",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 85417616.0
         },
         {
@@ -6527,7 +6527,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Southern Europe",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 158895024.0
         },
         {
@@ -6535,7 +6535,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Europe",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 317638592.0
         },
         {
@@ -6543,7 +6543,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Western Asia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 313826240.0
         },
         {
@@ -6551,7 +6551,7 @@
           "habitability": 9.599996566772461,
           "income": "LowerMiddle",
           "name": "Northern Africa",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 314781056.0
         },
         {
@@ -6559,7 +6559,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern Europe",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 112064800.0
         },
         {
@@ -6567,7 +6567,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central Asia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 94408712.0
         },
         {
@@ -6575,7 +6575,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "South-eastern Asia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 841306176.0
         },
         {
@@ -6583,7 +6583,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Southern Asia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 2449155840.0
         },
         {
@@ -6591,7 +6591,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Southern America",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 476349120.0
         },
         {
@@ -6599,7 +6599,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Oceania",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 13917582.0
         },
         {
@@ -6607,7 +6607,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Eastern Africa",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 668142656.0
         },
         {
@@ -6615,7 +6615,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Australasia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 32447608.0
         },
         {
@@ -6623,7 +6623,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Western Europe",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 206323424.0
         },
         {
@@ -6631,7 +6631,7 @@
           "habitability": 10.0,
           "income": "LowerMiddle",
           "name": "Central America",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 226827232.0
         },
         {
@@ -6639,7 +6639,7 @@
           "habitability": 9.900003433227539,
           "income": "LowerMiddle",
           "name": "Central Africa",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 245974048.0
         },
         {
@@ -6647,7 +6647,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Caribbean",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 47861408.0
         },
         {
@@ -6655,7 +6655,7 @@
           "habitability": 10.0,
           "income": "UpperMiddle",
           "name": "Eastern Asia",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 1835167616.0
         },
         {
@@ -6663,7 +6663,7 @@
           "habitability": 10.0,
           "income": "High",
           "name": "Northern America",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 391167744.0
         },
         {
@@ -6671,7 +6671,7 @@
           "habitability": 10.0,
           "income": "Low",
           "name": "Western Africa",
-          "outlook": 7.722654819488525,
+          "outlook": 7.722653865814209,
           "population": 603145024.0
         }
       ],
@@ -6876,12 +6876,12 @@
           "fuel_kwh": 129630115725312.0,
           "plant_calories_kcal": 8213288508719104.0
         },
-        "emissions_ch4_g": 434230454648832.0,
-        "emissions_co2_g": 5.586283143784038e16,
-        "emissions_gtco2eq": 74.56840515136719,
+        "emissions_ch4_g": 434230421094400.0,
+        "emissions_co2_g": 5.586283573280768e16,
+        "emissions_gtco2eq": 74.56841278076172,
         "emissions_n2o_g": 10313020735488.0,
         "extinction_rate": 119.76850128173828,
-        "hector_ch4_tg": 425.3247985839844,
+        "hector_ch4_tg": 425.3248291015625,
         "hector_ffi_pgc": 14.925210952758789,
         "hector_n2o_tg": 10.143941879272461,
         "land_demand_fraction": 0.653134822845459,
@@ -7272,8 +7272,8 @@
         "emissions_gtco2eq": 76.06971740722656,
         "emissions_n2o_g": 10481077059584.0,
         "extinction_rate": 121.61610412597656,
-        "hector_ch4_tg": 434.2304382324219,
-        "hector_ffi_pgc": 15.23531723022461,
+        "hector_ch4_tg": 434.23040771484375,
+        "hector_ffi_pgc": 15.235318183898926,
         "hector_n2o_tg": 10.313020706176758,
         "land_demand_fraction": 0.6637519598007202,
         "land_use_fraction": 0.7637519240379333,
@@ -8440,7 +8440,7 @@
           "fuel_kwh": 140172373000192.0,
           "plant_calories_kcal": 8516220068298752.0
         },
-        "emissions_ch4_g": 468864500498432.0,
+        "emissions_ch4_g": 468864534052864.0,
         "emissions_co2_g": 6.028589613344358e16,
         "emissions_gtco2eq": 80.43180084228516,
         "emissions_n2o_g": 10962375540736.0,
@@ -8832,11 +8832,11 @@
           "plant_calories_kcal": 8584688826318848.0
         },
         "emissions_ch4_g": 477238076112896.0,
-        "emissions_co2_g": 6.135582832145203e16,
+        "emissions_co2_g": 6.135583261641933e16,
         "emissions_gtco2eq": 81.84870910644531,
         "emissions_n2o_g": 11115129995264.0,
         "extinction_rate": 128.62722778320312,
-        "hector_ch4_tg": 468.864501953125,
+        "hector_ch4_tg": 468.8645324707031,
         "hector_ffi_pgc": 16.441608428955078,
         "hector_n2o_tg": 10.96237564086914,
         "land_demand_fraction": 0.703748345375061,
@@ -9223,8 +9223,8 @@
           "plant_calories_kcal": 8650426522009600.0
         },
         "emissions_ch4_g": 485696309559296.0,
-        "emissions_co2_g": 6.243646356796211e16,
-        "emissions_gtco2eq": 83.2791976928711,
+        "emissions_co2_g": 6.243645927299482e16,
+        "emissions_gtco2eq": 83.27919006347656,
         "emissions_n2o_g": 11267348627456.0,
         "extinction_rate": 130.31088256835938,
         "hector_ch4_tg": 477.2380676269531,
@@ -9619,7 +9619,7 @@
         "emissions_n2o_g": 11571827834880.0,
         "extinction_rate": 131.97268676757812,
         "hector_ch4_tg": 485.6963195800781,
-        "hector_ffi_pgc": 17.028127670288086,
+        "hector_ffi_pgc": 17.028125762939453,
         "hector_n2o_tg": 11.267348289489746,
         "land_demand_fraction": 0.7325006127357483,
         "land_use_fraction": 0.8325006365776062,
@@ -11178,7 +11178,7 @@
           "plant_calories_kcal": 8936391887028224.0
         },
         "emissions_ch4_g": 529245700882432.0,
-        "emissions_co2_g": 6.799495440787046e16,
+        "emissions_co2_g": 6.799495870283776e16,
         "emissions_gtco2eq": 90.63167572021484,
         "emissions_n2o_g": 12026421182464.0,
         "extinction_rate": 138.6508026123047,
@@ -11568,8 +11568,8 @@
           "fuel_kwh": 164060989489152.0,
           "plant_calories_kcal": 9028239225782272.0
         },
-        "emissions_ch4_g": 546833021534208.0,
-        "emissions_co2_g": 7.023852506421658e16,
+        "emissions_ch4_g": 546833088643072.0,
+        "emissions_co2_g": 7.023852076924928e16,
         "emissions_gtco2eq": 93.59573364257812,
         "emissions_n2o_g": 12319511805952.0,
         "extinction_rate": 140.24264526367188,
@@ -11959,13 +11959,13 @@
           "fuel_kwh": 164060989489152.0,
           "plant_calories_kcal": 9028239225782272.0
         },
-        "emissions_ch4_g": 546833021534208.0,
-        "emissions_co2_g": 7.023852506421658e16,
+        "emissions_ch4_g": 546833088643072.0,
+        "emissions_co2_g": 7.023852076924928e16,
         "emissions_gtco2eq": 93.59573364257812,
         "emissions_n2o_g": 12319511805952.0,
         "extinction_rate": 141.85488891601562,
-        "hector_ch4_tg": 546.8330078125,
-        "hector_ffi_pgc": 19.155961990356445,
+        "hector_ch4_tg": 546.8330688476562,
+        "hector_ffi_pgc": 19.155960083007812,
         "hector_n2o_tg": 12.319511413574219,
         "land_demand_fraction": 0.7795310616493225,
         "land_use_fraction": 0.8795311450958252,

@@ -2,8 +2,11 @@
 
 These fixtures are the numerical reference for the assembly simulation (W5).
 They were produced by the headless reference driver on branch
-`feature/assembly-workshop` (base `b9b11964`, regenerated on top of `a10e47f6`
-with the native climate fix in `game/src/climate.rs`), using the embedded workshop world
+`feature/assembly-workshop`. The base is `b9b11964`; the fixtures were
+regenerated on top of `cb487502`, which includes the native climate fix in
+`game/src/climate.rs`, with the production-allocator fix in
+`engine/src/production/planner.rs` applied. The allocator fix diverges from
+upstream when land is scarce; see model-baseline §7.1. They use the embedded workshop world
 `engine/assets/WORKSHOP.world` (sha256
 `e42723ddae162eb841020610e34d36eabab9d374d797ad5057c17973f105ea5d`).
 Read `../model-baseline.md` first. It explains the driver, the climate path
@@ -20,7 +23,7 @@ and the tolerances.
 Scenarios:
 
 - `a_no_action`, `b_comfort_and_technology`, `c_sufficiency`: the parity scenarios.
-- `d_preserves_only`: a diagnostic for the land-squeeze mechanism (model-baseline §7.1).
+- `d_preserves_only`: a diagnostic for the land-squeeze mechanism and the allocator fix (model-baseline §7, §7.1).
 
 ### JSON layout
 
@@ -70,6 +73,6 @@ python3 references/assembly/tools/assembly_baseline.py --runs 3 --profiles debug
 
 - For each scenario, 3 debug-build and 3 release-build processes ran. Every run within a profile was bit-identical.
 - Debug vs release:
-  - a, b and d: identical.
-  - c: `extinction_rate` differed by one f32 ulp (7.6e-6) from 2040; nothing else differed.
-- Browser Hector (open loop) is within 0.0022 °C of native under steady emissions. Under the on/off oscillation in b and d it is up to 0.0173 °C. See `reproducibility.json` and model-baseline §4.
+  - a and d: identical.
+  - b and c: `extinction_rate` differed by one f32 ulp (7.6e-6) from 2040; nothing else differed.
+- Browser Hector (open loop) is within 0.0022 °C of native in a and c, and up to 0.0087 °C in the land-scarce b and d. See `reproducibility.json` and model-baseline §4.

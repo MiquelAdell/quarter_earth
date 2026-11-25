@@ -232,7 +232,20 @@ pub fn calculate_production(
             rank_orders(orders, order_idxs, demand, &resources, &feedstocks);
 
             // Ok to unwrap b/c we check if `orders` is empty
-            let order_idx = order_idxs.pop().unwrap();
+            let mut order_idx = order_idxs.pop().unwrap();
+
+            // Orders with nothing to produce (0 mix share, locked or retired
+            // processes) must not use up this output's turn. Otherwise, when
+            // a resource is scarce, a real process of the same output is
+            // served only after other outputs have exhausted the resource.
+            // Their `produced` entry stays 0. Quarter Earth change; upstream
+            // Half-Earth Socialism lets them consume the turn.
+            while orders[order_idx].amount <= 0. {
+                match order_idxs.pop() {
+                    Some(next) => order_idx = next,
+                    None => break,
+                }
+            }
 
             let amount = produce_amount(
                 &orders[order_idx],
@@ -352,6 +365,70 @@ mod test {
     //     // Should not have created enough to meet total demand
     //     assert!(produced.iter().sum::<f32>() < 200.);
     // }
+
+    /// An idle electricity process (0 mix share, so a 0-amount order) that
+    /// ranks first, a real electricity process, and a land-hungry livestock
+    /// process. All use land; `Feedstock::Other` keeps feedstock out of it.
+    fn gen_land_competition() -> (Vec<Process>, OutputMap) {
+        let process = |name: &str, mix_share, output, land, co2| Process {
+            id: Id::new_v4(),
+            name: name.into(),
+            mix_share,
+            output,
+            resources: resources!(land: land),
+            byproducts: byproducts!(co2: co2),
+            feedstock: (Feedstock::Other, 0.),
+            ..Default::default()
+        };
+        let processes = vec![
+            // Lowest land intensity, so it ranks first for electricity.
+            process("Idle Power", 0, Output::Electricity, 0.001, 0.),
+            process("Real Power", 2, Output::Electricity, 1., 2.),
+            process("Livestock", 20, Output::AnimalCalories, 1., 3.),
+        ];
+        let demand = outputs!(electricity: 100., animal_calories: 100.);
+        (processes, demand)
+    }
+
+    fn run_land_competition(land: f32) -> (Vec<f32>, ResourceMap, ByproductMap) {
+        let (processes, demand) = gen_land_competition();
+        let orders: Vec<ProductionOrder> = processes
+            .iter()
+            .map(|p| p.production_order(&demand))
+            .collect();
+        assert_eq!(
+            orders.iter().map(|o| o.amount).collect::<Vec<_>>(),
+            vec![0., 10., 100.]
+        );
+        let (required_r, required_f) = calculate_required(&orders);
+        let (produced, consumed_r, _consumed_f, byproducts) = calculate_production(
+            &orders,
+            (&required_r, &required_f),
+            &resources!(land: land),
+            &feedstocks!(),
+        );
+        (produced, consumed_r, byproducts)
+    }
+
+    #[test]
+    fn test_zero_amount_order_does_not_use_up_a_turn_when_land_is_scarce() {
+        // Land (50) is less than required (110). Previously the idle
+        // process took electricity's first turn, livestock then took all
+        // 50 land, and Real Power produced 0.
+        let (produced, consumed_r, byproducts) = run_land_competition(50.);
+        assert_eq!(produced, vec![0., 10., 40.]);
+        assert_eq!(consumed_r, resources!(land: 50.));
+        assert_eq!(byproducts, byproducts!(co2: 140.));
+    }
+
+    #[test]
+    fn test_zero_amount_order_skip_is_identical_when_land_is_plentiful() {
+        // Every order is met in full, before and after the change.
+        let (produced, consumed_r, byproducts) = run_land_competition(1000.);
+        assert_eq!(produced, vec![0., 10., 100.]);
+        assert_eq!(consumed_r, resources!(land: 110.));
+        assert_eq!(byproducts, byproducts!(co2: 320.));
+    }
 
     #[test]
     fn test_calculated_required() {
