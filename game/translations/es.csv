@@ -52,7 +52,7 @@ Completed Request: Stop %{name},Solicitud completada: Detener %{name}
 Completed Request: Unban %{name},Solicitud completada: Permitir %{name}
 Completed Requests,Peticiones completadas
 Concept,Concepto
-Contentedness,Felicidad
+Contentedness,Satisfacción
 Continue,Continuar
 Contract the economies of the wealthiest regions.,Contraer las economías de las regiones más ricas.
 Could increase,Podría aumentar
@@ -2531,7 +2531,7 @@ Space,Espacio
 Nuclear,Nuclear
 Restoration,Restauración
 Agriculture,Agricultura
-Food,Comida
+Food,Alimentación
 Geoengineering,Geoingeniería
 Population,Población
 Control,Control
@@ -2615,7 +2615,7 @@ Water,Agua
 Energy,Energía
 Emissions,Emisiones
 Biodiversity,Biodiversidad
-Contentedness,Felicidad
+Contentedness,Satisfacción
 Fuel,Combustible
 Electricity,Electricidad
 Plant Calories,Calorías Vegetales
