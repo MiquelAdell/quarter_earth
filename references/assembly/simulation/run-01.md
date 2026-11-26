@@ -206,9 +206,11 @@ W2 acceptance:
 ## Findings
 
 Severity: **high** means fix it, or decide on it, before the human W4.
-**med** means fix before W5–W7 or watch in W4. **low** means note it. Paths
-are relative to `~/code/quarter_earth` unless they start with `<oc>/`,
-which means `~/personal/quarter-earth/files/openspec/changes/assembly-workshop/`.
+**med** means fix before W5–W7 or watch in W4. **low** means note it. Code
+paths are relative to `~/code/quarter_earth`. Kit paths (`content/`,
+`print/`, `run-sheet.md`, `rehearsal.md`, `model-baseline.md`) are under
+`references/assembly/`. `<oc>/` means
+`~/personal/quarter-earth/files/openspec/changes/assembly-workshop/`.
 Transcript references are to `references/assembly/simulation/run-01-raw/transcript.md`.
 
 ### 1. Rule ambiguities

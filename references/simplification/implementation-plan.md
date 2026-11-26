@@ -324,6 +324,11 @@ Conventional-Commits branch off `main`.
   alignment, playtest rebalance — needs `playtest-notes.md` from the W3
   human playtest, which hasn't happened yet) → W9 (review + wasm
   verification).
+- **Superseded (2026-11-26):** W3 and W8 are replaced by the assembly
+  workshop plan. `engine/assets/WORKSHOP.world` already carries the five
+  mix-transfer cards (`TransferMixShare`) and ends in 2052; the playtest is
+  now the assembly W4 rehearsal (`references/assembly/rehearsal.md`).
+  W9 (review + wasm verification) still stands.
 
 ## Global verification
 
