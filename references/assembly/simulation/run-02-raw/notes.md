@@ -1,0 +1,33 @@
+# run-02 orchestrator notes (haiku)
+- Opening: Oriol computed "Ban Outdoor Cats alone only gets us to 89.7" from the card text (90.2−0.5). The understated card copy drives a quantitative misjudgement here too, as in run-01.
+- Opening: only 2 of 8 asked a rules question about promises (Àlex, Jordi). In run-01 it was 7 of 8. Haiku asks less, so this is a weaker detector of rule ambiguity.
+- Jordi (FL) proposed an Emissions promise, which isn't FL's mandate indicator. Less mandate-bound.
+- Same facilitator rulings as run-01 are used verbatim, including the "about one year of effect" line.
+- R1 Build: Oriol said "we can raise it in round 2", which contradicts the ruling that promises don't change (a Haiku rule slip). Jordi rejected Organic as land-hungry, overriding Núria's private priority. Marta and Pau crossed again: Marta took Pau's 45 and Pau took Marta's 42.
+- R1 final slips are IDENTICAL to run-01 R1: FL Veg+Organic, EI Solar+Veg (run-01 had Solar+Cats), LS Luxury+Solar, LW Preserves+Veg. All 4 recorders adopted the envoy's package (run-01: 2 of 4 in R1). Deference is even stronger with Haiku. EI differs: Solar+Veg vs Solar+Cats.
+- R1 TRADE CLOSE: MAT A = FL+EI, Solar Push + Vegetarian Mandate, which is IDENTICAL to run-01 R1. LS refused to sign (Àlex held out: "signing Pau's version costs us our promise"). LW was willing to sign Veg+Cats with FL, but FL preferred EI, so LW was left out. Same two tables frozen out as run-01.
+- Prediction mismatch on the signed mat: EI wrote Emissions↓/Well-being↓ and FL wrote Emissions↓/Land use↓ on the same cards. The run sheet says the "two predictions are written on the mat" but not who reconciles them. FACILITATOR ruling (improvised): the visiting envoy's slip predictions go on the mat (EI: Emissions↓, Well-being↓). New finding (not seen in run-01).
+- Oriol signalled he'd sign a package he expects to miss his own promise with. Haiku LW gave up Preserves outright; run-01 LW refused to.
+- R1 VOTE: A 6, = 2 (Carme and Àlex: both LS, both citing their well-being promise). Run-01 was 7–1 (only Carme). The LS pair voted as a bloc here.
+- DEVIATION (run-02 only): the R1 Reveal cause sentence and the R2 Read+Build were merged into one turn per agent, to save turns.
+- R2 Build: LW Laia predicts "Land use ↓" for Preserves + Cats, and Oriol says "Preserves cuts farmland pressure, helps FL's promise". Both are wrong: Preserves raises land use by about 30 pts. This confirms the run-01 finding that LW's materials don't say protected land counts in land use. Nobody asked, so (unlike run-01) the facilitator gave no ruling.
+- R2 Build: LS keeps Luxury in both partners' ideas (Carme: Luxury+Organic; Àlex: Luxury+Degrowth). In run-01 LS dropped Luxury because of the one-year framing. Here nobody cited the lag against Luxury.
+- R2 cause sentences: Carme says "Solar and the Vegetarian Mandate both cut contentedness". Only the Vegetarian card text says so, so that's a misattribution.
+- R2 final slips: FL (Jordi) and EI (Pau) both carry Organic + Degrowth + Cats (30), the same cards as the package that won run-01 R2. LS: Luxury + Degrowth. LW: Preserves + Cats with the wrong "Land use ↓" prediction. Recorders merged rather than simply deferred this time: Núria and Marta each added their own card plus the envoy's.
+- DEVIATION (run-02 only): the R2 slot-1 envoy pitch turn was skipped. Hosts received the slip directly, as presented by the envoy, to save a turn.
+- R2 TRADE CLOSE: one mat only, FL+EI · Organic + Degrowth + Cats · Emissions↓, Well-being↓. Núria gave up her Land↑ prediction to match. Same cards as run-01's R2 winner. LS (Luxury + Degrowth) and LW (Preserves + Cats) were refused by everyone, never visited each other, and signed nothing. **In both rounds of run-02, LS and LW were frozen out** (run-01: R1 only). Same FL+EI coalition both rounds.
+- No tie this time: only one mat, so the run-01 4–4 deadlock didn't arise. The two-leftover-tables problem replaced it.
+- R2 VOTE: A 5, = 3. "=" votes were Carme and Àlex (LS: their promise) and Laia (LW: Organic raises land). Àlex voted against his own priority card (Degrowth) because of the bundle. Engine result identical to run-01 R2 (same decisions).
+
+## Run-02 timeline (orchestrator summary; agent logs in log/*.md hold every reply verbatim)
+- Opening: promises FL Land use <59%; EI Emissions <42; LS Well-being >32; LW Extinction <88. The rulings text was identical to run-01.
+- R1 slips: FL Veg+Organic → LW; EI Solar+Veg → FL; LS Luxury+Solar → EI; LW Preserves+Veg → FL.
+- R1 hosts: Oriol (LW) countered Núria with Veg+Cats. Jordi (FL) was open to EI's Solar+Veg and countered Laia with Veg+Cats. Pau (EI) refused Carme (Luxury).
+- R1 signing: FL chose EI (Solar+Veg) over LW (Veg+Cats; Oriol was willing). LS refused to sign (Àlex). LW was left out. Prediction mismatch, resolved by facilitator ruling.
+- R1 vote A 6, = 2 (Carme, Àlex). Report identical to run-01 R1.
+- R2 slips: FL Organic+Degrowth+Cats → EI; EI Organic+Degrowth+Cats → FL; LS Luxury+Degrowth → EI; LW Preserves+Cats (Land↓, wrong) → FL.
+- R2: Marta refused Àlex (Luxury). Núria refused Oriol (Preserves). FL and EI signed the identical cards, and Núria accepted EI's predictions (Emissions↓, Well-being↓). LS and LW never visited each other.
+- R2 vote A 5, = 3 (Carme, Àlex, Laia). Report identical to run-01 R2: Emissions 52.7 ✗, Well-being 19.7 ✓.
+- Promises: FL kept, EI missed, LS missed, LW kept (same as run-01).
+- Debrief R2 cause accuracy: Pau and Marta correctly said underlying demand drove emissions. Àlex was partly right. Jordi, Laia, Oriol and Marta attributed the +4 land to Organic (partly right: Organic accounts for +1.6, the baseline for +2.4). Oriol said "the cats only lowered it by 2.0". Wrong: cats −7.4 vs no action. Nobody credited Cats. Núria said the round-one card mix caused the emissions rise (wrong).
+- Harness glitch: two host replies (Marta, Núria) were not delivered on first try and had to be re-requested. Agents logged them correctly.

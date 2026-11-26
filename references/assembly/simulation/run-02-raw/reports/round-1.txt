@@ -1,0 +1,27 @@
+PLANET 2022
+  Emissions                       51.58  (Gt CO2-eq/yr)
+  Temperature                      1.10  (°C warming)
+  Extinction pressure              90.2  (index, lower is better)
+  Well-being (contentedness)       30.0  (index)
+  Land use                        58.7%  (% of habitable land)
+  Cards in force:  (none)
+  Cards building:  (none)
+
+REPORT round 1: 2022 -> 2027
+  Emissions                       51.58 ->    46.80  (-4.78)  [Gt CO2-eq/yr]
+  Temperature                      1.10 ->     1.48  (+0.38)  [°C warming]
+  Extinction pressure              90.2 ->     64.0  (-26.20)  [index, lower is better]
+  Well-being (contentedness)       30.0 ->     21.6  (-8.45)  [index]
+  Land use                        58.7% ->    36.4%  (-22.2 pts)  [% of habitable land]
+  Year by year:
+    year     Emissions Temperature  Extinction  Well-being        Land
+    2022         51.58        1.10        90.2        30.0       58.7%
+    2023         51.58        1.36        90.2        26.1       58.7%
+    2024         52.92        1.39        92.5        25.6       59.7%
+    2025         54.28        1.42        94.3        25.2       60.7%
+    2026         46.80        1.45        96.1        21.9       36.4%
+    2027         46.80        1.48        64.0        21.6       36.4%
+  Cards in force at 2027:  Solar Push, Vegetarian Mandate
+  Cards building at 2027:  (none)
+
+(engine CSV: /private/tmp/claude-501/-Users-miqueladell-personal-quarter-earth/560f0117-de74-43ac-a615-667afce364f4/scratchpad/sim2/runs/round1.csv)
